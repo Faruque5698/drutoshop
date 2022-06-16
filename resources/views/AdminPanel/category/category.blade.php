@@ -4,6 +4,8 @@
     Category
 @endsection
 
+@php($categories = \App\Models\Category::all())
+
 @section('content')
     <div class="content-wrapper">
 
@@ -45,6 +47,7 @@
                             <div class="card-body">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
+
                                     <tr>
                                         <th>Sl</th>
                                         <th>Category Title</th>
@@ -57,54 +60,55 @@
                                     </thead>
                                     <tbody>
                                     @php($i=1)
-{{--                                    @foreach($categories as $category)--}}
-{{--                                        <tr>--}}
-{{--                                            <td>{{$i++}}</td>--}}
-{{--                                            <td>{{$category->title}}</td>--}}
-{{--                                            <td>{{$category->summary}}</td>--}}
+
+                                    @foreach($categories as $category)
+                                        <tr>
+                                            <td>{{$i++}}</td>
+                                            <td>{{$category->title}}</td>
+                                            <td>{{$category->summary}}</td>
 
 
-{{--                                            <td><img src="{{asset($category->photo)}}" alt="" width="100px" height="100px"></td>--}}
-{{--                                            <td>{{$category->status == 'active' ? 'Published':'Unpublished'}}</td>--}}
-{{--                                            <td>--}}
+                                            <td><img src="{{asset($category->photo)}}" alt="" width="100px" height="100px"></td>
+                                            <td>{{$category->status == 'active' ? 'Published':'Unpublished'}}</td>
+                                            <td>
 
-{{--                                                @if($category->status == 'active')--}}
-{{--                                                    <a href="{{route('category_unpublished',['id'=>$category->id])}}" class="btn btn-sm btn-info"--}}
-{{--                                                    ><i class="fa fa-arrow-circle-up"></i></a>--}}
-{{--                                                @else--}}
-{{--                                                    <a href="{{route('category_published',['id'=>$category->id])}}" class="btn btn-sm btn-warning"--}}
-{{--                                                    ><i class="fa fa-arrow-circle-down"></i></a>--}}
-{{--                                                @endif--}}
+                                                @if($category->status == 'active')
+                                                    <a href="{{route('category_unpublished',['id'=>$category->id])}}" class="btn btn-sm btn-info"
+                                                    ><i class="fa fa-arrow-circle-up"></i></a>
+                                                @else
+                                                    <a href="{{route('category_published',['id'=>$category->id])}}" class="btn btn-sm btn-warning"
+                                                    ><i class="fa fa-arrow-circle-down"></i></a>
+                                                @endif
 
-{{--                                                <a href="{{route('category_edit',['id'=>$category->id])}}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>--}}
+                                                <a href="{{route('category_edit',['id'=>$category->id])}}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
 
-{{--                                                <a href="" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-danger" ><i class="fa fa-trash"></i></a>--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
+                                                <a href="" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-danger" ><i class="fa fa-trash"></i></a>
+                                            </td>
+                                        </tr>
 
-{{--                                        <div class="modal fade" id="modal-danger">--}}
-{{--                                            <div class="modal-dialog">--}}
-{{--                                                <div class="modal-content bg-danger">--}}
-{{--                                                    <div class="modal-header">--}}
-{{--                                                        <h4 class="modal-title" style="text-align: center;"><img src="{{asset('Admin/image/Danger.png')}}" width="100px" height="100px" alt=""></h4>--}}
-{{--                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
-{{--                                                            <span aria-hidden="true">&times;</span>--}}
-{{--                                                        </button>--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="modal-body">--}}
-{{--                                                        <p>Are you want to delete it..</p>--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="modal-footer justify-content-between">--}}
-{{--                                                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>--}}
-{{--                                                        <a href="{{route('category_destroy',['id'=>$category->id])}}" class="btn btn-outline-light">Delete</a>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                                <!-- /.modal-content -->--}}
-{{--                                            </div>--}}
-{{--                                            <!-- /.modal-dialog -->--}}
-{{--                                        </div>--}}
+                                        <div class="modal fade" id="modal-danger">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content bg-danger">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" style="text-align: center;"><img src="{{asset('Admin/image/Danger.png')}}" width="100px" height="100px" alt=""></h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Are you want to delete it..</p>
+                                                    </div>
+                                                    <div class="modal-footer justify-content-between">
+                                                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                                                        <a href="{{route('category_destroy',['id'=>$category->id])}}" class="btn btn-outline-light">Delete</a>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
 
-{{--                                    @endforeach--}}
+                                    @endforeach
 
                                     </tbody>
 

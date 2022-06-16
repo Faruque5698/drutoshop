@@ -39,5 +39,13 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],
     Route::get('category',[CategoryController::class,'index'])->name('admin.category');
     Route::get('category/add',[CategoryController::class,'add'])->name('add_category');
     Route::post('category/store',[CategoryController::class,'store'])->name('category_store');
+    Route::get('category/edit/{id}',[CategoryController::class,'edit'])->name('category_edit');
+    Route::post('category/update',[CategoryController::class,'update'])->name('category_update');
+    Route::get('category/unpublished/{id}',[CategoryController::class,'unpublished'])->name('category_unpublished');
+    Route::get('category/published/{id}',[CategoryController::class,'published'])->name('category_published');
+    Route::get('category/delete/{id}',[CategoryController::class,'destroy'])->name('category_destroy');
+
+
+    Route::get('sub-category',[\App\Models\Subcategory::class,'index'])->name('admin.subcategory');
 
 });

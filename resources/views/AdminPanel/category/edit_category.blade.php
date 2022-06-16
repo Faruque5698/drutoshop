@@ -1,7 +1,7 @@
 @extends('AdminPanel.Master')
 
 @section('title')
-    Add Category
+    Update Category
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1><strong>Add Category</strong></h1>
+                        <h1><strong>Update Category</strong></h1>
                     </div>
                     @if(Session::get('message'))
 
@@ -29,15 +29,16 @@
         <section class="content">
             <div class="card card-warning">
                 <div class="card-header">
-                    <h3 class="card-title">Add Category</h3>
+                    <h3 class="card-title">Update Category</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form action="{{route('category_store')}}" enctype="multipart/form-data" method="post">
+                    <form action="{{route('category_update')}}" enctype="multipart/form-data" method="post">
                         @csrf
                         <div class="form-row">
                             <div class="col-12">
-                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title"  placeholder="Category Title">
+                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{$category -> title ?? ''}}" placeholder="Category Title">
+                                <input type="hidden" class="form-control @error('title') is-invalid @enderror" name="id" value="{{$category -> id ?? ''}}" placeholder="Category Title">
                             </div>
                             @error('title')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -46,7 +47,7 @@
                         <hr>
                         <div class="form-row">
                             <div class="col-12">
-                                <textarea id="editor" class="form-control @error('description') is-invalid @enderror" name="summary" rows="5" cols="5"   placeholder="Category Summary"></textarea>
+                                <textarea id="editor" class="form-control @error('description') is-invalid @enderror" name="summary" rows="5" cols="5"   placeholder="Category Summary">{{$category -> summary}}</textarea>
                             </div>
                             @error('summary')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -55,20 +56,19 @@
                         <hr>
 
                         <div class="form-row">
-                            <input type="file" name="photo" id="cat_image" class="@error('photo') is-invalid @enderror" placeholder="">
+                            <input type="file" name="photo" id="imgInp" class="@error('photo') is-invalid @enderror" placeholder="">
                         </div>
                         @error('photo')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-
-                        <img src="" alt="" id="cat_image_preview" width="100px" height="100px" class="mt-2">
+                        <img src="{{asset($category -> photo)}}" alt="" id="blah" width="100px" height="100px">
                         <hr>
 
                         <div class="form-row">
                             <select class="form-control @error('status') is-invalid @enderror" id="" name="status">
                                 <option selected>Status</option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="active" {{$category -> status == 'active' ? 'Selected' : ''}}>Active</option>
+                                <option value="inactive" {{$category -> status == 'inactive' ? 'Selected' : ''}}>Inactive</option>
 
                             </select>
 
@@ -86,7 +86,7 @@
                         {{--                        </div>--}}
                         <hr>
                         <div class="col-2">
-                            <input type="submit" class="form-control btn btn-primary" name="btn" id="btn" value="Add Category">
+                            <input type="submit" class="form-control btn btn-primary" name="btn" id="btn" value="Update Category">
                         </div>
                     </form>
                 </div>
@@ -97,12 +97,11 @@
 @endsection
 
 @section('js')
-
     <script>
-        cat_image.onchange = evt => {
-            const [file] = cat_image.files
+        imgInp.onchange = evt => {
+            const [file] = imgInp.files
             if (file) {
-                cat_image_preview.src = URL.createObjectURL(file)
+                blah.src = URL.createObjectURL(file)
             }
         }
     </script>
