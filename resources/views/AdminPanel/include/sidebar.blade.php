@@ -94,7 +94,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('admin.category')}}" class="nav-link">
+                    <a href="{{route('admin.subcategory')}}" class="nav-link">
                         <i class="nav-icon fa fa-list-alt text-success"></i>
                         <p>Sub category</p>
                     </a>

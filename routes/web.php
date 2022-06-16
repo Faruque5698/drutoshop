@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminPanel\AdminController;
 use App\Http\Controllers\AdminPanel\HomeSectionController;
 use App\Http\Controllers\AdminPanel\CategoryController;
+use \App\Http\Controllers\AdminPanel\SubcategoryController;
 //use Image;
 
 /*
@@ -46,6 +47,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],
     Route::get('category/delete/{id}',[CategoryController::class,'destroy'])->name('category_destroy');
 
 
-    Route::get('sub-category',[\App\Models\Subcategory::class,'index'])->name('admin.subcategory');
+    Route::get('sub-category',[SubcategoryController::class,'index'])->name('admin.subcategory');
+    Route::get('sub-category/add',[SubcategoryController::class,'add'])->name('add_subcategory');
 
 });

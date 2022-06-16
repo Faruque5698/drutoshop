@@ -26,6 +26,6 @@ Route::group(["middleware" => ["auth:api"]], function(){
     Route::get("profile", [\App\Http\Controllers\Api\AuthController::class, "profile"]);
     Route::post("logout", [\App\Http\Controllers\Api\AuthController::class, "logout"]);
 
-//    Route::get('category')
+
 
 });

@@ -25,7 +25,7 @@ class CategoryController extends Controller
         $category_image = $request->file('photo');
         if ($category_image){
             $imageName = $category_image->getClientOriginalName();
-            $directory = 'Admin/image/category/';
+            $directory = 'assets/images/category/';
             $imageUrl = $directory.$imageName;
             $category_image -> move($directory,$imageName);
 
@@ -77,7 +77,7 @@ class CategoryController extends Controller
         $category_image = $request->file('photo');
         if ($category_image){
             $imageName = $category_image->getClientOriginalName();
-            $directory = 'Admin/image/category/';
+            $directory = 'assets/images/category/';
             $imageUrl = $directory.$imageName;
             $category_image -> move($directory,$imageName);
 
