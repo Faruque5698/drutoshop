@@ -99,12 +99,14 @@
                         <p>Sub category</p>
                     </a>
                 </li>
-{{--                <li class="nav-item">--}}
-{{--                    <a href="#" class="nav-link">--}}
-{{--                        <i class="nav-icon far fa-circle text-info"></i>--}}
-{{--                        <p>Informational</p>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
+
+                 <li class="nav-item">
+                    <a href="{{ route('admin.brand') }}" class="nav-link">
+                        <i class="nav-icon fa fa-folder text-success"></i>
+                        <p>Brand</p>
+                    </a>
+                </li>
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
