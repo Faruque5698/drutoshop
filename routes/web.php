@@ -6,6 +6,8 @@ use App\Http\Controllers\AdminPanel\HomeSectionController;
 use App\Http\Controllers\AdminPanel\CategoryController;
 use \App\Http\Controllers\AdminPanel\SubcategoryController;
 use \App\Http\Controllers\AdminPanel\BrandController;
+use \App\Http\Controllers\AdminPanel\ColorController;
+use \App\Http\Controllers\AdminPanel\SizeController;
 //use Image;
 
 /*
@@ -66,4 +68,21 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],
     Route::get('brand/unpublished/{id}',[BrandController::class,'unpublished'])->name('brand_unpublished');
     Route::get('brand/published/{id}',[BrandController::class,'published'])->name('brand_published');
     Route::get('Brnad/delete/{id}',[BrandController::class,'destroy'])->name('brand_delete');
+
+    Route::get('color',[ColorController::class,'index'])->name('admin.color');
+    Route::get('color/add',[ColorController::class,'add'])->name('add.color');
+    Route::post('color/add',[ColorController::class,'store'])->name('add.color');
+    Route::get('color/status/{id}',[ColorController::class,'status'])->name('status.color');
+    Route::get('color/edit/{id}', [ColorController::class, 'edit'])->name('color.edit');
+    Route::post('color/update', [ColorController::class, 'update'])->name('color.update');
+    Route::get('color/delete/{id}',[ColorController::class,'destroy'])->name('color_delete');
+
+    Route::get('size',[SizeController::class,'index'])->name('admin.size');
+    Route::get('size/add',[SizeController::class,'add'])->name('add.size');
+    Route::post('size/add',[SizeController::class,'store'])->name('add.size');
+    Route::get('size/edit/{id}', [SizeController::class, 'edit'])->name('size.edit');
+    Route::post('size/update', [SizeController::class, 'update'])->name('size.update');
+    Route::get('size/status/{id}',[SizeController::class,'status'])->name('status.size');
+    Route::get('size/delete/{id}',[SizeController::class,'destroy'])->name('size_delete');
+
 });

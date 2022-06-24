@@ -106,6 +106,19 @@
                         <p>Brand</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.color') }}" class="nav-link">
+                        <i class="nav-icon fa fa-folder text-success"></i>
+                        <p>Color</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.size') }}" class="nav-link">
+                        <i class="nav-icon fa fa-folder text-success"></i>
+                        <p>Size</p>
+                    </a>
+                </li>
 
             </ul>
         </nav>
