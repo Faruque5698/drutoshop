@@ -8,6 +8,7 @@ use \App\Http\Controllers\AdminPanel\SubcategoryController;
 use \App\Http\Controllers\AdminPanel\BrandController;
 use \App\Http\Controllers\AdminPanel\ColorController;
 use \App\Http\Controllers\AdminPanel\SizeController;
+use \App\Http\Controllers\AdminPanel\ProductController;
 //use Image;
 
 /*
@@ -84,5 +85,14 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],
     Route::post('size/update', [SizeController::class, 'update'])->name('size.update');
     Route::get('size/status/{id}',[SizeController::class,'status'])->name('status.size');
     Route::get('size/delete/{id}',[SizeController::class,'destroy'])->name('size_delete');
+
+    Route::get('product', [ProductController::class, 'index'])->name('admin.product');
+    Route::get('product/add', [ProductController::class, 'add'])->name('product.add');
+    Route::post('product/subcateoryid',[ProductController::class, 'getSubId'])->name('product.subcatid');
+    Route::post('product/add',[ProductController::class, 'store'])->name('product.add');
+    Route::get('product/status/{id}',[ProductController::class, 'status'])->name('product.status');
+    Route::get('product/edit/{id}',[ProductController::class, 'edit'])->name('product.edit');
+    Route::post('product/update',[ProductController::class, 'update'])->name('product.update');
+    Route::get('product/delete/{id}',[ProductController::class, 'destroy'])->name('product.delete');
 
 });

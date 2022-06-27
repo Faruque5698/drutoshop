@@ -120,6 +120,13 @@
                     </a>
                 </li>
 
+                 <li class="nav-item">
+                    <a href="{{ route('admin.product') }}" class="nav-link">
+                        <i class="nav-icon fa fa-folder text-success"></i>
+                        <p>Product</p>
+                    </a>
+                </li>
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
