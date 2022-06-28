@@ -136,20 +136,7 @@ class ProductController extends Controller
     public function update(Request $request)
     {
 
-      $this->validate($request, [
-            'product_name' => 'required',
-            'brand_id' => 'required',
-            'category_id' => 'required',
-            'subcategory_id' => 'required',
-            'size_id' => 'required',
-            'color_id' => 'required',
-            'quantity' => 'required',
-            'price' => 'required',
-            'discount_price' => 'required',
-            'discription' => 'required',
-            'image' => 'required|image',
-            'status' => 'required|in:active,inactive'
-        ]);
+    
 
         $slug_name =  Str::slug(Str::lower($request->product_name));
         $sku = Str::substr($request->product_name,0,3)."-".Str::random();
