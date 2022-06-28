@@ -24,9 +24,9 @@ class Product extends Model
         return $this->belongsTo(Subcategory::class, 'subcategory_id', 'id');
     }
     public function productToSize(){
-        return $this->belongsTo(Color::class, 'size_id', 'id');
+        return $this->belongsTo(Size::class, 'size_id', 'id');
     }
     public function productToColor(){
-        return $this->belongsTo(Size::class, 'color_id', 'id');
+        return $this->belongsTo(Color::class, 'color_id', 'id');
     }
 }

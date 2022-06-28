@@ -171,7 +171,7 @@
 
                         <hr>
                         <div class="col-2">
-                            <input type="submit" class="form-control btn btn-primary" name="btn" id="btn" value="Add Color">
+                            <input type="submit" class="form-control btn btn-primary" name="btn" id="btn" value="Add Product">
                         </div>
                     </form>
                 </div>

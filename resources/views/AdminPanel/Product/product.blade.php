@@ -79,8 +79,8 @@
                                             <td>{{$product->productToBrand->brand_title}}</td>
                                             <td>{{$product->productToCategory->title}}</td>
                                             <td>{{$product->productToSubcategory->title}}</td>
-                                            <td>{{$product->productToSize->color_name}}</td>
-                                            <td>{{$product->productToColor->size_name}}</td>
+                                            <td>{{$product->productToColor->color_name}}</td>
+                                            <td>{{$product->productToSize->size_name}}</td>
                                             <td>{{$product->quantity}}</td>
                                             <td>{{$product->price}}</td>
                                             <td>{{$product->total_price}}</td>
