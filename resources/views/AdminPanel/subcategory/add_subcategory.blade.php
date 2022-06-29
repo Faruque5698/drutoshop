@@ -56,7 +56,7 @@
                             </select>
 
                         </div>
-                        @error('status')
+                        @error('category_id')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                         <hr>

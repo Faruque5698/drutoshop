@@ -54,9 +54,6 @@
                                         <th>Product Title</th>
                                         <th>Brand</th>
                                         <th>Category</th>
-                                        <th>Subcategory</th>
-                                        <th>Color</th>
-                                        <th>Size</th>
                                         <th>Quantity</th>
                                         <th>Price</th>
                                         <th>Total Price</th>
@@ -78,9 +75,6 @@
 
                                             <td>{{$product->productToBrand->brand_title}}</td>
                                             <td>{{$product->productToCategory->title}}</td>
-                                            <td>{{$product->productToSubcategory->title}}</td>
-                                            <td>{{$product->productToColor->color_name}}</td>
-                                            <td>{{$product->productToSize->size_name}}</td>
                                             <td>{{$product->quantity}}</td>
                                             <td>{{$product->price}}</td>
                                             <td>{{$product->total_price}}</td>
@@ -88,7 +82,7 @@
                                             <td>
                                                 <a href="{{ route('product.status', ["id"=>$product->id]) }}" class="btn btn-sm btn-{{$product->status == 'active' ? 'success':'warning'}} mb-1"><i class="fa fa-{{$product->status == 'active' ? 'arrow-up':'arrow-down'}}"></i></a>
                                                 <a href="{{ route('product.edit', ["id"=>$product->id]) }}" class="btn btn-sm btn-info mb-1"><i class="fa fa-edit"></i></a>
-                                                <a href="" class="btn btn-sm btn-primary mb-1"><i class="fa fa-eye"></i></a>
+                                                <a href="{{ route('product.single', ["id"=>$product->id]) }}" class="btn btn-sm btn-primary mb-1"><i class="fa fa-eye"></i></a>
 
                                                 <a href="" class="btn btn-sm btn-danger mb-1" data-toggle="modal" data-target="#modal-product" ><i class="fa fa-trash"></i></a>
                                             </td>
@@ -127,9 +121,6 @@
                                         <th>Product Title</th>
                                         <th>Brand</th>
                                         <th>Category</th>
-                                        <th>Subcategory</th>
-                                        <th>Color</th>
-                                        <th>Size</th>
                                         <th>Quantity</th>
                                         <th>Price</th>
                                         <th>Total Price</th>

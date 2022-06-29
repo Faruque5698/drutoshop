@@ -58,6 +58,7 @@ class ProductController extends Controller
             'size_id' => 'required',
             'color_id' => 'required',
             'quantity' => 'required',
+            'discount_type'=>'required',
             'price' => 'required',
             'discount_price' => 'required',
             'discription' => 'required',
@@ -92,6 +93,7 @@ class ProductController extends Controller
                     'image' => $imageUrl,
                     'slug' => $slug_name,
                     'sku' => $sku,
+                    'discount_type'=> $request->discount_type,
                     'future_product' => "product name",
                     'total_price' =>$total_price,
                     'status' => $request->status,
@@ -102,6 +104,15 @@ class ProductController extends Controller
         }
 
         return redirect()->route('admin.product')->with('message', 'Product Uplopad Successfully');
+    }
+
+
+
+    public function show($id)
+    {
+
+        $single_product = Product::find($id);
+        return view('AdminPanel.Product.single_view_product', compact('single_product'));
     }
 
     public function status($id)
@@ -136,8 +147,6 @@ class ProductController extends Controller
     public function update(Request $request)
     {
 
-    
-
         $slug_name =  Str::slug(Str::lower($request->product_name));
         $sku = Str::substr($request->product_name,0,3)."-".Str::random();
         $total_price = $request->quantity * $request->discount_price;
@@ -154,9 +163,9 @@ class ProductController extends Controller
             if ($product_image) {
                 Product::where('id', $request->id)->update([
                     'product_name' => $request->product_name,
-                    'brand_id' => $request->brand_id,
-                    'category_id' => $request->category_id,
-                    'subcategory_id' => $request->subcategory_id,
+                   // 'brand_id' => $request->brand_id,
+                    // 'category_id' => $request->category_id,
+                    // 'subcategory_id' => $request->subcategory_id,
                     'size_id' => $request->size_id,
                     'color_id' => $request->color_id,
                     'color_id' => $request->color_id,
@@ -167,6 +176,7 @@ class ProductController extends Controller
                     'image' => $imageUrl,
                     'slug' => $slug_name,
                     'sku' => $sku,
+                    'discount_type'=> $request->discount_type,
                     'future_product' => "product name",
                     'total_price' =>$total_price,
                     'status' => $request->status,
@@ -178,9 +188,9 @@ class ProductController extends Controller
 
            Product::where('id', $request->id)->update([
                     'product_name' => $request->product_name,
-                    'brand_id' => $request->brand_id,
-                    'category_id' => $request->category_id,
-                    'subcategory_id' => $request->subcategory_id,
+                    //'brand_id' => $request->brand_id,
+                    // 'category_id' => $request->category_id,
+                    // 'subcategory_id' => $request->subcategory_id,
                     'size_id' => $request->size_id,
                     'color_id' => $request->color_id,
                     'color_id' => $request->color_id,
@@ -190,6 +200,7 @@ class ProductController extends Controller
                     'discription' => $request->discription,
                     'slug' => $slug_name,
                     'sku' => $sku,
+                    'discount_price' => $request->discount_price,
                     'future_product' => "product name",
                     'total_price' =>$total_price,
                     'status' => $request->status,

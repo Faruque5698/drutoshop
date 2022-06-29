@@ -4,7 +4,7 @@
     Sub Category
 @endsection
 
-@php($subcategories = \App\Models\Subcategory::all())
+{{-- @php($subcategories = \App\Models\Subcategory::all()) --}}
 
 {{-- {{ $subcategories }} --}}
 
@@ -65,7 +65,7 @@
                                        @foreach($subcategories as $subcategory)
                                         <tr>
                                             <td>{{$i++}}</td>
-                                            <td>{{$subcategory->subcategoryTOcategory->title}}</td>
+                                            <td>{{$subcategory->subcategoryTocategory->title}}</td>
                                             <td>{{$subcategory->title}}</td>
 
 

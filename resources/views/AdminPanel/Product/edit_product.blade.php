@@ -28,8 +28,9 @@
         <!-- Main content -->
         <section class="content">
             <div class="card card-warning">
-                <div class="card-header">
+                <div class="card-header justify-content-end">
                     <h3 class="card-title">Edit Product</h3>
+                   <a href="{{route('admin.product')}}" class="btn btn-primary float-right"><i class="fa fa-eye"></i></a>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -47,7 +48,7 @@
                         <hr>
                         <div class="form-row">
                             <div class="col-12">
-                                <select name="brand_id" class="form-control @error('brand_id') is-invalid @enderror">
+                                <select disabled name="brand_id" class="form-control @error('brand_id') is-invalid @enderror">
                                     <option selected>Select Brand</option>
                                     @foreach($brands as $brand)
                                         <option {{ $brand->id == $product_edit->brand_id ? 'selected': '' }} value="{{ $brand->id }}">{{ $brand->brand_title }}</option>
@@ -61,7 +62,7 @@
                         <hr>
                         <div class="form-row">
                             <div class="col-12">
-                                <select name="category_id" class="form-control @error('category_id') is-invalid @enderror" id="catId">
+                                <select disabled name="category_id" class="form-control @error('category_id') is-invalid @enderror" id="catId">
                                     <option selected>Select Category</option>
                                     @foreach($categories as $category)
                                         <option {{ $category->id == $product_edit->category_id ? 'selected': '' }} value="{{ $category->id }}">{{ $category->title }}</option>
@@ -74,7 +75,7 @@
                         </div>
                         <hr>
                         <div class="form-row">
-                            <select class="form-control" name="subcategory_id" id="subCatId">
+                            <select disabled class="form-control" name="subcategory_id" id="subCatId">
                                  <option value="">-----Select Sub Category------</option>
                             </select>
                             @error('subcategory_id')
@@ -118,17 +119,42 @@
                             @enderror
                         </div>
                         <hr>
-                        <div class="form-row">
-                            <div class="col-6">
-                                <input type="number" name="price" class="form-control @error('price') is-invalid @enderror" value="{{ $product_edit->price }}" placeholder="Type Price">
+                         <div class="form-row">
+                            <div class="col-12">
+                                <input type="number" name="price" id="priceValEdit" value="{{ $product_edit->price }}" class="form-control @error('price') is-invalid @enderror" placeholder="Price">
                             </div>
                             @error('price')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                            <div class="col-6">
-                               <input type="number" name="discount_price" class="form-control @error('price') is-invalid @enderror" value="{{ $product_edit->discount_price }}" placeholder="Type Discount Price">                  
+                           
+                        </div>
+                        <hr>
+
+                         <div class="form-row">
+                             <div class="col-12">
+                               <input type="number"  id="discountPriceEdit"  class="form-control" placeholder="Discount Price">                  
                             </div>
-                            @error('discount_price')
+        
+                        </div>
+                        <hr>
+                        <div class="form-row">
+                             <div class="col-12">
+                                <select class="form-control" name="discount_type" id="discountEdit">
+                                    <option selected>Select Discount Type</option>
+                                    <option {{$product_edit -> discount_type == 'credit' ? 'Selected' : ''}} value="credit">TK</option>
+                                    <option {{$product_edit -> discount_type == 'parcentage' ? 'Selected' : ''}} value="parcentage">Parcentage</option>
+                                </select>    
+                            </div>
+                           
+                        </div>
+
+                        <hr>
+
+                         <div class="form-row">
+                             <div class="col-12" id="disCount">
+                               <input type="number" name="discount_price" value="{{ $product_edit->discount_price }}" id="disResultedit" class="form-control @error('price') is-invalid @enderror" placeholder="Total">                  
+                            </div>
+                            @error('title')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
@@ -147,13 +173,14 @@
 
                         <div class="form-row">
                             <div class="col-12">
-                                <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="productImg" /> 
+                                <input type="file" class=" @error('image') is-invalid @enderror" name="image" id="productImgEdit" /> 
                             </div>
                             @error('image')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
+                            <br>
 
-                            <img src="{{asset($product_edit->image)}}" alt="" id="prevImg" width="100px" height="100px">
+                            <img src="{{asset($product_edit->image)}}" alt="" id="prevImgEdit" width="100px" height="100px">
                         </div>
                        
                         <hr>
@@ -161,8 +188,8 @@
                         <div class="form-row">
                             <select class="form-control @error('status') is-invalid @enderror" id="" name="status">
                                 <option selected>Status</option>
-                                <option value="active" {{$category -> status == 'active' ? 'Selected' : ''}}>Active</option>
-                                <option value="inactive" {{$category -> status == 'inactive' ? 'Selected' : ''}}>Inactive</option>
+                                <option value="active" {{$product_edit -> status == 'active' ? 'Selected' : ''}}>Active</option>
+                                <option value="inactive" {{$product_edit -> status == 'inactive' ? 'Selected' : ''}}>Inactive</option>
 
                             </select>
 
@@ -184,40 +211,48 @@
 @endsection
 
 @section('js')
+   
 
 
-    
     <script type="text/javascript">
+        
+        productImgEdit.onchange = evt => {
+                        const [file] = productImgEdit.files
+                        if (file) {
+                            prevImgEdit.src = URL.createObjectURL(file)
+                        };
+   
+    </script>
+                
+    <script type="text/javascript">
+            
+            $(document).ready(function(){
 
 
-        productImg.onchange = evt => {
-            const [file] = productImg.files
-            if (file) {
-                prevImg.src = URL.createObjectURL(file)
-            }
-        }
 
 
-        $(document).ready(function(){
-            $('#catId').change(function(){
-                var catId = $(this).val();
-                $.ajaxSetup({
-                      headers: {
-                          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                      }
-                });
 
-                $.ajax({
-                  type   : 'POST',
-                  url: "{{ route('product.subcatid') }}",
-                  data   : {cat_id:catId},
-                  success: function(data){
-                    $('#subCatId').html(data);
-                  }
-                });
+                        $('#discountEdit').change(function(){
 
+                       
+                        var discountType = $(this).val();
+                        // alert(discountType);
+                        var priceVal = $('#priceValEdit').val();
+                        var discountPrice = $('#discountPriceEdit').val();
+                       
+                        if (discountType == "credit") {
+                            var result = (priceVal - discountPrice)
+                           
+                            $('#disResultedit').val(result);
+                        }else if(discountType == "parcentage"){
+                            var result = ((priceVal * (100 - discountPrice)) / 100);
+                            $('#disResultedit').val(Math.round(result));
+                            
+                        }
+                    });
+       
             });
-        });
+
     </script>
 
  

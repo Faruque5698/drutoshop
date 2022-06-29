@@ -10,7 +10,8 @@ use App\Models\Category;
 class SubcategoryController extends Controller
 {
     public function index(){
-        return view('AdminPanel.subcategory.subcategory');
+        $subcategories = Subcategory::all();
+        return view('AdminPanel.subcategory.subcategory', compact('subcategories'));
     }
     public function add(){
         return view('AdminPanel.subcategory.add_subcategory');
@@ -110,7 +111,7 @@ class SubcategoryController extends Controller
 
     public function destroy($id){
         $subcategory = Subcategory::find($id);
-        unlink($subcategory->photo);
+        // unlink($subcategory->photo);
         $subcategory->delete();
 
         return back()->with('message',' Subcategory Deleted');

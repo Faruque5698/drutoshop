@@ -34,7 +34,7 @@ class ColorController extends Controller
             'status'     => $request->status,
             'created_at' =>Carbon::now(),
        ]);
-       return back()->with('message','New Color added');
+       return redirect()->route('admin.color')->with('message','New Color added');
     }
 
     public function status($id)

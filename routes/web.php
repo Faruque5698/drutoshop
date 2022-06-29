@@ -95,4 +95,6 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],
     Route::post('product/update',[ProductController::class, 'update'])->name('product.update');
     Route::get('product/delete/{id}',[ProductController::class, 'destroy'])->name('product.delete');
 
+    Route::get('product/single/view/{id}', [ProductController::class, 'show'])->name('product.single');
+
 });

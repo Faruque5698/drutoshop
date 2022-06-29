@@ -28,6 +28,7 @@ class CreateProductsTable extends Migration
             $table->string('image');
             $table->string('slug');
             $table->string('sku');
+            $table->string('discount_type');
             $table->float('total_price',10,2);
             $table->string('future_product')->nullable();
             $table->enum('status',['active','inactive'])->default('active');

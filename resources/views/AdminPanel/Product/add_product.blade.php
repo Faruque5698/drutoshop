@@ -30,6 +30,7 @@
             <div class="card card-warning">
                 <div class="card-header">
                     <h3 class="card-title">Add Product</h3>
+                     <a href="{{route('admin.product')}}" class="btn btn-primary float-right"><i class="fa fa-eye text-white"></i></a>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -110,7 +111,7 @@
                         <hr>
                          <div class="form-row">
                             <div class="col-12">
-                                <input type="number" class="form-control @error('quantity') is-invalid @enderror" name="quantity" placeholder="Type quantity">
+                                <input type="number" class="form-control @error('quantity') is-invalid @enderror" name="quantity" placeholder="Quantity">
                             </div>
                             @error('quantity')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -130,17 +131,17 @@
 
                          <div class="form-row">
                              <div class="col-12">
-                               <input type="number"  id="discountPrice" class="form-control" placeholder="Discount Price">                  
+                               <input type="number" class="form-control " id="discountPrice" placeholder="Discount Price">                  
                             </div>
         
                         </div>
                         <hr>
                         <div class="form-row">
                              <div class="col-12">
-                                <select class="form-control" id="discount">
+                                <select class="form-control " id="discount" name="discount_type">
                                     <option selected>Select Discount Type</option>
-                                    <option value="taka">TK</option>
-                                    <option value="parcen">Parcentage</option>
+                                    <option value="credit">TK</option>
+                                    <option value="parcentage">Parcentage</option>
                                 </select>    
                             </div>
                            
@@ -150,7 +151,7 @@
 
                          <div class="form-row">
                              <div class="col-12" id="disCount">
-                               <input type="number" name="discount_price" id="disResult" class="form-control @error('price') is-invalid @enderror" placeholder="Total">                  
+                               <input  type="number" name="discount_price" id="disResult"  class="form-control @error('price') is-invalid @enderror" placeholder="Total">                  
                             </div>
                             @error('title')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -171,7 +172,7 @@
 
                         <div class="form-row">
                             <div class="col-12">
-                                <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" /> 
+                                <input type="file" class="@error('image') is-invalid @enderror" name="image" /> 
                             </div>
                             @error('image')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -237,13 +238,13 @@
                     var priceVal = $('#priceVal').val();
                     var discountPrice = $('#discountPrice').val();
                    
-                    if (discountType == "taka") {
+                    if (discountType == "credit") {
                         var result = (priceVal - discountPrice)
                        
                         $('#disResult').val(result);
-                    }else{
+                    }else if(discountType == "parcentage"){
                         var result = ((priceVal * (100 - discountPrice)) / 100);
-                        $('#disResult').val(result);
+                        $('#disResult').val(Math.round(result));
                         
                     }
             });
