@@ -81,15 +81,15 @@
 {{--                </li>--}}
 
                 <li class="nav-header">Sections</li>
-                <li class="nav-item">
+               {{--  <li class="nav-item">
                     <a href="{{route('admin.homes')}}" class="nav-link">
                         <i class="nav-icon fa fa-home text-danger"></i>
                         <p class="text">Home</p>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a href="{{route('admin.category')}}" class="nav-link">
-                        <i class="nav-icon fa fa-list-alt text-info"></i>
+                        <i class="nav-icon fa fa-list-alt text-primary"></i>
                         <p>category</p>
                     </a>
                 </li>
@@ -102,27 +102,27 @@
 
                  <li class="nav-item">
                     <a href="{{ route('admin.brand') }}" class="nav-link">
-                        <i class="nav-icon fa fa-folder text-success"></i>
+                        <i class="nav-icon fa fa-star text-warning"></i>
                         <p>Brand</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.color') }}" class="nav-link">
-                        <i class="nav-icon fa fa-folder text-success"></i>
+                        <i class="nav-icon fa fa-globe text-primary"></i>
                         <p>Color</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{ route('admin.size') }}" class="nav-link">
-                        <i class="nav-icon fa fa-folder text-success"></i>
+                        <i class="nav-icon fa fa-th-large text-danger"></i>
                         <p>Size</p>
                     </a>
                 </li>
 
                  <li class="nav-item">
                     <a href="{{ route('admin.product') }}" class="nav-link">
-                        <i class="nav-icon fa fa-folder text-success"></i>
+                        <i class="nav-icon fa fa-tasks text-success"></i>
                         <p>Product</p>
                     </a>
                 </li>

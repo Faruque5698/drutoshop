@@ -118,14 +118,39 @@
                         </div>
                         <hr>
                         <div class="form-row">
-                            <div class="col-6">
-                                <input type="number" name="price" class="form-control @error('price') is-invalid @enderror" placeholder="Type Price">
+                            <div class="col-12">
+                                <input type="number" name="price" id="priceVal" class="form-control @error('price') is-invalid @enderror" placeholder="Price">
                             </div>
                             @error('price')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                            <div class="col-6">
-                               <input type="number" name="discount_price" class="form-control @error('price') is-invalid @enderror" placeholder="Type Discount Price">                  
+                           
+                        </div>
+                        <hr>
+
+                         <div class="form-row">
+                             <div class="col-12">
+                               <input type="number"  id="discountPrice" class="form-control" placeholder="Discount Price">                  
+                            </div>
+        
+                        </div>
+                        <hr>
+                        <div class="form-row">
+                             <div class="col-12">
+                                <select class="form-control" id="discount">
+                                    <option selected>Select Discount Type</option>
+                                    <option value="taka">TK</option>
+                                    <option value="parcen">Parcentage</option>
+                                </select>    
+                            </div>
+                           
+                        </div>
+
+                        <hr>
+
+                         <div class="form-row">
+                             <div class="col-12" id="disCount">
+                               <input type="number" name="discount_price" id="disResult" class="form-control @error('price') is-invalid @enderror" placeholder="Total">                  
                             </div>
                             @error('title')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -205,7 +230,31 @@
                 });
 
             });
+
+
+            $('#discount').change(function(){
+                    var discountType = $(this).val();
+                    var priceVal = $('#priceVal').val();
+                    var discountPrice = $('#discountPrice').val();
+                   
+                    if (discountType == "taka") {
+                        var result = (priceVal - discountPrice)
+                       
+                        $('#disResult').val(result);
+                    }else{
+                        var result = ((priceVal * (100 - discountPrice)) / 100);
+                        $('#disResult').val(result);
+                        
+                    }
+            });
+
         });
+
+
+
+
+
+
     </script>
 
  

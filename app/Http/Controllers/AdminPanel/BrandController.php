@@ -41,9 +41,10 @@ class BrandController extends Controller
             $brands->photo = $imageUrl;
             $brands->save();
         }else{
-            $brands = new Category();
+            $brands = new Brand();
             $brands->brand_title = $request->brand_title;
             $brands->summary = $request->summary;
+            $brands->photo = "image.jpg";
             $brands->status = $request->status;
             $brands->save();
         }
@@ -75,7 +76,7 @@ class BrandController extends Controller
             $brands->brand_title = $request->brand_title;
             $brands->summary = $request->summary;
             $brands->status = $request->status;
-            $brands->photo = $imageUrl ;
+            $brands->photo = $imageUrl;
             $brands->save();
         }else{
             $brands->brand_title = $request->brand_title;

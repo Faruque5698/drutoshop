@@ -38,10 +38,11 @@ class SubcategoryController extends Controller
             $subcategory->category_id = $request->category_id;
             $subcategory->summary = $request->summary;
             $subcategory->status = $request->status;
-            $subcategory->photo = $imageUrl ;
+            $subcategory->photo = $imageUrl;
             $subcategory->save();
         }else{
-            $subcategory = new Subategory();
+            $subcategory = new Subcategory();
+            $subcategory->photo = "default.jpg";
             $subcategory->title = $request->title;
             $subcategory->category_id = $request->category_id;
             $subcategory->summary = $request->summary;
