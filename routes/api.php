@@ -25,13 +25,19 @@ Route::get('brand',[\App\Http\Controllers\Api\CategoryController::class,'brand']
 Route::get('category',[\App\Http\Controllers\Api\CategoryController::class,'category']);
 Route::get('subcat-product/{id}',[\App\Http\Controllers\Api\CategoryController::class,'subcatProduct']);
 Route::get('brand-product/{id}',[\App\Http\Controllers\Api\CategoryController::class,'brandProduct']);
-Route::get('all-products',[\App\Http\Controllers\Api\CategoryController::class,'product']);
+Route::get('all-products',[\App\Http\Controllers\Api\ProductController::class,'product']);
+
+Route::get('product/trending',[\App\Http\Controllers\Api\ProductController::class,'trending']);
+Route::get('product/popular',[\App\Http\Controllers\Api\ProductController::class,'popular']);
+Route::get('product/exclusive',[\App\Http\Controllers\Api\ProductController::class,'exclusive']);
+
+
 
 Route::group(["middleware" => ["auth:api"]], function(){
 
     Route::get("profile", [\App\Http\Controllers\Api\AuthController::class, "profile"]);
 
-
+    Route::post('address/save',[\App\Http\Controllers\Api\AddressController::class,'save']);
 
     Route::post("logout", [\App\Http\Controllers\Api\AuthController::class, "logout"]);
 

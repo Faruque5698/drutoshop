@@ -36,10 +36,5 @@ class CategoryController extends Controller
            'data'=>$product
         ]);
     }
-    public function product(){
-        $product = Product::with('productToCategory','productToSubcategory','productToBrand')->where('status','=','active')->get();
-        return response()->json([
-            'data'=>['product'=>$product],
-        ],200);
-    }
+
 }
