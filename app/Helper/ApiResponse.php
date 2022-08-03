@@ -70,4 +70,13 @@ class ApiResponse
 //
 //    }
 
+public function dataExsits(){
+        return response()->json([
+            'code'=>409,
+            'status'=>true,
+            'message'=>'data all ready exists',
+
+        ],409);
+}
+
 }

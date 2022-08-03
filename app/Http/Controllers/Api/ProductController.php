@@ -10,14 +10,22 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function product(){
-        $product = Product::with('productToCategory','productToSubcategory','productToBrand')->where('status','=','active')->get();
+        $product = Product::with('productToCategory','productToSubcategory','productToBrand','productToColor','productToSize')->where('status','=','active')->get();
         return response()->json([
             'data'=>['product'=>$product],
         ],200);
     }
 
+    public function pro_details($id)
+    {
+        $product = Product::with('productToCategory', 'productToSubcategory', 'productToBrand','productToColor','productToSize')->find($id);
+
+            return ApiResponse::success($product);
+
+    }
+
     public function trending(){
-        $product = Product::with('productToCategory','productToSubcategory','productToBrand')->where('trending','=',1)->get();
+        $product = Product::with('productToCategory','productToSubcategory','productToBrand','productToColor','productToSize')->where('trending','=',1)->get();
 //        return response()->json([
 //
 //        ]);
@@ -33,7 +41,7 @@ class ProductController extends Controller
     }
 
     public function popular(){
-        $product = Product::with('productToCategory','productToSubcategory','productToBrand')->where('popular','=',1)->get();
+        $product = Product::with('productToCategory','productToSubcategory','productToBrand','productToColor','productToSize')->where('popular','=',1)->get();
 //        return response()->json([
 //
 //        ]);
@@ -47,7 +55,7 @@ class ProductController extends Controller
         }
     }
     public function exclusive(){
-        $product = Product::with('productToCategory','productToSubcategory','productToBrand')->where('exclusive','=',1)->get();
+        $product = Product::with('productToCategory','productToSubcategory','productToBrand','productToColor','productToSize')->where('exclusive','=',1)->get();
 //        return response()->json([
 //
 //        ]);

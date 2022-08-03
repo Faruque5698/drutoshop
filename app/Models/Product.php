@@ -27,6 +27,10 @@ class Product extends Model
         return $this->belongsTo(Size::class, 'size_id', 'id');
     }
     public function productToColor(){
-        return $this->belongsTo(Color::class, 'color_id', 'id');
+        return $this->belongsTo(Color::class, 'color_id','id');
+    }
+
+    public function favouriteProduct(){
+        return $this->hasMany(FavouriteProduct::class);
     }
 }
