@@ -17,7 +17,6 @@ class CategoryController extends Controller
     public function store(Request $request){
         $request->validate([
             'title' => 'required',
-            'summary' => 'required',
             'photo' => ' image|nullable',
             'status' => 'required|in:active,inactive'
         ]);
@@ -64,7 +63,7 @@ class CategoryController extends Controller
         unlink($category->photo);
         $category->delete();
 
-        return back()->with('message',' Category Deleted');
+         return response()->json(['success'=>'Category Delete Successfully!!']);
     }
     public function edit($id){
         $category = Category::find($id);

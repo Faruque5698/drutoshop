@@ -10,6 +10,8 @@ use App\Models\Size;
 use App\Models\Color;
 use App\Models\Brand;
 use App\Models\Product;
+use App\Models\GalleryProduct;
+use Auth;
 use Str;
 use Carbon\Carbon;
 
@@ -48,6 +50,25 @@ class ProductController extends Controller
 
     }
 
+
+
+    public function getColor(Request $request)
+    {
+        $colors = Color::where('id',$request->color_id)->first();
+
+        return $colors->color_name;
+
+    }
+
+    public function getSize(Request $request)
+    {
+        $sizes = Size::where('id',$request->size_id)->first();
+
+        return $sizes->size_name;
+
+    }
+
+
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -78,14 +99,16 @@ class ProductController extends Controller
             $product_image -> move($directory,$imageName);
 
             if ($product_image) {
-                Product::insert([
+               $product_id = Product::insertGetId([
+                    'user_id' => Auth::user()->id,
                     'product_name' => $request->product_name,
                     'brand_id' => $request->brand_id,
                     'category_id' => $request->category_id,
                     'subcategory_id' => $request->subcategory_id,
                     'size_id' => $request->size_id,
                     'color_id' => $request->color_id,
-                    'color_id' => $request->color_id,
+                    'size_qty' => $request->size_qty,
+                    'color_qty' => $request->color_qty,
                     'price' => $request->price,
                     'quantity' => $request->quantity,
                     'discount_price' => $request->discount_price,
@@ -99,6 +122,27 @@ class ProductController extends Controller
                     'status' => $request->status,
                     'created_at' => Carbon::now(),
                 ]);
+
+                if($product_id){
+                    if($request->hasFile('gallery')){
+                        $gallery = $request->file('gallery');
+                        foreach($gallery as $gall){
+                            $gallery_image = $slug_name."-".uniqid().".".$gall->getClientOriginalExtension();
+                            $directory = 'assets/images/gallery/';
+                            $imageUrl = $directory.$gallery_image;
+                            $gallery_uploads = $gall->move($directory, $gallery_image);
+
+                            if($gallery_uploads){
+                                $galleyProduct = new GalleryProduct();
+                                $galleyProduct->product_id = $product_id;
+                                $galleyProduct->image = $imageUrl;
+                                $galleyProduct->save();
+
+                            }
+                            
+                        }
+                    }
+                }
             }
 
         }
@@ -216,9 +260,23 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product_id = Product::find($id);
-        if($product_id){
-            $product_id->delete();
+
+
+        if ($product_id) {
+            $Gallery_photo = GalleryProduct::where('product_id', $product_id)->get();
+
+            foreach($Gallery_photo as $gall){
+                
+                 unlink(public_path('/assets/images/gallery/'.$gall->gallery));
+                 $gall->delete();
+            }
+
+
         }
-        return redirect()->route('admin.product')->with('message', 'Product Delete Successfully');
+
+        $product_id->delete();
+
+        return response()->json(['success'=>'Deleted Successfully!!']);
+    
     } 
 }

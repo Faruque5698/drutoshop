@@ -52,6 +52,7 @@
                                         <th>Sl</th>
                                         <th>Color Name</th>
                                         <th>Color Code</th>
+                                        <th>Color Box</th>
                                         <th>Publication Status</th>
                                         <th>Action</th>
 
@@ -63,9 +64,11 @@
                                      @foreach($datas as $data)
 
                                        <tr>
+                                        <input type="hidden" class="color-id" value="{{ $data->id }}">
                                          <td>{{ $loop->index +1 }}</td>
                                          <td>{{ $data->color_name }}</td>
                                          <td>{{ $data->color_code }}</td>
+                                         <td><div style="width: 50px; height:20px; background-color: {{ $data->color_code }};"></div></td>
                                          <td>{{ $data->status == "active" ? "Active" : "Inactive" }}</td>
 
                                          <td>   
@@ -73,33 +76,9 @@
 
                                                 <a href="{{ route('color.edit', ["id"=>$data->id]) }}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
 
-                                                <a href="" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-color" ><i class="fa fa-trash"></i></a>
+                                                <a href="" class="btn btn-sm btn-danger delete" data-toggle="modal" data-target="#modal-color" ><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
-
-
-
-
-                                        <div class="modal fade" id="modal-color">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content bg-danger">
-                                                    <div class="modal-header">
-                                                        <h3>Delete</h3>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <p>Are you want to delete it..</p>
-                                                    </div>
-                                                    <div class="modal-footer justify-content-between">
-                                                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                                                        <a href="{{ route('color_delete', ["id"=>$data->id]) }}" class="btn btn-outline-light">Delete</a>
-                                                    </div>
-                                                </div>
-                                                <!-- /.modal-content -->
-                                            </div>
-                                            <!-- /.modal-dialog -->
                                        
 
                                      @endforeach
@@ -125,4 +104,66 @@
 
     </div>
 @endsection
+
+
+
+@section('js')
+
+<script>
+
+$(document).ready(function(){
+
+
+
+    $('.delete').click(function(e){
+        e.preventDefault();
+        var delete_id = $(this).closest('tr').find('.color-id').val();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+
+                var data = {
+                    "_token" : $('input[name="csrf-token"]').val(),
+                    "id"     : delete_id,
+                }
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                })
+
+                $.ajax({
+                    type    : 'DELETE',
+                    url     : '/admin/color-delete/'+delete_id,
+                    data    : data,
+                    success : function(response){
+                        Swal.fire(
+                            response.success,
+                            'success'
+                        ).then((result) => {
+                            location.reload();
+                        })
+                    }
+                })
+
+            }
+          })
+
+    })
+})
+
+
+</script>
+
+
+@endsection
+
 

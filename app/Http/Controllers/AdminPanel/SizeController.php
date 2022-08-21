@@ -78,6 +78,6 @@ class SizeController extends Controller
     {
         $size_id = Size::find($id);
         $size_id->delete();
-        return back()->with('message','Size Deleted Successfully');
+        return response()->json(['success'=>'Product Delete Successfully!!']);
     }
 }

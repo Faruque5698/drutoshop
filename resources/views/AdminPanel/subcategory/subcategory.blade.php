@@ -64,12 +64,13 @@
                                     @php($i=1)
                                        @foreach($subcategories as $subcategory)
                                         <tr>
+                                            <input type="hidden" class="subcategory-id" value="{{ $subcategory->id }}">
                                             <td>{{$i++}}</td>
                                             <td>{{$subcategory->subcategoryTocategory->title}}</td>
                                             <td>{{$subcategory->title}}</td>
 
 
-                                            <td><img src="{{asset($subcategory->photo)}}" alt="" width="100px" height="100px"></td>
+                                            <td><img src="@if(isset($subcategory->photo)) {{ asset($subcategory->photo) }} @else {{asset('assets/images/noimage.jpeg')}} @endif" alt="{{$subcategory->title}}" width="100px" height="100px"/></td>
                                             <td>{{$subcategory->status == 'active' ? 'Published':'Unpublished'}}</td>
                                             <td>
 
@@ -84,32 +85,9 @@
 
                                                 <a href="{{ route('subcategory.edit', ['id'=>$subcategory->id]) }}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
 
-                                                <a href="" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-subcat" ><i class="fa fa-trash"></i></a>
+                                                <a href="" class="btn btn-sm btn-danger delete" data-toggle="modal" data-target="#modal-subcat" ><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
-
-
-                                           <div class="modal fade" id="modal-subcat">
-                                               <div class="modal-dialog">
-                                                    <div class="modal-content bg-danger">
-                                                       <div class="modal-header">
-                                                            <h3>Delete</h3>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                    <div class="modal-body">
-                                                        <p>Are you want to delete it..</p>
-                                                    </div>
-                                                    <div class="modal-footer justify-content-between">
-                                                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                                                        <a href="{{route('subcategory_delete',['id'=>$subcategory->id])}}" class="btn btn-outline-light">Delete</a>
-                                                    </div>
-                                                </div>
-                                                <!-- /.modal-content -->
-                                            </div>
-                                            <!-- /.modal-dialog -->
-
                    
 
                                       @endforeach
@@ -142,4 +120,67 @@
         <!-- /.modal -->
     </div>
 @endsection
+
+
+
+
+@section('js')
+
+<script>
+
+$(document).ready(function(){
+
+
+
+    $('.delete').click(function(e){
+        e.preventDefault();
+        var delete_id = $(this).closest('tr').find('.subcategory-id').val();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+
+                var data = {
+                    "_token" : $('input[name="csrf-token"]').val(),
+                    "id"     : delete_id,
+                }
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                })
+
+                $.ajax({
+                    type    : 'DELETE',
+                    url     : '/admin/subcategory-delete/'+delete_id,
+                    data    : data,
+                    success : function(response){
+                        Swal.fire(
+                            response.success,
+                            'success'
+                        ).then((result) => {
+                            location.reload();
+                        })
+                    }
+                })
+
+            }
+          })
+
+    })
+})
+
+
+</script>
+
+
+@endsection
+
 

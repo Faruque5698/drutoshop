@@ -21,7 +21,6 @@ class BrandController extends Controller
     public function store(Request $request){
         $request->validate([
             'brand_title' => 'required',
-            'summary' => 'required',
             'photo' => ' image|nullable',
             'status' => 'required|in:active,inactive'
         ]);
@@ -44,7 +43,6 @@ class BrandController extends Controller
             $brands = new Brand();
             $brands->brand_title = $request->brand_title;
             $brands->summary = $request->summary;
-            $brands->photo = "image.jpg";
             $brands->status = $request->status;
             $brands->save();
         }
@@ -107,6 +105,6 @@ class BrandController extends Controller
         // unlink($brands->photo);
         $brands->delete();
 
-        return back()->with('message',' Brands Deleted');
+        return response()->json(['success'=>'Brand Delete Successfully!!']);
     }
 }

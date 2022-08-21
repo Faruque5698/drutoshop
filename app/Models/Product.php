@@ -7,12 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Subcategory;
+use App\Models\GalleryProduct;
 use App\Models\Color;
 use App\Models\Size;
 
 class Product extends Model
 {
     use HasFactory;
+
+
+    protected $fillable = [];
 
     public function productToBrand(){
         return $this->belongsTo(Brand::class, 'brand_id', 'id');
@@ -32,5 +36,8 @@ class Product extends Model
 
     public function favouriteProduct(){
         return $this->hasMany(FavouriteProduct::class);
+    }
+    public function gallery_product(){
+        return $this->hasMany(GalleryProduct::class);
     }
 }

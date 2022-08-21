@@ -21,7 +21,6 @@ class SubcategoryController extends Controller
 
         $request->validate([
             'title' => 'required',
-            'summary' => 'required',
             'photo' => ' image|nullable',
             'status' => 'required|in:active,inactive'
         ]);
@@ -114,6 +113,6 @@ class SubcategoryController extends Controller
         // unlink($subcategory->photo);
         $subcategory->delete();
 
-        return back()->with('message',' Subcategory Deleted');
+        return response()->json(['success'=>'Subcategory Delete Successfully!!']);
     }
 }

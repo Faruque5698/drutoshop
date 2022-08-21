@@ -64,12 +64,13 @@
                                      @foreach($brands as $brand)
 
                                        <tr>
+                                        <input type="hidden" class="brand-id" value="{{ $brand->id }}">
                                          <td>{{ $loop->index +1 }}</td>
                                          <td>{{$brand->brand_title}}</td>
                                             <td>{{$brand->summary}}</td>
 
 
-                                            <td><img src="{{asset($brand->photo)}}" alt="" width="100px" height="100px"></td>
+                                            <td><img src="@if(isset($brand->photo)) {{ asset($brand->photo) }} @else {{asset('assets/images/noimage.jpeg')}} @endif" alt="{{ $brand->brand_title }}" width="100px" height="100px"/></td>
                                             <td>{{$brand->status == 'active' ? 'Published':'Unpublished'}}</td>
                                             <td>
 
@@ -83,33 +84,13 @@
 
                                                 <a href="{{route('brnad.edit',['id'=>$brand->id])}}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
 
-                                                <a href="" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-brnad" ><i class="fa fa-trash"></i></a>
+                                                <a href="" class="btn btn-sm btn-danger delete" data-toggle="modal" data-target="#modal-brnad" ><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
 
 
 
 
-                                        <div class="modal fade" id="modal-brnad">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content bg-danger">
-                                                    <div class="modal-header">
-                                                        <h3>Delete</h3>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <p>Are you want to delete it..</p>
-                                                    </div>
-                                                    <div class="modal-footer justify-content-between">
-                                                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                                                        <a href="{{route('brand_delete',['id'=>$brand->id])}}" class="btn btn-outline-light">Delete</a>
-                                                    </div>
-                                                </div>
-                                                <!-- /.modal-content -->
-                                            </div>
-                                            <!-- /.modal-dialog -->
                                        
 
                                      @endforeach
@@ -146,4 +127,67 @@
 
     </div>
 @endsection
+
+
+
+
+@section('js')
+
+<script>
+
+$(document).ready(function(){
+
+
+
+    $('.delete').click(function(e){
+        e.preventDefault();
+        var delete_id = $(this).closest('tr').find('.brand-id').val();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+
+                var data = {
+                    "_token" : $('input[name="csrf-token"]').val(),
+                    "id"     : delete_id,
+                }
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                })
+
+                $.ajax({
+                    type    : 'DELETE',
+                    url     : '/admin/brand-delete/'+delete_id,
+                    data    : data,
+                    success : function(response){
+                        Swal.fire(
+                            response.success,
+                            'success'
+                        ).then((result) => {
+                            location.reload();
+                        })
+                    }
+                })
+
+            }
+          })
+
+    })
+})
+
+
+</script>
+
+
+@endsection
+
 

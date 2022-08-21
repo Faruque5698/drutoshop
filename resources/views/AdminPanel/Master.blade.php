@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{asset('assets')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="{{asset('assets')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="{{asset('assets')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    @yield('style')
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -43,6 +44,7 @@
 
 <!-- jQuery -->
 <script src="{{asset('assets')}}/plugins/jquery/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="{{asset('assets')}}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
@@ -62,6 +64,10 @@
 <script src="{{asset('assets')}}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="{{asset('assets')}}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="{{asset('assets')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 <script>

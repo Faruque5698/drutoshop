@@ -4,8 +4,6 @@
     Product Single View
 @endsection
 
-{{-- @php($categories = \App\Models\Category::all()) --}}
-
 @section('content')
     <div class="content-wrapper">
 
@@ -64,11 +62,11 @@
                                    </tr>
                                    <tr>
                                        <th>Color Name</th>
-                                       <td>{{$single_product->productToColor->color_name}}</td>
+                                       <td>{{$single_product->productToColor->color_name}}({{ $single_product->color_qty }})</td>
                                    </tr>
                                    <tr>
                                        <th>Size Name</th>
-                                       <td>{{$single_product->productToSize->size_name}}</td>
+                                       <td>{{$single_product->productToSize->size_name}}({{ $single_product->size_qty }})</td>
                                    </tr>
                                    <tr>
                                        <th>Price</th>
@@ -93,6 +91,14 @@
                                    <tr>
                                        <th>Product Image</th>
                                        <td><img src="{{asset($single_product->image)}}" alt="{{$single_product->product_name}}" width="150px" height="150px"></td>
+                                   </tr>
+                                   <tr>
+                                       <th>Gallery Image</th>
+                                       <td>
+                                           @foreach($single_product->gallery_product as $gallery_image)
+                                            <span><img src="{{asset($gallery_image->image)}}" alt="{{$single_product->product_name}}" width="100px" height="100px"></span>
+                                           @endforeach
+                                       </td>
                                    </tr>
                                    <tr>
                                        <th>Product Status</th>

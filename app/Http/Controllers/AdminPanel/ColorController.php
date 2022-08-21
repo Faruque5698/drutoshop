@@ -82,6 +82,6 @@ class ColorController extends Controller
     {
         $color_id = Color::find($id);
         $color_id->delete();
-        return back()->with('message','Color Deleted');
+        return response()->json(['success'=>'Color Delete Successfully!!']);
     }
 }
