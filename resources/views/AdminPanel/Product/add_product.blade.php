@@ -16,6 +16,27 @@
             display: none;
         }
 
+        input[type="file"]{
+            position: relative;
+            width: 50%;
+            background: red;
+            display: none;
+        }
+        .lable-custom{
+            position: relative;
+            width: 100%;
+            left: 0;
+            top: 0;
+            box-sizing: border-box;
+           /* background: #2b2b;*/
+            padding: 10px 5px;
+            text-align: left;
+            color: #000;
+            font-size: 15px;
+            font-weight: 300;
+
+        }
+
     </style>
 @endsection
 
@@ -96,45 +117,37 @@
                             <span id="subCatError" class="pl-2" style="color: red;"></span>
                         </div>
                        
-                        <hr>
-                        <div class="form-row">
-                            <div class="col-6">
-                                <select name="size_id" id="sizeId" class="select-size form-control @error('size_id') is-invalid @enderror mb-1" >
-                                    <option selected>Select Size</option>
-                                    @foreach($sizes as $size)
-                                        <option value="{{ $size->id }}">{{ $size->size_name }}</option>
-                                    @endforeach
-                                </select>
-
-                                <div class="form-row mb-1 show-size">
-                                  <div class="col-12">
-                                    <p id="sizeName"></p>
-                                      <input type="number" name="size_qty" class="form-control size-qty" min="1" placeholder="Size qty">
-                                  </div>
-                                </div>
-                                 <span id="sizeError" class="pl-2" style="color: red;"></span>
-                            </div>
-                           
-                            <div class="col-6">
-                                 <select name="color_id" id="colorId" class="select-color form-control @error('color_id') is-invalid @enderror mb-1" >
-                                    <option id="colorHide" selected>Select Color</option>
-                                    @foreach($colors as $color)
-                                        <option class="colorText" value="{{ $color->id }}">{{ $color->color_name }}</option>
-                                    @endforeach
-                                </select>
-                              
-                                <div class="form-row mb-1 show-color">
-                                  <div class="col-12">
-                                      <p id="colorName"></p>
-                                      <input type="number" name="color_qty" class="form-control color-qty" min="1" placeholder="color qty">
-                                  </div>
-                                </div>
-                                <span id="colorError" class="pl-2" style="color: red;"></span>
-                            </div>
-                    
-                            
-                        </div>
                        
+                        <hr>
+                        <div class="addSection">
+                            <div class="form-row">
+                                <div class="col-4">
+                                    <select name="size_id[]" id="sizeId" class="select-size form-control @error('size_id') is-invalid @enderror mb-1" >
+                                        <option selected>Select Size</option>
+                                        @foreach($sizes as $size)
+                                            <option value="{{ $size->id }}">{{ $size->size_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                     <select name="color_id[]" id="colorId" class="select-color form-control @error('color_id') is-invalid @enderror mb-1" >
+                                        <option id="colorHide" selected>Select Color</option>
+                                        @foreach($colors as $color)
+                                            <option class="colorText" value="{{ $color->id }}">{{ $color->color_name }}</option>
+                                        @endforeach
+                                    </select>
+                                  
+                                </div>
+
+                                <div class="col-2">
+                                    <input type="number" name="size_color_qty[]" class="form-control color-qty"  placeholder="Size qty">
+                                </div>
+                                <div class="col-2 text-center">
+                                     <a href="javascript:void(0)" class="addRow ml-2"><i class="fas fa-plus pr-2"></i>Add More</a>
+                                </div>
+
+                            </div>
+                        </div> 
                         <hr>
                          <div class="form-row">
                             <div class="col-12">
@@ -195,27 +208,41 @@
                         <hr>
 
                         <div class="form-row">
-                            <div class="col-12">
-                                <input type="file" id="image" class="@error('image') is-invalid @enderror" name="image" onchange="checkImage();" /> 
+                            <div class="col-6">
+                                <input type="file" id="image" class="@error('image') is-invalid @enderror" name="image" onchange="checkImage();" />
+                                <label for="image" class="lable-custom"><i class="fas fa-upload mr-2"></i>Choise Primary Image (Compulsery)</label> 
                             </div>
                             <span id="imgError" class="pl-2" style="color: red;"></span>
                         </div>
                        
                         <hr>
-
                         <div class="form-row">
-                            <div class="col-4">
-                                <label>Select Multiple Image</label>
-                            </div>
-                            <div class="col-8">
-                                <input type="file" id="image" class="@error('image') is-invalid @enderror" name="gallery[]" multiple onchange="checkImage();" /> 
+                            <div class="col-6">
+                                <input type="file" id="image" class="@error('image') is-invalid @enderror" name="image" onchange="checkImage();" />
+                                <label for="image" class="lable-custom"><i class="fas fa-upload mr-2"></i>Choise Image (Optional)</label> 
                             </div>
                             <span id="imgError" class="pl-2" style="color: red;"></span>
                         </div>
                        
                         <hr>
-
-
+                        <div class="form-row">
+                            <div class="col-6">
+                                <input type="file" id="image" class="@error('image') is-invalid @enderror" name="image" onchange="checkImage();" />
+                                <label for="image" class="lable-custom"><i class="fas fa-upload mr-2"></i>Choise Image (Optional)</label> 
+                            </div>
+                            <span id="imgError" class="pl-2" style="color: red;"></span>
+                        </div>
+                       
+                        <hr>
+                        <div class="form-row">
+                            <div class="col-6">
+                                <input type="file" id="image" class="@error('image') is-invalid @enderror" name="image" onchange="checkImage();" />
+                                <label for="image" class="lable-custom"><i class="fas fa-upload mr-2"></i>Choise Image (Optional)</label> 
+                            </div>
+                            <span id="imgError" class="pl-2" style="color: red;"></span>
+                        </div>
+                       
+                        <hr>
 
                         <div class="form-row">
                             <select id="status" class="form-control @error('status') is-invalid @enderror" id="" name="status">
@@ -514,7 +541,7 @@
 
             function checkDescription() {
                 var discription = $('#discription').val();
-                var reg = /^[a-zA-Z -.]{50,1000}$/;
+                var reg = /^[a-zA-Z0-9 -.]{50,1000}$/;
                 if (reg.test(discription)) {
                     $('#discriptionError').text(' ');
                     return true;
@@ -527,27 +554,6 @@
             $('#discription').keyup(function() {
                checkDescription();
             });
-
-
-
-
-
-             function checkImage() {
-                var extension = $('#image').val().replace(/^.*\./, '');
-
-                alert(extension);
-
-
-
-
-
-                // alert(attrValue);
-                // if (attrValue == 'password') {
-                //     $('#password').attr('type', 'text');
-                // } else {
-                //     $('#password').attr('type', 'password');
-                // }
-            };
 
 
 
@@ -565,6 +571,26 @@
             };
 
 
+            $('.addRow').click(function(e){
+                e.preventDefault();
+                $('.addSection').append("<div class='form-row'><div class='col-4 mb-2'><select  name='size_id[]' class='form-control'><option selected>Select Size</option> @foreach($sizes as $size)<option value='{{ $size->id }}'>{{ $size->size_name }}</option>@endforeach</select></div><div class='col-4 mb-2'><select name='color_id[]'class='form-control'><option selected>Select Color</option> @foreach($colors as $color)<option value='{{ $color->id }}'>{{ $color->color_name }}</option>@endforeach</select></div><div class='col-2 mb-2'><input type='number' name='size_color_qty[]' class='form-control color-qty' min='1' placeholder='Size qty'></div><div class='col-2 text-center'><a href='javascript:void(0)' class=' removeRow ml-2'><i class='fas fa-minus  pr-2'></i>Remove</a></div></div>");
+
+
+
+           });
+
+
+            $(document).on('click','.removeRow', function(e){
+                e.preventDefault();
+              $(this).parent('div').parent('div').remove();
+            });
+
+       
+
+           
+
+
+
 
             $('#productForm').submit(function() {
                 if (checkProductName() == true && checkBrand() == true && checkCategory() == true && checkSubCatId() == true && checkColor() == true && checkSize() == true && checkQty() == true && checkPrice() == true && checkDisPrice() == true && checkDiscontType() == true && checkAfterDiscount() == true && checkDescription() == true && checkStatus() == true) {
@@ -577,6 +603,11 @@
 
 
         });
+
+
+        
+
+
 
 
 

@@ -61,12 +61,17 @@
                                        <td>{{$single_product->productToSubcategory->title}}</td>
                                    </tr>
                                    <tr>
-                                       <th>Color Name</th>
-                                       <td>{{$single_product->productToColor->color_name}}({{ $single_product->color_qty }})</td>
-                                   </tr>
-                                   <tr>
-                                       <th>Size Name</th>
-                                       <td>{{$single_product->productToSize->size_name}}({{ $single_product->size_qty }})</td>
+                                       <th>Color, Sizw & Qty</th>
+                                        <td>
+
+                                            @foreach($single_product->size_color_qty_product as $details)
+
+                                            <div class="d-flex">
+                                                 <div>{{ $details->product_size->size_name }}</div>-<div class="d-flex" style="width:50px; height: 20px; background-color: {{ $details->product_color->color_code }};"></div>-<div>{{ $details->size_color_qty }}</div><br>
+                                            </div>
+
+                                          @endforeach
+                                       </td> 
                                    </tr>
                                    <tr>
                                        <th>Price</th>
@@ -87,6 +92,14 @@
                                    <tr>
                                        <th>Qunatity</th>
                                        <td>{{$single_product->quantity}}</td>
+                                   </tr>
+                                   <tr>
+                                       <th>Total Sale</th>
+                                       <td>{{ $single_product->product_stock->sale_qty }}</td>
+                                   </tr>
+                                   <tr>
+                                       <th>Current Qunatity</th>
+                                       <td>{{ $single_product->quantity - ( $single_product->quantity - $single_product->product_stock->last_qty) }}</td>
                                    </tr>
                                    <tr>
                                        <th>Product Image</th>

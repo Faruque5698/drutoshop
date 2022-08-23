@@ -11,6 +11,8 @@ use App\Models\Color;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\GalleryProduct;
+use App\Models\ColorSizeQty;
+use App\Models\StockProduct;
 use Auth;
 use Str;
 use Carbon\Carbon;
@@ -71,6 +73,13 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+
+
+
+
+
+
+
         $this->validate($request, [
             'product_name' => 'required',
             'brand_id' => 'required',
@@ -87,8 +96,10 @@ class ProductController extends Controller
             'status' => 'required|in:active,inactive'
         ]);
 
+       
+
         $slug_name =  Str::slug(Str::lower($request->product_name));
-        $sku = Str::substr($request->product_name,0,3)."-".Str::random();
+        $sku = "PRO"."-"."BD"."-".rand(11111,99999);
         $total_price = $request->quantity * $request->discount_price;
 
         if ($request->hasFile('image')) {
@@ -105,10 +116,6 @@ class ProductController extends Controller
                     'brand_id' => $request->brand_id,
                     'category_id' => $request->category_id,
                     'subcategory_id' => $request->subcategory_id,
-                    'size_id' => $request->size_id,
-                    'color_id' => $request->color_id,
-                    'size_qty' => $request->size_qty,
-                    'color_qty' => $request->color_qty,
                     'price' => $request->price,
                     'quantity' => $request->quantity,
                     'discount_price' => $request->discount_price,
@@ -143,6 +150,33 @@ class ProductController extends Controller
                         }
                     }
                 }
+
+                if ($product_id) {
+
+                    $all_arrry = [$request->size_id,$request->color_id,$request->size_color_qty];
+
+                        foreach($all_arrry as  $key => $value){
+                           if (isset($request->size_id[$key]) && isset($request->color_id[$key]) && isset($request->size_color_qty[$key])) {
+                                $color_size_qty = new ColorSizeQty();
+                                $color_size_qty->product_id = $product_id;
+                                $color_size_qty->size_id = $request->size_id[$key];
+                                $color_size_qty->color_id = $request->color_id[$key];
+                                $color_size_qty->size_color_qty = $request->size_color_qty[$key];
+                                $color_size_qty->save();
+                           }
+                        }
+                }
+
+
+              
+              $stock_product = new StockProduct();
+              $stock_product->product_id = $product_id;
+              $stock_product->total_qty = $request->quantity;
+              $stock_product->last_qty = $request->quantity;
+              $stock_product->sale_qty = 0;
+              $stock_product->save();
+
+               
             }
 
         }
@@ -155,7 +189,7 @@ class ProductController extends Controller
     public function show($id)
     {
 
-        $single_product = Product::find($id);
+        $single_product = Product::with('product_stock')->find($id);
         return view('AdminPanel.Product.single_view_product', compact('single_product'));
     }
 

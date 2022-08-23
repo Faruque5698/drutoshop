@@ -8,8 +8,9 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\GalleryProduct;
-use App\Models\Color;
-use App\Models\Size;
+use App\Models\ColorSizeQty;
+use App\Models\StockProduct;
+
 
 class Product extends Model
 {
@@ -27,11 +28,9 @@ class Product extends Model
     public function productToSubcategory(){
         return $this->belongsTo(Subcategory::class, 'subcategory_id', 'id');
     }
-    public function productToSize(){
-        return $this->belongsTo(Size::class, 'size_id', 'id');
-    }
-    public function productToColor(){
-        return $this->belongsTo(Color::class, 'color_id','id');
+   
+    public function size_color_qty_product(){
+        return $this->hasMany(ColorSizeQty::class);
     }
 
     public function favouriteProduct(){
@@ -39,5 +38,8 @@ class Product extends Model
     }
     public function gallery_product(){
         return $this->hasMany(GalleryProduct::class);
+    }
+    public function product_stock(){
+        return $this->hasOne(StockProduct::class);
     }
 }
