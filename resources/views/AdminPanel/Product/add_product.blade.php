@@ -16,6 +16,21 @@
             display: none;
         }
 
+        input[type="file"]{
+            display: none;
+            position: relative;
+        }
+
+        .label-custom{
+            position: relative;
+           /* background: #2b2b;*/
+            left: 0;
+            top: 0;
+            padding: 15px 10px;
+            font-size: 15px;
+            font-weight: 300;
+        }
+
     </style>
 @endsection
 
@@ -98,7 +113,7 @@
                        
                         <hr>
                         <div class="form-row">
-                            <div class="col-6">
+                            <div class="col-4">
                                 <select name="size_id" id="sizeId" class="select-size form-control @error('size_id') is-invalid @enderror mb-1" >
                                     <option selected>Select Size</option>
                                     @foreach($sizes as $size)
@@ -106,33 +121,28 @@
                                     @endforeach
                                 </select>
 
-                                <div class="form-row mb-1 show-size">
-                                  <div class="col-12">
-                                    <p id="sizeName"></p>
-                                      <input type="number" name="size_qty" class="form-control size-qty" min="1" placeholder="Size qty">
-                                  </div>
-                                </div>
-                                 <span id="sizeError" class="pl-2" style="color: red;"></span>
+                    
                             </div>
                            
-                            <div class="col-6">
+                            <div class="col-4">
                                  <select name="color_id" id="colorId" class="select-color form-control @error('color_id') is-invalid @enderror mb-1" >
                                     <option id="colorHide" selected>Select Color</option>
                                     @foreach($colors as $color)
                                         <option class="colorText" value="{{ $color->id }}">{{ $color->color_name }}</option>
                                     @endforeach
                                 </select>
-                              
-                                <div class="form-row mb-1 show-color">
-                                  <div class="col-12">
-                                      <p id="colorName"></p>
-                                      <input type="number" name="color_qty" class="form-control color-qty" min="1" placeholder="color qty">
-                                  </div>
-                                </div>
-                                <span id="colorError" class="pl-2" style="color: red;"></span>
+                            </div>
+                            <div class="col-2">
+                                 <input type="number" id="colorQty" class="form-control" name="" placeholder="Qty">
+                            </div>
+                            <div class="col-2 text-center">
+                                 <a href="javascript:void(0)" id="addMore"><i class="fas fa-plus mr-1"></i>Add More</a>
                             </div>
                     
                             
+                        </div>
+                        <div class="form-row  addRow mt-2">
+                          
                         </div>
                        
                         <hr>
@@ -195,27 +205,61 @@
                         <hr>
 
                         <div class="form-row">
-                            <div class="col-12">
-                                <input type="file" id="image" class="@error('image') is-invalid @enderror" name="image" onchange="checkImage();" /> 
+                            <div class="col-3">
+                                <input type="file" class="@error('image') is-invalid @enderror" accept="image/*" id="mainImage" name="image" />
+                                <label for="mainImage" class="label-custom"><i class="fas fa-upload mr-2"></i>Choise Product Image</label> 
+                                <span id="imgError" class="pl-2" style="color: red;"></span>
+
+                                <div><img id="mainImagePreview" src="{{ asset('Admin/noimage/noimg.png') }}" alt="your image" width="100px" height="100px" /></div>
                             </div>
-                            <span id="imgError" class="pl-2" style="color: red;"></span>
+                            <div class="col-3">
+                                
+                            </div>
+                            
                         </div>
                        
                         <hr>
 
                         <div class="form-row">
-                            <div class="col-4">
-                                <label>Select Multiple Image</label>
+                            <div class="col-6">
+                               <input accept="image/*" type='file' id="imgOptional2" name="image1" />
+                               <label for="imgOptional2" class="label-custom"><i class="fas fa-upload mr-2"></i>Optional Image 1</label>
+ 
                             </div>
-                            <div class="col-8">
-                                <input type="file" id="image" class="@error('image') is-invalid @enderror" name="gallery[]" multiple onchange="checkImage();" /> 
+                            <div class="col-6">
+                                <img id="options2" src="{{ asset('Admin/noimage/noimg.png') }}" alt="your image" width="100px" height="100px" />
                             </div>
-                            <span id="imgError" class="pl-2" style="color: red;"></span>
+                            
+                        </div>
+
+                        <hr>
+                         <hr>
+
+                        <div class="form-row">
+                            <div class="col-6">
+                               <input accept="image/*" type='file' id="imgOptional3" name="image2" />
+                                <label for="imgOptional3" class="label-custom"><i class="fas fa-upload mr-2"></i>Optional Image 2</label>
+ 
+                            </div>
+                            <div class="col-6">
+                                <img id="options3" src="{{ asset('Admin/noimage/noimg.png') }}" alt="your image" width="100px" height="100px" />
+                            </div>
+                            
+                        </div>
+                         <hr>
+
+                        <div class="form-row">
+                            <div class="col-6">
+                               <input accept="image/*" type='file' id="imgOptional1" name="image3" />
+                                <label for="imgOptional1" class="label-custom"><i class="fas fa-upload mr-2"></i>Optional Image 3</label>
+ 
+                            </div>
+                            <div class="col-6">
+                                <img id="options1" src="{{ asset('Admin/noimage/noimg.png') }}" alt="your image" width="100px" height="100px" />
+                            </div>
+                            
                         </div>
                        
-                        <hr>
-
-
 
                         <div class="form-row">
                             <select id="status" class="form-control @error('status') is-invalid @enderror" id="" name="status">
@@ -281,76 +325,6 @@
                         
                     }
             });
-
-
-
-
-
-           
-
-            function selectColor(){
-                $('.show-color').show();
-
-                 var colorId = $('.select-color').val();
-
-                $.ajaxSetup({
-                      headers: {
-                          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                      }
-                });
-
-                $.ajax({
-                  type   : 'POST',
-                  url: "{{ route('product.colorid') }}",
-                  data   : {color_id:colorId},
-                  success: function(data){
-
-
-                    $('#colorName').text(data);
-                  }
-                })
-             
-            }
-
-            $('.select-color').change(function(){
-
-                selectColor();
-            });
-
-
-            function selectSize(){
-
-                
-                $('.show-size').show();
-
-                var sizeId = $('.select-size').val();
-
-                $.ajaxSetup({
-                      headers: {
-                          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                      }
-                });
-
-                $.ajax({
-                  type   : 'POST',
-                  url: "{{ route('product.sizeid') }}",
-                  data   : {size_id:sizeId},
-                  success: function(data){
-
-
-                    $('#sizeName').text(data);
-                  }
-                })
-            }
-
-            $('.select-size').change(function(){
-
-                selectSize();
-            });
-
-
-
-
 
 
 
@@ -511,46 +485,6 @@
                 checkAfterDiscount();
             });
 
-
-            function checkDescription() {
-                var discription = $('#discription').val();
-                var reg = /^[a-zA-Z -.]{50,1000}$/;
-                if (reg.test(discription)) {
-                    $('#discriptionError').text(' ');
-                    return true;
-                } else {
-                    $('#discriptionError').text('First Name Must Be 50 to 500 Charecter !');
-                    return false;
-                }
-            };
-
-            $('#discription').keyup(function() {
-               checkDescription();
-            });
-
-
-
-
-
-             function checkImage() {
-                var extension = $('#image').val().replace(/^.*\./, '');
-
-                alert(extension);
-
-
-
-
-
-                // alert(attrValue);
-                // if (attrValue == 'password') {
-                //     $('#password').attr('type', 'text');
-                // } else {
-                //     $('#password').attr('type', 'password');
-                // }
-            };
-
-
-
              function checkStatus() {
 
                 var status = $('#status').val();
@@ -564,10 +498,46 @@
 
             };
 
+            function addmore(sizeId,colorId,colorSizeQty,sizeText,colorText){
+                var listElement = document.createElement('input');
+                listElement.value = sizeText;
+                listElement.name = sizeId;
+                listElement.innerHTML = `<input type="text" />`;                               
+                                
+                          
+                           
+
+
+                $('.addRow').append(listElement);
+
+            };
+
+
+
+            $('#addMore').click(function(){
+                var sizeId = $('#sizeId').val();
+                var colorId = $('#colorId').val();
+                 var sizeText = $('#sizeId option:selected').text();
+                var colorText = $('#colorId option:selected').text();
+                var colorSizeQty = $('#colorQty').val();
+
+    
+
+                addmore(sizeId,colorId,colorSizeQty,sizeText,colorText);
+            });
+
+
+        
+
+
+
+
+
+
 
 
             $('#productForm').submit(function() {
-                if (checkProductName() == true && checkBrand() == true && checkCategory() == true && checkSubCatId() == true && checkColor() == true && checkSize() == true && checkQty() == true && checkPrice() == true && checkDisPrice() == true && checkDiscontType() == true && checkAfterDiscount() == true && checkDescription() == true && checkStatus() == true) {
+                if (checkProductName() == true && checkBrand() == true && checkCategory() == true && checkSubCatId() == true && checkColor() == true && checkSize() == true && checkQty() == true && checkPrice() == true && checkDisPrice() == true && checkDiscontType() == true && checkAfterDiscount() == true &&  checkStatus() == true) {
                     return true;
                 } else {
                     return false;
@@ -577,6 +547,49 @@
 
 
         });
+
+
+            imgOptional1.onchange = evt => {
+              const [file] = imgOptional1.files
+              if (file) {
+                options1.src = URL.createObjectURL(file)
+              }
+            }
+
+             imgOptional2.onchange = evt => {
+              const [file] = imgOptional2.files
+              if (file) {
+                options2.src = URL.createObjectURL(file)
+              }
+            }
+
+             
+             imgOptional3.onchange = evt => {
+              const [file] = imgOptional3.files
+              if (file) {
+                options3.src = URL.createObjectURL(file)
+              }
+            }
+
+
+            mainImage.onchange = evt => {
+              const [file] = mainImage.files
+              if (file) {
+                mainImagePreview.src = URL.createObjectURL(file)
+              }
+            }
+
+
+
+
+           
+
+
+
+
+        
+
+          
 
 
 
