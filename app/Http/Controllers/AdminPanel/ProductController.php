@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\AdminPanel;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Str;
+use Auth;
+use Carbon\Carbon;
+use App\Models\Size;
+use App\Models\Brand;
+use App\Models\Color;
+use App\Models\Product;
 use App\Models\Category;
 use App\Models\Subcategory;
-use App\Models\Size;
-use App\Models\Color;
-use App\Models\Brand;
-use App\Models\Product;
-use App\Models\GalleryProduct;
 use App\Models\ColorSizeQty;
 use App\Models\StockProduct;
-use Auth;
-use Str;
-use Carbon\Carbon;
+use Illuminate\Http\Request;
+use App\Models\GalleryProduct;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
@@ -27,6 +28,7 @@ class ProductController extends Controller
 
     public function add()
     {
+        // $all_data = SizeColorQuantity::all();
         $categories = Category::all();
         $brands = Brand::all();
         $sizes = Size::all();
@@ -51,35 +53,28 @@ class ProductController extends Controller
 
 
     }
-
-
-
-    public function getColor(Request $request)
+  
+    public function storeColorSize(Request $request)
     {
-        $colors = Color::where('id',$request->color_id)->first();
+    
 
-        return $colors->color_name;
+       $data = collect([$request->size_id,$request->color_id,$request->size_color_qty]);
+       Session::push('array_data',$data);
+
+      foreach(Session::get('array_data') as $store_data){
+        return $store_data;
+      }
+        
+
+      
 
     }
 
-    public function getSize(Request $request)
-    {
-        $sizes = Size::where('id',$request->size_id)->first();
 
-        return $sizes->size_name;
-
-    }
 
 
     public function store(Request $request)
     {
-
-
-
-
-
-
-
         $this->validate($request, [
             'product_name' => 'required',
             'brand_id' => 'required',
@@ -95,8 +90,6 @@ class ProductController extends Controller
             'image' => 'required|image',
             'status' => 'required|in:active,inactive'
         ]);
-
-       
 
         $slug_name =  Str::slug(Str::lower($request->product_name));
         $sku = "PRO"."-"."BD"."-".rand(11111,99999);
@@ -144,7 +137,6 @@ class ProductController extends Controller
                                 $galleyProduct->product_id = $product_id;
                                 $galleyProduct->image = $imageUrl;
                                 $galleyProduct->save();
-
                             }
                             
                         }
@@ -153,7 +145,7 @@ class ProductController extends Controller
 
                 if ($product_id) {
 
-                    $all_arrry = [$request->size_id,$request->color_id,$request->size_color_qty];
+                    $all_arrry = [$request->size_id,$request->color_id,$request->size_color_qty]; 
 
                         foreach($all_arrry as  $key => $value){
                            if (isset($request->size_id[$key]) && isset($request->color_id[$key]) && isset($request->size_color_qty[$key])) {

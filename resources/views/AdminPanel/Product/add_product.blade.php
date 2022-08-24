@@ -28,13 +28,19 @@
             left: 0;
             top: 0;
             box-sizing: border-box;
-           /* background: #2b2b;*/
-            padding: 10px 5px;
+            border: 1px solid rgb(224, 72, 118);
+            border-radius: 20px;
+            padding: 10px 10px;
             text-align: left;
             color: #000;
             font-size: 15px;
             font-weight: 300;
 
+        }
+        .lable-custom:hover{
+            background-color: rgb(172, 70, 101);
+            border-color: #ffff;
+            color: #ffff;
         }
 
     </style>
@@ -140,7 +146,7 @@
                                 </div>
 
                                 <div class="col-2">
-                                    <input type="number" name="size_color_qty[]" class="form-control color-qty"  placeholder="Size qty">
+                                    <input type="number" id="sizeColorQty" name="size_color_qty[]" class="form-control color-qty"  placeholder="Size qty">
                                 </div>
                                 <div class="col-2 text-center">
                                      <a href="javascript:void(0)" class="addRow ml-2"><i class="fas fa-plus pr-2"></i>Add More</a>
@@ -148,36 +154,33 @@
 
                             </div>
                         </div> 
-                        <hr>
-                         <div class="form-row">
-                            <div class="col-12">
-                                <input type="number" id="qty" class="form-control @error('quantity') is-invalid @enderror" name="quantity" placeholder="Quantity"  min="1" required>
-                            </div>
-                            @error('quantity')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                            <span id="qtyError" class="pl-2" style="color: red;"></span>
-                        </div>
+
                         <hr>
                         <div class="form-row">
-                            <div class="col-12">
+                            <div class="col-6">
+                                <input type="number" id="qty" class="form-control @error('quantity') is-invalid @enderror" name="quantity" placeholder="Quantity"  min="1" required>
+                                @error('quantity')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                <span id="qtyError" class="pl-2" style="color: red;"></span>
+    
+                            </div>
+                           
+                            <div class="col-6">
                                 <input type="number" name="price" id="priceVal" class="form-control @error('price') is-invalid @enderror" placeholder="Price">
                             </div>
                     
                              <span id="priceError" class="pl-2" style="color: red;"></span>
                         </div>
                         <hr>
+            
 
                          <div class="form-row">
-                             <div class="col-12">
+                             <div class="col-6">
                                <input type="number" class="form-control discount-price" id="discountPrice" placeholder="Discount Price">
                                <span id="disCountPriceError" class="pl-2" style="color: red;"></span>                  
                             </div>
-        
-                        </div>
-                        <hr>
-                        <div class="form-row">
-                             <div class="col-12">
+                            <div class="col-6">
                                 <select class="form-control " id="discount" name="discount_type">
                                     <option selected>Select Discount Type</option>
                                     <option value="credit">TK</option>
@@ -185,11 +188,9 @@
                                 </select>
                                 <span id="discountError" class="pl-2" style="color: red;"></span>    
                             </div>
-                           
+        
                         </div>
-
                         <hr>
-
                          <div class="form-row">
                              <div class="col-12" id="disCount">
                                <input  type="number" name="discount_price" id="disResult"  class="form-control @error('price') is-invalid @enderror" placeholder="Total">                  
@@ -208,36 +209,34 @@
                         <hr>
 
                         <div class="form-row">
-                            <div class="col-6">
-                                <input type="file" id="image" class="@error('image') is-invalid @enderror" name="image" onchange="checkImage();" />
-                                <label for="image" class="lable-custom"><i class="fas fa-upload mr-2"></i>Choise Primary Image (Compulsery)</label> 
+                            <div class="col-3">
+                                <input type="file" id="mainImg" class="@error('image') is-invalid @enderror" name="image" onchange="checkImage();" />
+                                <label for="mainImg" class="lable-custom"><i class="fas fa-upload mr-2"></i>Upload Image (Compulsery)</label> 
+                                <div class="text-center">
+                                    <img src="{{ asset('assets/images/noimage.jpeg') }}" id="mainPreview"/ width="100px" height="100px">
+                                </div>
                             </div>
-                            <span id="imgError" class="pl-2" style="color: red;"></span>
-                        </div>
-                       
-                        <hr>
-                        <div class="form-row">
-                            <div class="col-6">
-                                <input type="file" id="image" class="@error('image') is-invalid @enderror" name="image" onchange="checkImage();" />
-                                <label for="image" class="lable-custom"><i class="fas fa-upload mr-2"></i>Choise Image (Optional)</label> 
+                            <div class="col-3">
+                                <input type="file" id="optionImg1" class="@error('image') is-invalid @enderror" name="image" onchange="checkImage();" />
+                                <label for="optionImg1" class="lable-custom"><i class="fas fa-upload mr-2"></i>Upload Image (Optional)</label> 
+                                <div class="text-center">
+                                    <img src="{{ asset('assets/images/noimage.jpeg') }}" id="option1Preview"/ width="100px" height="100px">
+                                </div>
+                                
                             </div>
-                            <span id="imgError" class="pl-2" style="color: red;"></span>
-                        </div>
-                       
-                        <hr>
-                        <div class="form-row">
-                            <div class="col-6">
-                                <input type="file" id="image" class="@error('image') is-invalid @enderror" name="image" onchange="checkImage();" />
-                                <label for="image" class="lable-custom"><i class="fas fa-upload mr-2"></i>Choise Image (Optional)</label> 
+                            <div class="col-3">
+                                <input type="file" id="optionImg2" class="@error('image') is-invalid @enderror" name="image" onchange="checkImage();" />
+                                <label for="optionImg2" class="lable-custom"><i class="fas fa-upload mr-2"></i>Upload Image (Optional)</label> 
+                                <div class="text-center">
+                                    <img src="{{ asset('assets/images/noimage.jpeg') }}" id="option2Preview"/ width="100px" height="100px">
+                                </div>
                             </div>
-                            <span id="imgError" class="pl-2" style="color: red;"></span>
-                        </div>
-                       
-                        <hr>
-                        <div class="form-row">
-                            <div class="col-6">
-                                <input type="file" id="image" class="@error('image') is-invalid @enderror" name="image" onchange="checkImage();" />
-                                <label for="image" class="lable-custom"><i class="fas fa-upload mr-2"></i>Choise Image (Optional)</label> 
+                            <div class="col-3">
+                                <input type="file" id="optionImg3" class="@error('image') is-invalid @enderror" name="image" onchange="checkImage();" />
+                                <label for="optionImg3" class="lable-custom"><i class="fas fa-upload mr-2"></i>Upload Image (Optional)</label> 
+                                <div class="text-center">
+                                    <img src="{{ asset('assets/images/noimage.jpeg') }}" id="option3Preview"/ width="100px" height="100px">
+                                </div>
                             </div>
                             <span id="imgError" class="pl-2" style="color: red;"></span>
                         </div>
@@ -290,6 +289,33 @@
                   }
                 })
 
+            });
+
+
+            $('.addRow').click(function(){
+                var sizeId = $('#sizeId').val();
+                var colorId = $('#colorId').val();
+                var sizeColorQty = $('#sizeColorQty').val();
+
+                $.ajaxSetup({
+                      headers: {
+                          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                      }
+                });
+
+                $.ajax({
+                  type   : 'POST',
+                  url: "{{ route('product.store-size-color-qty') }}",
+                  data   : {
+                    size_id:sizeId,
+                    color_id:colorId,
+                    size_color_qty:sizeColorQty,
+                },
+                  success: function(data){
+                     alert(data);
+                  }
+                })
+               
             });
 
 
@@ -603,6 +629,38 @@
 
 
         });
+
+
+
+        mainImg.onchange = evt => {
+            const [file] = mainImg.files
+            if (file) {
+                mainPreview.src = URL.createObjectURL(file)
+            }
+        }
+
+        optionImg1.onchange = evt => {
+            const [file] = optionImg1.files
+            if (file) {
+                option1Preview.src = URL.createObjectURL(file)
+            }
+        }
+
+
+        optionImg2.onchange = evt => {
+            const [file] = optionImg2.files
+            if (file) {
+                option2Preview.src = URL.createObjectURL(file)
+            }
+        }
+
+        optionImg3.onchange = evt => {
+            const [file] = optionImg3.files
+            if (file) {
+                option3Preview.src = URL.createObjectURL(file)
+            }
+        }
+
 
 
         
