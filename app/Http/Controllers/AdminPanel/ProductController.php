@@ -28,6 +28,7 @@ class ProductController extends Controller
 
     public function add()
     {
+
         // $all_data = SizeColorQuantity::all();
         $categories = Category::all();
         $brands = Brand::all();
@@ -39,6 +40,9 @@ class ProductController extends Controller
             "colors" => $colors,
             "brands" => $brands,
         ]);
+
+
+
     }
 
     public function getSubId(Request $request)
@@ -56,25 +60,35 @@ class ProductController extends Controller
   
     public function storeColorSize(Request $request)
     {
-    
 
-       $data = collect([$request->size_id,$request->color_id,$request->size_color_qty]);
-       Session::push('array_data',$data);
+      $product = collect(['size_id' => $request->size_id, 'size_text' => $request->size_text,'color_id' => $request->color_id, 'color_text' => $request->color_text, 'qty' => $request->size_color_qty]);
 
-      foreach(Session::get('array_data') as $store_data){
-        return $store_data;
-      }
-        
 
-      
+        Session::push('color_size', $product);
+
+
+        $outputs = "<div class='form-row mb-2'><div class='col-4'><input type='text'  class='form-control'></div><div class='col-4'> <input type='text' class='form-control'></div><div class='col-2'><input type='text' class='form-control'></div><div class='col-2 text-center'><a href='javascript:void(0)' class='remove ml-2'><i class='fas fa-minus pr-2'></i>remove</a></div></div>";
+
+       foreach(Session::get('color_size') as $key => $data_view){
+         
+            // echo $data_view['size_text'].$data_view['color_text'];
+
+        echo $outputs = "<div class='form-row mb-2'><div class='col-4'><input type='text' value='".$data_view['size_text']."' class='form-control' disabled></div><div class='col-4'> <input type='text' value='".$data_view['color_text']."' class='form-control' disabled></div><div class='col-2'><input type='text' value='".$data_view['qty']."' class='form-control' disabled></div><div class='col-2 text-center'> <button class='addRow ml-2 btn btn-danger'>Remove</button></div></div>";
+
+         
+       }
 
     }
 
 
 
 
+
+
+
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'product_name' => 'required',
             'brand_id' => 'required',
@@ -87,7 +101,11 @@ class ProductController extends Controller
             'price' => 'required',
             'discount_price' => 'required',
             'discription' => 'required',
-            'image' => 'required|image',
+            'image' => 'required',
+            'image.*' => 'mimes:jpeg,jpg,png',
+            'image1.*' => 'mimes:jpeg,jpg,png',
+            'image2.*' => 'mimes:jpeg,jpg,png',
+            'image3.*' => 'mimes:jpeg,jpg,png',
             'status' => 'required|in:active,inactive'
         ]);
 
@@ -124,39 +142,61 @@ class ProductController extends Controller
                 ]);
 
                 if($product_id){
-                    if($request->hasFile('gallery')){
-                        $gallery = $request->file('gallery');
-                        foreach($gallery as $gall){
-                            $gallery_image = $slug_name."-".uniqid().".".$gall->getClientOriginalExtension();
-                            $directory = 'assets/images/gallery/';
-                            $imageUrl = $directory.$gallery_image;
-                            $gallery_uploads = $gall->move($directory, $gallery_image);
 
-                            if($gallery_uploads){
-                                $galleyProduct = new GalleryProduct();
-                                $galleyProduct->product_id = $product_id;
-                                $galleyProduct->image = $imageUrl;
-                                $galleyProduct->save();
-                            }
-                            
-                        }
+                    if ($request->hasFile('image1')) {
+                        $product_image = $request->file('image1');
+                        $imageName1 = $product_image->getClientOriginalName();
+                        $directory = 'assets/images/product/';
+                        $imageUrl1 = $directory.$imageName1;
+                        $product_image ->move($directory,$imageName1);
+
+
+                       $gallery = GalleryProduct::insertGetId([
+                            'product_id' => $product_id,
+                            'image' => $imageUrl,
+                            'image1' => $imageUrl1,
+                        ]);
                     }
+                    if ($request->hasFile('image2')) {
+                        $product_image = $request->file('image2');
+                        $imageName2 = $product_image->getClientOriginalName();
+                        $directory = 'assets/images/product/';
+                        $imageUrl2 = $directory.$imageName2;
+                        $product_image ->move($directory,$imageName2);
+
+                        GalleryProduct::where('id', $gallery)->update([
+                            'image2' => $imageUrl2,
+                        ]);
+
+                    }
+                    if ($request->hasFile('image3')) {
+                        $product_image = $request->file('image3');
+                        $imageName3 = $product_image->getClientOriginalName();
+                        $directory = 'assets/images/product/';
+                        $imageUrl3 = $directory.$imageName3;
+                        $product_image ->move($directory,$imageName3);
+
+                         GalleryProduct::where('id', $gallery)->update([
+                            'image3' => $imageUrl3,
+                        ]);
+                    }
+
+
+                    
+
                 }
 
                 if ($product_id) {
-
-                    $all_arrry = [$request->size_id,$request->color_id,$request->size_color_qty]; 
-
-                        foreach($all_arrry as  $key => $value){
-                           if (isset($request->size_id[$key]) && isset($request->color_id[$key]) && isset($request->size_color_qty[$key])) {
-                                $color_size_qty = new ColorSizeQty();
-                                $color_size_qty->product_id = $product_id;
-                                $color_size_qty->size_id = $request->size_id[$key];
-                                $color_size_qty->color_id = $request->color_id[$key];
-                                $color_size_qty->size_color_qty = $request->size_color_qty[$key];
-                                $color_size_qty->save();
-                           }
+                  
+                        foreach(Session::get('color_size') as  $key => $color_size){
+                            $color_size_qty = new ColorSizeQty();
+                            $color_size_qty->product_id = $product_id;
+                            $color_size_qty->size_id = $color_size['size_id'];
+                            $color_size_qty->color_id = $color_size['color_id'];
+                            $color_size_qty->size_color_qty = $color_size['qty'];
+                            $color_size_qty->save();   
                         }
+                   
                 }
 
 
@@ -172,6 +212,9 @@ class ProductController extends Controller
             }
 
         }
+
+        Session::forget('color_size');
+
 
         return redirect()->route('admin.product')->with('message', 'Product Uplopad Successfully');
     }

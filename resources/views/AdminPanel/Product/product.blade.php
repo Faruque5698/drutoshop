@@ -6,6 +6,18 @@
 
 
 
+@section('style')
+
+    <style type="text/css">
+        
+
+
+    </style>
+
+@endsection
+
+
+
 @section('content')
     <div class="content-wrapper">
 
@@ -50,14 +62,12 @@
 
                                     <tr>
                                         <th>Sl</th>
-                                        <th>Product Image</th>
                                         <th>Product Title</th>
-                                        <th>Brand</th>
-                                        <th>Category</th>
-                                        <th>Quantity</th>
                                         <th>Price</th>
-                                        <th>Total Price</th>
-                                        <th>Publication Status</th>
+                                        <th>Quantity</th>
+                                        <th>Future</th>
+                                        <th>Trand</th>
+                                        <th>Status</th>
                                         <th>Action</th>
 
                                     </tr>
@@ -71,14 +81,13 @@
                                         <tr>
                                            <input type="hidden" value="{{ $product->id }}" class="product-id" />
                                            <td>{{$i++}}</td>
-                                           <td><img src="{{asset($product->image)}}" alt="{{$product->product_name}}" width="100px" height="100px"></td>
                                             <td>{{$product->product_name}}</td>
-
-                                            <td>{{$product->productToBrand->brand_title}}</td>
-                                            <td>{{$product->productToCategory->title}}</td>
-                                            <td>{{$product->quantity}}</td>
                                             <td>{{$product->price}}</td>
-                                            <td>{{$product->total_price}}</td>
+                                            <td>{{$product->quantity}}</td>
+                                            <td>
+                                                Future
+                                            </td>
+                                            <td>Trand</td>
                                             <td>{{$product->status == 'active' ? 'Published':'Unpublished'}}</td>
                                             <td>
                                                 <a href="{{ route('product.status', ["id"=>$product->id]) }}" class="btn btn-sm btn-{{$product->status == 'active' ? 'success':'warning'}} mb-1"><i class="fa fa-{{$product->status == 'active' ? 'arrow-up':'arrow-down'}}"></i></a>
@@ -96,14 +105,12 @@
                                     <tfoot>
                                     <tr>
                                        <th>Sl</th>
-                                        <th>Product Image</th>
                                         <th>Product Title</th>
-                                        <th>Brand</th>
-                                        <th>Category</th>
-                                        <th>Quantity</th>
                                         <th>Price</th>
-                                        <th>Total Price</th>
-                                        <th>Publication Status</th>
+                                         <th>Quantity</th>
+                                        <th>Future</th>
+                                        <th>Trand</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                     </tfoot>
