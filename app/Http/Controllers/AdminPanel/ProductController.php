@@ -94,8 +94,6 @@ class ProductController extends Controller
             'brand_id' => 'required',
             'category_id' => 'required',
             'subcategory_id' => 'required',
-            'size_id' => 'required',
-            'color_id' => 'required',
             'quantity' => 'required',
             'discount_type'=>'required',
             'price' => 'required',
@@ -115,7 +113,8 @@ class ProductController extends Controller
 
         if ($request->hasFile('image')) {
             $product_image = $request->file('image');
-            $imageName = $product_image->getClientOriginalName();
+            $ext = $product_image->getClientOriginalExtension();
+            $imageName = time().'-'.'.'.$ext;
             $directory = 'assets/images/product/';
             $imageUrl = $directory.$imageName;
             $product_image -> move($directory,$imageName);
@@ -135,7 +134,6 @@ class ProductController extends Controller
                     'slug' => $slug_name,
                     'sku' => $sku,
                     'discount_type'=> $request->discount_type,
-                    'future_product' => "product name",
                     'total_price' =>$total_price,
                     'status' => $request->status,
                     'created_at' => Carbon::now(),
@@ -143,23 +141,28 @@ class ProductController extends Controller
 
                 if($product_id){
 
+                    $gallery = GalleryProduct::insertGetId([
+                            'product_id' => $product_id,
+                            'image' => $imageUrl,
+                    ]);
+
                     if ($request->hasFile('image1')) {
                         $product_image = $request->file('image1');
-                        $imageName1 = $product_image->getClientOriginalName();
+                        $ext = $product_image->getClientOriginalExtension();
+                        $imageName1 = time().'-'.'.'.$ext;
                         $directory = 'assets/images/product/';
                         $imageUrl1 = $directory.$imageName1;
                         $product_image ->move($directory,$imageName1);
 
 
-                       $gallery = GalleryProduct::insertGetId([
-                            'product_id' => $product_id,
-                            'image' => $imageUrl,
+                       GalleryProduct::where('id', $gallery)->update([
                             'image1' => $imageUrl1,
                         ]);
                     }
                     if ($request->hasFile('image2')) {
                         $product_image = $request->file('image2');
-                        $imageName2 = $product_image->getClientOriginalName();
+                        $ext = $product_image->getClientOriginalExtension();
+                        $imageName2 = time().'-'.'.'.$ext;
                         $directory = 'assets/images/product/';
                         $imageUrl2 = $directory.$imageName2;
                         $product_image ->move($directory,$imageName2);
@@ -171,7 +174,8 @@ class ProductController extends Controller
                     }
                     if ($request->hasFile('image3')) {
                         $product_image = $request->file('image3');
-                        $imageName3 = $product_image->getClientOriginalName();
+                        $ext = $product_image->getClientOriginalExtension();
+                        $imageName3 = time().'-'.'.'.$ext;
                         $directory = 'assets/images/product/';
                         $imageUrl3 = $directory.$imageName3;
                         $product_image ->move($directory,$imageName3);
@@ -192,7 +196,9 @@ class ProductController extends Controller
                             $color_size_qty = new ColorSizeQty();
                             $color_size_qty->product_id = $product_id;
                             $color_size_qty->size_id = $color_size['size_id'];
+                            $color_size_qty->size_name = $color_size['size_text'];
                             $color_size_qty->color_id = $color_size['color_id'];
+                            $color_size_qty->color_name = $color_size['color_text'];
                             $color_size_qty->size_color_qty = $color_size['qty'];
                             $color_size_qty->save();   
                         }
@@ -224,7 +230,9 @@ class ProductController extends Controller
     public function show($id)
     {
 
-        $single_product = Product::with('product_stock')->find($id);
+        $single_product = Product::with('size_color_qty_product','gallery_product')->find($id);
+
+        //return $single_product;
         return view('AdminPanel.Product.single_view_product', compact('single_product'));
     }
 
@@ -242,6 +250,60 @@ class ProductController extends Controller
                 'status' => 'active',
             ]);
             return back()->with('message', 'Product Active Successfully');
+        }
+
+    }
+
+    public function futurs($id)
+    {
+        $future = Product::find($id);
+
+        if ($future->future_product == 0) {
+            Product::where('id', $future->id)->update([
+                'future_product' => 1,
+            ]);
+            return back()->with('message', 'Future Product Add Successfully');
+        }else{
+            Product::where('id',$future->id)->update([
+               'future_product' => 0,
+            ]);
+            return back()->with('message', 'Future Product Remove Successfully');
+        }
+
+    }
+
+    public function trands($id)
+    {
+       $trand = Product::find($id);
+
+        if ($trand->trand_product == 0) {
+            Product::where('id', $trand->id)->update([
+                'trand_product' => 1,
+            ]);
+            return back()->with('message', 'Trands Product Add Successfully');
+        }else{
+            Product::where('id',$trand->id)->update([
+               'trand_product' => 0,
+            ]);
+            return back()->with('message', 'Trands Product Remove Successfully');
+        }
+
+    }
+
+    public function exclusive($id)
+    {
+        $exclusive = Product::find($id);
+
+        if ($exclusive->exclusive_product == 0) {
+            Product::where('id', $exclusive->id)->update([
+                'exclusive_product' => 1,
+            ]);
+            return back()->with('message', 'Exclusive Product Add Successfully');
+        }else{
+            Product::where('id',$exclusive->id)->update([
+               'exclusive_product' => 0,
+            ]);
+            return back()->with('message', 'Exclusive Product Remove Successfully');
         }
 
     }
@@ -276,12 +338,12 @@ class ProductController extends Controller
             if ($product_image) {
                 Product::where('id', $request->id)->update([
                     'product_name' => $request->product_name,
-                   // 'brand_id' => $request->brand_id,
+                    // 'brand_id' => $request->brand_id,
                     // 'category_id' => $request->category_id,
                     // 'subcategory_id' => $request->subcategory_id,
-                    'size_id' => $request->size_id,
-                    'color_id' => $request->color_id,
-                    'color_id' => $request->color_id,
+                    // 'size_id' => $request->size_id,
+                    // 'color_id' => $request->color_id,
+                    // 'color_id' => $request->color_id,
                     'price' => $request->price,
                     'quantity' => $request->quantity,
                     'discount_price' => $request->discount_price,
@@ -290,7 +352,6 @@ class ProductController extends Controller
                     'slug' => $slug_name,
                     'sku' => $sku,
                     'discount_type'=> $request->discount_type,
-                    'future_product' => "product name",
                     'total_price' =>$total_price,
                     'status' => $request->status,
                     'updated_at' => Carbon::now(),
@@ -304,9 +365,9 @@ class ProductController extends Controller
                     //'brand_id' => $request->brand_id,
                     // 'category_id' => $request->category_id,
                     // 'subcategory_id' => $request->subcategory_id,
-                    'size_id' => $request->size_id,
-                    'color_id' => $request->color_id,
-                    'color_id' => $request->color_id,
+                    // 'size_id' => $request->size_id,
+                    // 'color_id' => $request->color_id,
+                    // 'color_id' => $request->color_id,
                     'price' => $request->price,
                     'quantity' => $request->quantity,
                     'discount_price' => $request->discount_price,
@@ -314,7 +375,6 @@ class ProductController extends Controller
                     'slug' => $slug_name,
                     'sku' => $sku,
                     'discount_price' => $request->discount_price,
-                    'future_product' => "product name",
                     'total_price' =>$total_price,
                     'status' => $request->status,
                     'updated_at' => Carbon::now(),

@@ -113,7 +113,7 @@ input[type="file"]{
                         <div class="addSection">
                             <div class="form-row">
                                 <div class="col-4">
-                                    <select  id="sizeId" name="size_id" class="select-size form-control mb-1" >
+                                    <select  id="sizeId" class="select-size form-control mb-1" >
                                         <option value="0">Select Size</option>
                                         @foreach($sizes as $size)
                                         <option value="{{ $size->id }}">{{ $size->size_name }}</option>
@@ -122,7 +122,7 @@ input[type="file"]{
                                     <span id="sizeError" class="pl-2" style="color: red;"></span>
                                 </div>
                                 <div class="col-4">
-                                    <select  id="colorId" name="color_id" class="select-color form-control  mb-1" >
+                                    <select  id="colorId"  class="select-color form-control  mb-1" >
                                         <option value="0">Select Color</option>
                                         @foreach($colors as $color)
                                         <option class="colorText" value="{{ $color->id }}">{{ $color->color_name }}</option>
@@ -132,7 +132,7 @@ input[type="file"]{
                                     
                                 </div>
                                 <div class="col-2">
-                                    <input type="number" id="sizeColorQty" name="size_color_qty" class="form-control color-qty"  placeholder="Size qty">
+                                    <input type="number" id="sizeColorQty" class="form-control"  placeholder="Quantity">
                                      <span id="sizeColorError" class="pl-2" style="color: red;"></span>
                                 </div>
                                 <div class="col-2 text-center">
@@ -141,9 +141,7 @@ input[type="file"]{
                             </div>
                         </div>
 
-                        <section id="rewSection">
-                          
-                        </section>
+                     
 
                         <div id="myData"></div>
                            
@@ -234,7 +232,7 @@ input[type="file"]{
                         <hr>
                         <div class="form-row">
                             <select id="status" class="form-control @error('status') is-invalid @enderror" id="" name="status">
-                                <option selected>Status</option>
+                                <option value="0">Status</option>
                                 <option value="active">Active</option>
                                 <option value="inactive">Inactive</option>
                             </select>
@@ -479,7 +477,7 @@ input[type="file"]{
 
         function checkStatus() {
             var status = $('#status').val();
-            if (status == ' ') {
+            if (status == '0') {
                 $('#statusError').text('Please select status');
                 return false;
             } else {

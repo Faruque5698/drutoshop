@@ -67,7 +67,7 @@
                                             @foreach($single_product->size_color_qty_product as $details)
 
                                             <div class="d-flex">
-                                                 <div>{{ $details->product_size->size_name }}</div>-<div class="d-flex" style="width:50px; height: 20px; background-color: {{ $details->product_color->color_code }};"></div>-<div>{{ $details->size_color_qty }}</div><br>
+                                                 <div>{{ $details->size_name }}</div>-<div class="d-flex" style="width:50px; height: 20px; background-color: {{ $details->color_name }};"></div>-<div>{{ $details->size_color_qty }}</div><br>
                                             </div>
 
                                           @endforeach
@@ -75,27 +75,27 @@
                                    </tr>
                                    <tr>
                                        <th>Price</th>
-                                       <td>Tk {{$single_product->price}}</td>
+                                       <td>Tk {{  number_format($single_product->price)  }}</td>
                                    </tr>
                                    <tr>
                                        <th>Discount Price</th>
-                                       <td>Tk {{$single_product->discount_price}}</td>
+                                       <td>Tk {{ number_format($single_product->discount_price) }}</td>
                                    </tr>
                                    <tr>
                                        <th>Discount Type</th>
-                                       <td>{{$single_product->discount_type}}</td>
+                                       <td>{{ $single_product->discount_type }}</td>
                                    </tr>
                                    <tr>
                                        <th>Total Price</th>
-                                       <td>{{$single_product->total_price}}</td>
+                                       <td>{{ number_format($single_product->total_price) }}</td>
                                    </tr>
                                    <tr>
                                        <th>Qunatity</th>
-                                       <td>{{$single_product->quantity}}</td>
+                                       <td>{{ number_format($single_product->quantity) }}</td>
                                    </tr>
                                    <tr>
                                        <th>Total Sale</th>
-                                       <td>{{ $single_product->product_stock->sale_qty }}</td>
+                                       <td>{{ number_format($single_product->product_stock->sale_qty) }}</td>
                                    </tr>
                                    <tr>
                                        <th>Current Qunatity</th>
@@ -108,9 +108,12 @@
                                    <tr>
                                        <th>Gallery Image</th>
                                        <td>
-                                           @foreach($single_product->gallery_product as $gallery_image)
-                                            <span><img src="{{asset($gallery_image->image)}}" alt="{{$single_product->product_name}}" width="100px" height="100px"></span>
-                                           @endforeach
+                            
+                                            <span><img src="{{asset($single_product->gallery_product->image)}}" alt="{{ $single_product->product_name }}" width="100px" height="100px"></span>
+                                            <span>@if(isset($single_product->gallery_product->image1))<img src="{{ asset($single_product->gallery_product->image1) }} " alt="{{$single_product->product_name}}" width="100px" height="100px">@endif</span>
+                                            <span>@if(isset($single_product->gallery_product->image2))<img src="{{ asset($single_product->gallery_product->image2)}}" alt="{{$single_product->product_name}}" width="100px" height="100px"> @endif</span>
+                                            <span>@if(isset($single_product->gallery_product->image3)) <img src="{{ asset($single_product->gallery_product->image3)}}" alt="{{$single_product->product_name}}" width="100px" height="100px"> @endif</span>
+                                    
                                        </td>
                                    </tr>
                                    <tr>

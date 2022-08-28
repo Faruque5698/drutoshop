@@ -83,8 +83,8 @@
                             @enderror
                         </div>
                        
-                        <hr>
-                        <div class="form-row">
+                        {{-- <hr> --}}
+                       {{--  <div class="form-row">
                             <div class="col-6">
                                 <select name="size_id" class="form-control @error('size_id') is-invalid @enderror" >
                                     <option selected>Select Size</option>
@@ -107,7 +107,7 @@
                             @error('color_id')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                        </div>
+                        </div> --}}
                        
                         <hr>
                          <div class="form-row">
@@ -213,45 +213,38 @@
 @section('js')
    
 
-
-    <script type="text/javascript">
-        
-        productImgEdit.onchange = evt => {
-                        const [file] = productImgEdit.files
-                        if (file) {
-                            prevImgEdit.src = URL.createObjectURL(file)
-                        };
-   
-    </script>
                 
-    <script type="text/javascript">
+    <script>
             
-            $(document).ready(function(){
+        $(document).ready(function(){
+                $('#discountEdit').change(function(){
 
-
-
-
-
-                        $('#discountEdit').change(function(){
-
-                       
-                        var discountType = $(this).val();
-                        // alert(discountType);
-                        var priceVal = $('#priceValEdit').val();
-                        var discountPrice = $('#discountPriceEdit').val();
-                       
-                        if (discountType == "credit") {
-                            var result = (priceVal - discountPrice)
-                           
-                            $('#disResultedit').val(result);
-                        }else if(discountType == "parcentage"){
-                            var result = ((priceVal * (100 - discountPrice)) / 100);
-                            $('#disResultedit').val(Math.round(result));
-                            
-                        }
-                    });
-       
+               
+                var discountType = $(this).val();
+                // alert(discountType);
+                var priceVal = $('#priceValEdit').val();
+                var discountPrice = $('#discountPriceEdit').val();
+               
+                if (discountType == "credit") {
+                    var result = (priceVal - discountPrice)
+                   
+                    $('#disResultedit').val(result);
+                }else if(discountType == "parcentage"){
+                    var result = ((priceVal * (100 - discountPrice)) / 100);
+                    $('#disResultedit').val(Math.round(result));
+                    
+                }
             });
+   
+        });
+
+
+        productImgEdit.onchange = evt => {
+                const [file] = productImgEdit.files
+                if (file) {
+                    prevImgEdit.src = URL.createObjectURL(file)
+            }
+        };
 
     </script>
 

@@ -64,15 +64,18 @@
                                         <th>Sl</th>
                                         <th>Product Title</th>
                                         <th>Price</th>
-                                        <th>Quantity</th>
-                                        <th>Future</th>
-                                        <th>Trand</th>
+                                        <th>Seling Price</th>
+                                        <th>Feature</th>
+                                        <th>Tranding</th>
+                                        <th>Exclusive</th>
                                         <th>Status</th>
                                         <th>Action</th>
 
                                     </tr>
                                     </thead>
                                     <tbody>
+
+
 
 
                                     @php($i=1)
@@ -82,12 +85,20 @@
                                            <input type="hidden" value="{{ $product->id }}" class="product-id" />
                                            <td>{{$i++}}</td>
                                             <td>{{$product->product_name}}</td>
-                                            <td>{{$product->price}}</td>
-                                            <td>{{$product->quantity}}</td>
+                                            <td>{{number_format($product->price)}}</td>
+                                            <td>{{number_format($product->discount_price)}}</td>
                                             <td>
-                                                Future
+
+                                                <a href="{{ route('product.futurs', ["id"=>$product->id]) }}" class="btn btn-{{$product->future_product == 1 ? 'primary':'warning'}} btn-sm">{{$product->future_product == 1 ? 'On':'Off'}}</a>
+                                               
                                             </td>
-                                            <td>Trand</td>
+                                            <td>
+                                                <a href="{{ route('product.trands', ["id"=>$product->id]) }}" class="btn btn-{{$product->trand_product == 1 ? 'primary':'warning'}} btn-sm">{{$product->trand_product == 1 ? 'On':'Off'}}</a>
+                            
+                                            </td>
+                                            <td>
+                                                 <a href="{{ route('product.exclusive', ["id"=>$product->id]) }}" class="btn btn-{{$product->exclusive_product == 1 ? 'primary':'warning'}} btn-sm">{{$product->exclusive_product == 1 ? 'On':'Off'}}</a>
+                                            </td>
                                             <td>{{$product->status == 'active' ? 'Published':'Unpublished'}}</td>
                                             <td>
                                                 <a href="{{ route('product.status', ["id"=>$product->id]) }}" class="btn btn-sm btn-{{$product->status == 'active' ? 'success':'warning'}} mb-1"><i class="fa fa-{{$product->status == 'active' ? 'arrow-up':'arrow-down'}}"></i></a>
@@ -108,8 +119,8 @@
                                         <th>Product Title</th>
                                         <th>Price</th>
                                          <th>Quantity</th>
-                                        <th>Future</th>
-                                        <th>Trand</th>
+                                        <th>Feature</th>
+                                        <th>Tranding</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>

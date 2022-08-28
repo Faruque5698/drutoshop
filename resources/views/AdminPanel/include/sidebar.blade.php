@@ -127,6 +127,13 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{ route('stock.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-tasks text-success"></i>
+                        <p>Stock Products</p>
+                    </a>
+                </li>
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

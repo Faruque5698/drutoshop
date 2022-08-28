@@ -15,7 +15,7 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->integer('user_id');
             $table->string('product_name', 255);
             $table->integer('brand_id')->nullable();
             $table->integer('category_id');
@@ -33,7 +33,9 @@ class CreateProductsTable extends Migration
             $table->string('sku');
             $table->string('discount_type');
             $table->float('total_price',10,2);
-            $table->string('future_product')->nullable();
+            $table->tinyInteger('future_product')->default(0);
+            $table->tinyInteger('trand_product')->default(0);
+            $table->tinyInteger('exclusive_product')->default(0);
             $table->enum('status',['active','inactive'])->default('active');
             $table->timestamps();
         });

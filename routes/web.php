@@ -9,6 +9,7 @@ use \App\Http\Controllers\AdminPanel\BrandController;
 use \App\Http\Controllers\AdminPanel\ColorController;
 use \App\Http\Controllers\AdminPanel\SizeController;
 use \App\Http\Controllers\AdminPanel\ProductController;
+use \App\Http\Controllers\AdminPanel\StockProductController;
 //use Image;
 
 /*
@@ -94,10 +95,17 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],
     Route::post('product/store-size-color-qty',[ProductController::class, 'storeColorSize'])->name('product.store-size-color-qty');
     Route::post('product/add',[ProductController::class, 'store'])->name('product.add');
     Route::get('product/status/{id}',[ProductController::class, 'status'])->name('product.status');
+    Route::get('product/futurs/{id}',[ProductController::class, 'futurs'])->name('product.futurs');
+    Route::get('product/trands/{id}',[ProductController::class, 'trands'])->name('product.trands');
+    Route::get('product/exclusive/{id}',[ProductController::class, 'exclusive'])->name('product.exclusive');
     Route::get('product/edit/{id}',[ProductController::class, 'edit'])->name('product.edit');
     Route::post('product/update',[ProductController::class, 'update'])->name('product.update');
     Route::delete('product-delete/{id}',[ProductController::class, 'destroy'])->name('product.delete');
 
     Route::get('product/single/view/{id}', [ProductController::class, 'show'])->name('product.single');
+
+
+
+    Route::resource('/stock', StockProductController::class,);
 
 });
