@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 29, 2022 at 01:07 PM
+-- Generation Time: Aug 29, 2022 at 07:08 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -160,19 +160,22 @@ CREATE TABLE `color_size_qties` (
 --
 
 INSERT INTO `color_size_qties` (`id`, `product_id`, `size_id`, `size_name`, `color_name`, `color_code`, `size_color_qty`, `created_at`, `updated_at`) VALUES
-(1, 1, 8, 'M', 'Black', '#000000', 154, '2022-08-29 03:58:31', '2022-08-29 03:58:31'),
-(2, 1, 9, 'L', 'Green', '#0ff01e', 500, '2022-08-29 03:58:31', '2022-08-29 03:58:31'),
-(3, 2, 3, 'S', 'White', '#fafafa', 1000, '2022-08-29 04:16:45', '2022-08-29 04:16:45'),
-(4, 2, 8, 'M', 'Black', '#000000', 1200, '2022-08-29 04:16:45', '2022-08-29 04:16:45'),
-(5, 2, 9, 'L', 'Ornge', '#f8960d', 500, '2022-08-29 04:16:45', '2022-08-29 04:16:45'),
-(6, 3, 8, 'M', 'Black', '#000000', 782, '2022-08-29 04:58:30', '2022-08-29 04:58:30'),
-(7, 3, 9, 'L', 'Ornge', '#f8960d', 100, '2022-08-29 04:58:30', '2022-08-29 04:58:30'),
-(8, 3, 10, 'XXL', 'Green', '#0ff01e', 100, '2022-08-29 04:58:30', '2022-08-29 04:58:30'),
-(9, 3, 3, 'S', 'White', '#fafafa', 100, '2022-08-29 04:58:30', '2022-08-29 04:58:30'),
-(10, 4, 3, 'S', 'White', '#fafafa', 100, '2022-08-29 05:06:35', '2022-08-29 05:06:35'),
-(11, 4, 8, 'M', 'Black', '#000000', 50, '2022-08-29 05:06:35', '2022-08-29 05:06:35'),
-(12, 4, 9, 'L', 'Ornge', '#f8960d', 300, '2022-08-29 05:06:35', '2022-08-29 05:06:35'),
-(13, 4, 10, 'XXL', 'Green', '#0ff01e', 500, '2022-08-29 05:06:35', '2022-08-29 05:06:35');
+(1, 1, 3, 'S', 'White', '#fafafa', 100, '2022-08-29 08:26:01', '2022-08-29 08:26:01'),
+(2, 1, 8, 'M', 'Black', '#000000', 500, '2022-08-29 08:26:01', '2022-08-29 08:26:01'),
+(3, 1, 9, 'L', 'Ornge', '#f8960d', 100, '2022-08-29 08:26:02', '2022-08-29 08:26:02'),
+(4, 2, 8, 'M', 'Black', '#000000', 100, '2022-08-29 08:28:21', '2022-08-29 08:28:21'),
+(5, 2, 9, 'L', 'Ornge', '#f8960d', 200, '2022-08-29 08:28:22', '2022-08-29 08:28:22'),
+(6, 2, 10, 'XXL', 'Green', '#0ff01e', 400, '2022-08-29 08:28:22', '2022-08-29 08:28:22'),
+(7, 3, 3, 'S', 'Black', '#000000', 100, '2022-08-29 08:29:47', '2022-08-29 08:29:47'),
+(8, 3, 8, 'M', 'Ornge', '#f8960d', 500, '2022-08-29 08:29:47', '2022-08-29 08:29:47'),
+(9, 4, 3, 'S', 'White', '#fafafa', 100, '2022-08-29 08:53:35', '2022-08-29 08:53:35'),
+(10, 4, 8, 'M', 'Black', '#000000', 20, '2022-08-29 08:53:35', '2022-08-29 08:53:35'),
+(11, 4, 9, 'L', 'Ornge', '#f8960d', 50, '2022-08-29 08:53:35', '2022-08-29 08:53:35'),
+(12, 4, 10, 'XXL', 'Coffe', '#fff242', 100, '2022-08-29 08:53:35', '2022-08-29 08:53:35'),
+(13, 5, 3, 'S', 'White', '#fafafa', 376, '2022-08-29 09:10:44', '2022-08-29 09:10:44'),
+(14, 5, 8, 'M', 'Black', '#000000', 100, '2022-08-29 09:10:45', '2022-08-29 09:10:45'),
+(15, 5, 9, 'L', 'Ornge', '#f8960d', 10, '2022-08-29 09:10:45', '2022-08-29 09:10:45'),
+(16, 5, 10, 'XXL', 'Coffe', '#fff242', 1000, '2022-08-29 09:10:45', '2022-08-29 09:10:45');
 
 -- --------------------------------------------------------
 
@@ -226,10 +229,11 @@ CREATE TABLE `gallery_products` (
 --
 
 INSERT INTO `gallery_products` (`id`, `product_id`, `image`, `image1`, `image2`, `image3`, `created_at`, `updated_at`) VALUES
-(1, 1, 'assets/images/product/1661767111-.jpeg', 'assets/images/product/1661767111-.jpeg', NULL, NULL, NULL, '2022-08-29 03:58:31'),
-(2, 2, 'assets/images/product/1661768205-.jpeg', NULL, NULL, NULL, NULL, NULL),
-(3, 3, 'assets/images/product/1661770710-.jpeg', NULL, NULL, NULL, NULL, NULL),
-(4, 4, 'assets/images/product/1661771194-.jpeg', NULL, NULL, NULL, NULL, NULL);
+(1, 1, 'assets/images/product/1661783161-.jpeg', 'assets/images/product/1661783161-.jpeg', NULL, NULL, NULL, '2022-08-29 08:26:01'),
+(2, 2, 'assets/images/product/1661783301-.jpeg', 'assets/images/product/1661783301-.jpeg', 'assets/images/product/1661783301-.jpeg', NULL, NULL, '2022-08-29 08:28:21'),
+(3, 3, 'assets/images/product/1661783387-.jpeg', 'assets/images/product/1661783387-.jpeg', 'assets/images/product/1661783387-.jpeg', NULL, NULL, '2022-08-29 08:29:47'),
+(4, 4, 'assets/images/product/1661784814-.jpeg', 'assets/images/product/1661784815-.jpeg', 'assets/images/product/1661784815-.jpeg', NULL, NULL, '2022-08-29 08:53:35'),
+(5, 5, 'assets/images/product/1661785844-.jpeg', 'assets/images/product/1661785844-.jpeg', 'assets/images/product/1661785844-.jpeg', NULL, NULL, '2022-08-29 09:10:44');
 
 -- --------------------------------------------------------
 
@@ -283,11 +287,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (51, '2022_07_27_091629_create_addresses_table', 7),
 (52, '2022_08_03_054431_create_favourite_products_table', 7),
 (53, '2022_08_03_073659_create_add_to_carts_table', 7),
-(89, '2022_06_27_063912_create_products_table', 8),
-(90, '2022_08_18_090234_create_gallery_products_table', 8),
-(91, '2022_08_22_043426_create_color_size_qties_table', 8),
-(92, '2022_08_22_043936_create_stock_products_table', 8),
-(93, '2022_08_29_081300_create_temp_data_table', 8);
+(99, '2022_06_27_063912_create_products_table', 8),
+(100, '2022_08_18_090234_create_gallery_products_table', 8),
+(101, '2022_08_22_043426_create_color_size_qties_table', 8),
+(102, '2022_08_22_043936_create_stock_products_table', 8),
+(103, '2022_08_29_081300_create_temp_data_table', 8);
 
 -- --------------------------------------------------------
 
@@ -411,8 +415,8 @@ CREATE TABLE `products` (
   `brand_id` int(11) DEFAULT NULL,
   `category_id` int(11) NOT NULL,
   `subcategory_id` int(11) DEFAULT NULL,
-  `size_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `color_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `size` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`size`)),
+  `color` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`color`)),
   `price` double(10,2) NOT NULL,
   `discount_rate` double(10,2) NOT NULL,
   `quantity` int(11) NOT NULL,
@@ -421,9 +425,9 @@ CREATE TABLE `products` (
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `sku` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `discount_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `credit` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `total_price` double(10,2) NOT NULL,
-  `future_product` tinyint(4) NOT NULL DEFAULT 0,
+  `feature_product` tinyint(4) NOT NULL DEFAULT 0,
   `trand_product` tinyint(4) NOT NULL DEFAULT 0,
   `exclusive_product` tinyint(4) NOT NULL DEFAULT 0,
   `status` enum('active','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
@@ -435,11 +439,12 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `user_id`, `product_name`, `brand_id`, `category_id`, `subcategory_id`, `size_name`, `color_code`, `price`, `discount_rate`, `quantity`, `discount_price`, `discription`, `image`, `slug`, `sku`, `discount_type`, `total_price`, `future_product`, `trand_product`, `exclusive_product`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Bernard Mooney', 4, 6, 13, 'M,L,', 'M,L,', 759.00, 18.00, 718, 741.00, 'Quod voluptatum minu', 'assets/images/product/1661767111-.jpeg', 'bernard-mooney', 'PRO-BD-32514', 'credit', 532038.00, 0, 0, 0, 'active', '2022-08-29 03:58:31', NULL),
-(2, 1, 'Rhonda Castro', 4, 3, 6, 'S,M,L,', 'White,Black,Ornge,', 396.00, 10.00, 1500, 356.00, 'Fugiat earum magna', 'assets/images/product/1661768205-.jpeg', 'rhonda-castro', 'PRO-BD-76948', 'parcentage', 534000.00, 0, 0, 0, 'active', '2022-08-29 04:16:45', NULL),
-(3, 1, 'Kay Armstrong', 3, 5, 10, 'M,L,XXL,S,', 'Black,Ornge,Green,White,', 617.00, 17.00, 150, 512.00, 'Labore ipsa volupta', 'assets/images/product/1661770710-.jpeg', 'kay-armstrong', 'PRO-BD-61981', 'parcentage', 76800.00, 0, 0, 0, 'active', '2022-08-29 04:58:30', NULL),
-(4, 1, 'Velma Sellers', 5, 3, 6, 'S,M,L,XXL,', 'White,Black,Ornge,Green,', 471.00, 57.00, 122, 414.00, 'Obcaecati quidem nul', 'assets/images/product/1661771194-.jpeg', 'velma-sellers', 'PRO-BD-81811', 'credit', 50508.00, 0, 0, 0, 'active', '2022-08-29 05:06:34', NULL);
+INSERT INTO `products` (`id`, `user_id`, `product_name`, `brand_id`, `category_id`, `subcategory_id`, `size`, `color`, `price`, `discount_rate`, `quantity`, `discount_price`, `discription`, `image`, `slug`, `sku`, `credit`, `total_price`, `feature_product`, `trand_product`, `exclusive_product`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Malachi Gordon', 2, 2, 4, '[\"S\",\"M\",\"L\"]', '[\"#fafafa\",\"#000000\",\"#f8960d\"]', 675.00, 75.00, 700, 600.00, 'Culpa voluptas volup', 'assets/images/product/1661783161-.jpeg', 'malachi-gordon', 'PRO-BD-71622', '-', 420000.00, 0, 0, 0, 'active', '2022-08-29 08:26:01', NULL),
+(2, 1, 'Emery French', 5, 6, 13, '[\"M\",\"L\",\"XXL\"]', '[\"#000000\",\"#f8960d\",\"#0ff01e\"]', 1520.00, 15.00, 700, 1292.00, 'Error sit iste id', 'assets/images/product/1661783301-.jpeg', 'emery-french', 'PRO-BD-61989', '%', 904400.00, 0, 0, 0, 'active', '2022-08-29 08:28:21', NULL),
+(3, 1, 'Ciaran Lawson', 3, 5, 10, '[\"S\",\"M\"]', '[\"#000000\",\"#f8960d\"]', 700.00, 5.00, 800, 665.00, 'Dolore tempor velit', 'assets/images/product/1661783387-.jpeg', 'ciaran-lawson', 'PRO-BD-32219', '%', 532000.00, 0, 0, 0, 'active', '2022-08-29 08:29:47', NULL),
+(4, 1, 'Aline Lucas', 5, 2, 5, '[\"S\",\"M\",\"L\",\"XXL\"]', '[\"#fafafa\",\"#000000\",\"#f8960d\",\"#fff242\"]', 1500.00, 70.00, 500, 1430.00, 'Delectus sed odio q', 'assets/images/product/1661784814-.jpeg', 'aline-lucas', 'PRO-BD-63983', '-', 715000.00, 0, 0, 0, 'active', '2022-08-29 08:53:35', NULL),
+(5, 1, 'Zachary Gordon', 2, 6, 13, '[\"S\",\"M\",\"L\",\"XXL\"]', '[\"#fafafa\",\"#000000\",\"#f8960d\",\"#fff242\"]', 460.00, 50.00, 347, 230.00, 'Incididunt anim culp', 'assets/images/product/1661785844-.jpeg', 'zachary-gordon', 'PRO-BD-40174', '%', 79810.00, 0, 0, 0, 'active', '2022-08-29 09:10:44', NULL);
 
 -- --------------------------------------------------------
 
@@ -486,10 +491,11 @@ CREATE TABLE `stock_products` (
 --
 
 INSERT INTO `stock_products` (`id`, `product_id`, `total_qty`, `last_qty`, `sale_qty`, `created_at`, `updated_at`) VALUES
-(1, 1, 718, 718, 0, '2022-08-29 03:58:31', '2022-08-29 03:58:31'),
-(2, 2, 1500, 1500, 0, '2022-08-29 04:16:45', '2022-08-29 04:16:45'),
-(3, 3, 150, 150, 0, '2022-08-29 04:58:30', '2022-08-29 04:58:30'),
-(4, 4, 122, 122, 0, '2022-08-29 05:06:35', '2022-08-29 05:06:35');
+(1, 1, 700, 700, 0, '2022-08-29 08:26:02', '2022-08-29 08:26:02'),
+(2, 2, 700, 700, 0, '2022-08-29 08:28:22', '2022-08-29 08:28:22'),
+(3, 3, 800, 800, 0, '2022-08-29 08:29:47', '2022-08-29 08:29:47'),
+(4, 4, 500, 500, 0, '2022-08-29 08:53:35', '2022-08-29 08:53:35'),
+(5, 5, 347, 347, 0, '2022-08-29 09:10:45', '2022-08-29 09:10:45');
 
 -- --------------------------------------------------------
 
@@ -546,6 +552,13 @@ CREATE TABLE `temp_data` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `temp_data`
+--
+
+INSERT INTO `temp_data` (`id`, `size_id`, `size_name`, `color_code`, `color_name`, `quantity`, `created_at`, `updated_at`) VALUES
+(1, 8, 'M', '#fafafa', 'White', 661, '2022-08-29 09:12:48', '2022-08-29 09:12:48');
 
 -- --------------------------------------------------------
 
@@ -781,7 +794,7 @@ ALTER TABLE `colors`
 -- AUTO_INCREMENT for table `color_size_qties`
 --
 ALTER TABLE `color_size_qties`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -799,7 +812,7 @@ ALTER TABLE `favourite_products`
 -- AUTO_INCREMENT for table `gallery_products`
 --
 ALTER TABLE `gallery_products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `homes`
@@ -811,7 +824,7 @@ ALTER TABLE `homes`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT for table `oauth_clients`
@@ -835,7 +848,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `sizes`
@@ -847,7 +860,7 @@ ALTER TABLE `sizes`
 -- AUTO_INCREMENT for table `stock_products`
 --
 ALTER TABLE `stock_products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `subcategories`
@@ -859,7 +872,7 @@ ALTER TABLE `subcategories`
 -- AUTO_INCREMENT for table `temp_data`
 --
 ALTER TABLE `temp_data`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`

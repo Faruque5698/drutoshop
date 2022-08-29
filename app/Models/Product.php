@@ -49,7 +49,7 @@ class Product extends Model
 
 
     protected $casts = [
-        'size_name' => 'array',
-        'color_name' => 'array',
+        'size' => 'array',
+        'color' => 'array',
     ];
 }

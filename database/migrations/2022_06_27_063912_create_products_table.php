@@ -20,8 +20,8 @@ class CreateProductsTable extends Migration
             $table->integer('brand_id')->nullable();
             $table->integer('category_id');
             $table->integer('subcategory_id')->nullable();
-            $table->string('size_name')->nullable();
-            $table->string('color_code')->nullable();
+            $table->json('size')->nullable();
+            $table->json('color')->nullable();
             $table->float('price',10,2);
             $table->float('discount_rate',10,2);
             $table->integer('quantity');
@@ -30,9 +30,9 @@ class CreateProductsTable extends Migration
             $table->string('image');
             $table->string('slug');
             $table->string('sku');
-            $table->string('discount_type');
+            $table->string('credit');
             $table->float('total_price',10,2);
-            $table->tinyInteger('future_product')->default(0);
+            $table->tinyInteger('feature_product')->default(0);
             $table->tinyInteger('trand_product')->default(0);
             $table->tinyInteger('exclusive_product')->default(0);
             $table->enum('status',['active','inactive'])->default('active');

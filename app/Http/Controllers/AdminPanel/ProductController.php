@@ -74,11 +74,7 @@ class ProductController extends Controller
         $datas = TempData::all();
 
 
-        $outputs = "<div class='col-4'><input type='text' value='' class='form-control' /></div><div class='col-4'><input type='text' value='' class='form-control' /></div><div class='col-2'><input type='text' value='' class='form-control'/></div><div class='col-2'><button>Remove</button></div>";
-
-        foreach($datas as $data){
-          echo  $outputs = "<div class='col-4'><input type='text' value='' class='form-control' /></div><div class='col-4'><input type='text' value='' class='form-control' /></div><div class='col-2'><input type='text' value='' class='form-control'/></div><div class='col-2'><button>Remove</button></div>";
-        }
+        return $datas;
 
 
     }
@@ -94,9 +90,6 @@ class ProductController extends Controller
 
         $this->validate($request, [
             'product_name' => 'required',
-            'brand_id' => 'required',
-            'category_id' => 'required',
-            'subcategory_id' => 'required',
             'quantity' => 'required',
             'discount_type'=>'required',
             'price' => 'required',
@@ -113,15 +106,19 @@ class ProductController extends Controller
 
 
         $temp_datas = TempData::all();
-        $colors = '';
+        $colors = [];
         foreach($temp_datas as $color){
-            $colors .= $color->color_name.',';
+             $colors[] =  $color->color_code;
+        };
+    
+
+        $sizes = [];
+        foreach($temp_datas as $size){
+          $sizes[] = $size->size_name;
         };
 
-        $sizes = '';
-        foreach($temp_datas as $size){
-            $sizes .= $size->size_name.',';
-        };
+    
+
 
 
         $slug_name =  Str::slug(Str::lower($request->product_name));
@@ -143,8 +140,8 @@ class ProductController extends Controller
                     'brand_id' => $request->brand_id,
                     'category_id' => $request->category_id,
                     'subcategory_id' => $request->subcategory_id,
-                    'size_name' => $sizes,
-                    'color_code' => $colors,
+                    'size' => json_encode($sizes),
+                    'color' => json_encode($colors),
                     'discount_rate' => $request->discount_rate,
                     'price' => $request->price,
                     'quantity' => $request->quantity,
@@ -153,7 +150,7 @@ class ProductController extends Controller
                     'image' => $imageUrl,
                     'slug' => $slug_name,
                     'sku' => $sku,
-                    'discount_type'=> $request->discount_type,
+                    'credit'=> $request->discount_type,
                     'total_price' =>$total_price,
                     'status' => $request->status,
                     'created_at' => Carbon::now(),
@@ -278,18 +275,18 @@ class ProductController extends Controller
 
     public function futurs($id)
     {
-        $future = Product::find($id);
+        $feature = Product::find($id);
 
-        if ($future->future_product == 0) {
-            Product::where('id', $future->id)->update([
-                'future_product' => 1,
+        if ($feature->feature_product == 0) {
+            Product::where('id', $feature->id)->update([
+                'feature_product' => 1,
             ]);
-            return back()->with('message', 'Future Product Add Successfully');
+            return back()->with('message', 'Feature Product Add Successfully');
         }else{
-            Product::where('id',$future->id)->update([
-               'future_product' => 0,
+            Product::where('id',$feature->id)->update([
+               'feature_product' => 0,
             ]);
-            return back()->with('message', 'Future Product Remove Successfully');
+            return back()->with('message', 'Feature Product Remove Successfully');
         }
 
     }
@@ -302,12 +299,12 @@ class ProductController extends Controller
             Product::where('id', $trand->id)->update([
                 'trand_product' => 1,
             ]);
-            return back()->with('message', 'Trands Product Add Successfully');
+            return back()->with('message', 'Tranding Product Add Successfully');
         }else{
             Product::where('id',$trand->id)->update([
                'trand_product' => 0,
             ]);
-            return back()->with('message', 'Trands Product Remove Successfully');
+            return back()->with('message', 'Tranding Product Remove Successfully');
         }
 
     }

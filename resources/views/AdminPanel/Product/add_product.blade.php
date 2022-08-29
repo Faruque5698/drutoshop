@@ -141,7 +141,9 @@ input[type="file"]{
                         </div>
 
                      
-                        <div class="form-row newItem row"></div>
+                        <div id="myTable">
+                            
+                        </div>
 
                         <hr>
                         <div class="form-row">
@@ -166,8 +168,8 @@ input[type="file"]{
                             <div class="col-6">
                                 <select class="form-control " id="discount" name="discount_type">
                                     <option selected>Select Discount Type</option>
-                                    <option value="credit">TK</option>
-                                    <option value="parcentage">Parcentage</option>
+                                    <option value="-">TK</option>
+                                    <option value="%">Parcentage</option>
                                 </select>
                                 <span id="discountError" class="pl-2" style="color: red;"></span>
                             </div>
@@ -290,7 +292,16 @@ input[type="file"]{
                     size_color_qty:sizeColorQty,
                 },
                 success: function(data){
-                     $('.newItem').html(data);
+
+                    $.each(data, function(i, item){
+                        var row = "<div class='form-row mb-1 mt-1'><div class='col-4'><input type='text' value='"+item[i].size_name+"' class='form-control' hidden></div><div class='col-4'><input type='text' value='"+item[i].color_name+"' class='form-control' hidden></div><div class='col-2'><input type='number' value='"+item[i].quantity+"' class='form-control' hidden></div><div class='col-2 text-center'><button id='remove' class='ml-2 btn btn-danger'>remove</button></div></div>";
+      
+                         $('#myTable').append(row);
+                    });
+
+
+
+                   
                       
                 }
             });
@@ -306,11 +317,11 @@ input[type="file"]{
             var priceVal = $('#priceVal').val();
             var discountPrice = $('#discountPrice').val();
         
-            if (discountType == "credit") {
+            if (discountType == "-") {
             var result = (priceVal - discountPrice)
             
             $('#disResult').val(result);
-            }else if(discountType == "parcentage"){
+            }else if(discountType == "%"){
             var result = ((priceVal * (100 - discountPrice)) / 100);
             $('#disResult').val(Math.round(result));
             
