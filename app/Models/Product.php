@@ -45,4 +45,11 @@ class Product extends Model
     public function product_stock(){
         return $this->hasOne(StockProduct::class);
     }
+
+
+
+    protected $casts = [
+        'size_name' => 'array',
+        'color_name' => 'array',
+    ];
 }

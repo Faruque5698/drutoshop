@@ -13,6 +13,7 @@ use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\ColorSizeQty;
 use App\Models\StockProduct;
+use App\Models\TempData;
 use Illuminate\Http\Request;
 use App\Models\GalleryProduct;
 use App\Http\Controllers\Controller;
@@ -29,7 +30,7 @@ class ProductController extends Controller
     public function add()
     {
 
-        // $all_data = SizeColorQuantity::all();
+
         $categories = Category::all();
         $brands = Brand::all();
         $sizes = Size::all();
@@ -61,22 +62,24 @@ class ProductController extends Controller
     public function storeColorSize(Request $request)
     {
 
-      $product = collect(['size_id' => $request->size_id, 'size_text' => $request->size_text,'color_id' => $request->color_id, 'color_text' => $request->color_text, 'qty' => $request->size_color_qty]);
+
+        $temp_data = new TempData();
+        $temp_data->size_id = $request->size_id;
+        $temp_data->size_name = $request->size_text;
+        $temp_data->color_code = $request->color_code;
+        $temp_data->color_name = $request->color_text;
+        $temp_data->quantity = $request->size_color_qty;
+        $temp_data->save();
+
+        $datas = TempData::all();
 
 
-        Session::push('color_size', $product);
+        $outputs = "<div class='col-4'><input type='text' value='' class='form-control' /></div><div class='col-4'><input type='text' value='' class='form-control' /></div><div class='col-2'><input type='text' value='' class='form-control'/></div><div class='col-2'><button>Remove</button></div>";
 
+        foreach($datas as $data){
+          echo  $outputs = "<div class='col-4'><input type='text' value='' class='form-control' /></div><div class='col-4'><input type='text' value='' class='form-control' /></div><div class='col-2'><input type='text' value='' class='form-control'/></div><div class='col-2'><button>Remove</button></div>";
+        }
 
-        $outputs = "<div class='form-row mb-2'><div class='col-4'><input type='text'  class='form-control'></div><div class='col-4'> <input type='text' class='form-control'></div><div class='col-2'><input type='text' class='form-control'></div><div class='col-2 text-center'><a href='javascript:void(0)' class='remove ml-2'><i class='fas fa-minus pr-2'></i>remove</a></div></div>";
-
-       foreach(Session::get('color_size') as $key => $data_view){
-         
-            // echo $data_view['size_text'].$data_view['color_text'];
-
-        echo $outputs = "<div class='form-row mb-2'><div class='col-4'><input type='text' value='".$data_view['size_text']."' class='form-control' disabled></div><div class='col-4'> <input type='text' value='".$data_view['color_text']."' class='form-control' disabled></div><div class='col-2'><input type='text' value='".$data_view['qty']."' class='form-control' disabled></div><div class='col-2 text-center'> <button class='addRow ml-2 btn btn-danger'>Remove</button></div></div>";
-
-         
-       }
 
     }
 
@@ -107,6 +110,20 @@ class ProductController extends Controller
             'status' => 'required|in:active,inactive'
         ]);
 
+
+
+        $temp_datas = TempData::all();
+        $colors = '';
+        foreach($temp_datas as $color){
+            $colors .= $color->color_name.',';
+        };
+
+        $sizes = '';
+        foreach($temp_datas as $size){
+            $sizes .= $size->size_name.',';
+        };
+
+
         $slug_name =  Str::slug(Str::lower($request->product_name));
         $sku = "PRO"."-"."BD"."-".rand(11111,99999);
         $total_price = $request->quantity * $request->discount_price;
@@ -126,6 +143,9 @@ class ProductController extends Controller
                     'brand_id' => $request->brand_id,
                     'category_id' => $request->category_id,
                     'subcategory_id' => $request->subcategory_id,
+                    'size_name' => $sizes,
+                    'color_code' => $colors,
+                    'discount_rate' => $request->discount_rate,
                     'price' => $request->price,
                     'quantity' => $request->quantity,
                     'discount_price' => $request->discount_price,
@@ -191,15 +211,17 @@ class ProductController extends Controller
                 }
 
                 if ($product_id) {
+
+                       $color_sizes = TempData::all();
                   
-                        foreach(Session::get('color_size') as  $key => $color_size){
+                        foreach($color_sizes as $color_size){
                             $color_size_qty = new ColorSizeQty();
                             $color_size_qty->product_id = $product_id;
                             $color_size_qty->size_id = $color_size['size_id'];
-                            $color_size_qty->size_name = $color_size['size_text'];
-                            $color_size_qty->color_id = $color_size['color_id'];
-                            $color_size_qty->color_name = $color_size['color_text'];
-                            $color_size_qty->size_color_qty = $color_size['qty'];
+                            $color_size_qty->size_name = $color_size['size_name'];
+                            $color_size_qty->color_code = $color_size['color_code'];
+                            $color_size_qty->color_name = $color_size['color_name'];
+                            $color_size_qty->size_color_qty = $color_size['quantity'];
                             $color_size_qty->save();   
                         }
                    
@@ -219,7 +241,7 @@ class ProductController extends Controller
 
         }
 
-        Session::forget('color_size');
+        TempData::truncate();
 
 
         return redirect()->route('admin.product')->with('message', 'Product Uplopad Successfully');

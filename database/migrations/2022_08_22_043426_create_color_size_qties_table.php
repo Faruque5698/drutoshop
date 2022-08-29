@@ -21,9 +21,8 @@ class CreateColorSizeQtiesTable extends Migration
                     ->onDelete('cascade');
             $table->integer('size_id');
             $table->string('size_name');
-            $table->integer('color_id');
             $table->string('color_name');
-            $table->string('color_code')->nullable();
+            $table->string('color_code');
             $table->integer('size_color_qty');
             $table->timestamps();
         });

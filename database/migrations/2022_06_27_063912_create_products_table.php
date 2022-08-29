@@ -20,11 +20,10 @@ class CreateProductsTable extends Migration
             $table->integer('brand_id')->nullable();
             $table->integer('category_id');
             $table->integer('subcategory_id')->nullable();
-            $table->integer('size_id')->nullable();
-            $table->integer('size_qty')->nullable();
-            $table->integer('color_id')->nullable();
-            $table->integer('color_qty')->nullable();
+            $table->string('size_name')->nullable();
+            $table->string('color_code')->nullable();
             $table->float('price',10,2);
+            $table->float('discount_rate',10,2);
             $table->integer('quantity');
             $table->float('discount_price',10,2);
             $table->text('discription');

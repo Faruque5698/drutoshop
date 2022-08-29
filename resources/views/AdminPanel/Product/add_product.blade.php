@@ -125,7 +125,7 @@ input[type="file"]{
                                     <select  id="colorId"  class="select-color form-control  mb-1" >
                                         <option value="0">Select Color</option>
                                         @foreach($colors as $color)
-                                        <option class="colorText" value="{{ $color->id }}">{{ $color->color_name }}</option>
+                                        <option class="colorText" value="{{ $color->color_code }}">{{ $color->color_name }}</option>
                                         @endforeach
                                     </select>
                                     <span id="colorError" class="pl-2" style="color: red;"></span>
@@ -133,28 +133,21 @@ input[type="file"]{
                                 </div>
                                 <div class="col-2">
                                     <input type="number" id="sizeColorQty" class="form-control"  placeholder="Quantity">
-                                     <span id="sizeColorError" class="pl-2" style="color: red;"></span>
                                 </div>
                                 <div class="col-2 text-center">
-                                    <button class="addRow ml-2 btn btn-primary">Add</button>
+                                    <button id="addRow" class="ml-2 btn btn-primary">Add</button>
                                 </div>
                             </div>
                         </div>
 
                      
+                        <div class="form-row newItem row"></div>
 
-                        <div id="myData"></div>
-                           
-      
                         <hr>
                         <div class="form-row">
                             <div class="col-6">
-                                <input type="number" id="qty" class="form-control @error('quantity') is-invalid @enderror" name="quantity" placeholder="Quantity"  min="1" required>
-                                @error('quantity')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                                <span id="qtyError" class="pl-2" style="color: red;"></span>
-                                
+                                <input type="number"  class="form-control @error('quantity') is-invalid @enderror" name="quantity" placeholder="Quantity"   >
+                               
                             </div>
                             
                             <div class="col-6">
@@ -167,7 +160,7 @@ input[type="file"]{
                         
                         <div class="form-row">
                             <div class="col-6">
-                                <input type="number" class="form-control discount-price" id="discountPrice" placeholder="Discount Price">
+                                <input type="number" name="discount_rate" class="form-control discount-price" id="discountPrice" placeholder="Discount Price">
                                 <span id="disCountPriceError" class="pl-2" style="color: red;"></span>
                             </div>
                             <div class="col-6">
@@ -266,80 +259,44 @@ input[type="file"]{
             data   : {cat_id:catId},
             success: function(data){
                 $('#subCatId').html(data);
-
-
             }
             })
         });
 
 
-
-        function checkSize() {
-            var sizeId = $('#sizeId option:selected').val();
-            if (sizeId == '0') {
-                $('#sizeError').text('Please select your Size');
-                return false;
-            } else {
-                $('#sizeError').text(' ');
-                return true;
-            }
-        };
-
-
-        function checkColor() {
-            var colorId = $('#colorId option:selected').val();
-
-           
-            if (colorId == '0') {
-                $('#colorError').text('Please select your Color');
-                    return false;
-            } else {
-                $('#colorError').text(' ');
-                    return true;
-            }
-        };
-
-
-
         // auto genarate row
 
-        $('.addRow').click(function(){
+        $('#addRow').click(function(){
 
-            if (checkSize() == true && checkColor() == true) {
+            var sizeId = $('#sizeId').val();
+            var sizeText = $('#sizeId option:selected').text();
+            var colorCode = $('#colorId').val();
+            var colorText = $('#colorId option:selected').text();
+            var sizeColorQty = $('#sizeColorQty').val();
 
-
-                var sizeId = $('#sizeId').val();
-                var sizeText = $('#sizeId option:selected').text();
-                var colorId = $('#colorId').val();
-                var colorText = $('#colorId option:selected').text();
-                var sizeColorQty = $('#sizeColorQty').val();
-                $.ajaxSetup({
-                    headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                   }
-                });
-                $.ajax({
-                    type   : 'POST',
-                    url: "{{ route('product.store-size-color-qty') }}",
-                    data   : {
-                        size_id:sizeId,
-                        size_text:sizeText,
-                        color_id:colorId,
-                        color_text:colorText,
-                        size_color_qty:sizeColorQty,
-                    },
-                    success: function(data){
-                       
-                      $("#myData").html(data);
-                     
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+               }
+            });
+            $.ajax({
+                type   : 'POST',
+                url: "{{ route('product.store-size-color-qty') }}",
+                data   : {
+                    size_id:sizeId,
+                    size_text:sizeText,
+                    color_code:colorCode,
+                    color_text:colorText,
+                    size_color_qty:sizeColorQty,
+                },
+                success: function(data){
+                     $('.newItem').html(data);
                       
-                        
-                         
-                    }
-                })
-            }
+                }
+            });
         
         });
+
 
 
 
@@ -388,62 +345,7 @@ input[type="file"]{
                 return true;
             }
         };
-       
-
-        function checkQty() {
-            var qty = $('#qty').val();
-            var reg = /^[0-9]{1,10}$/;
-            if (reg.test(qty)) {
-                $('#qtyError').text(' ');
-                return true;
-            } else {
-                $('#qtyError').text('Please field valid data!');
-                return false;
-            }
-        };
-
-
-        $('#qty').keyup(function() {
-            checkQty();
-        });
-
-
-        function checkPrice() {
-            var priceVal = $('#priceVal').val();
-            var reg = /^[0-9]{1,10}$/;
-            if (reg.test(priceVal)) {
-                $('#priceError').text(' ');
-                return true;
-            } else {
-                $('#priceError').text('Quantity  Must Be 1 to 10 Number & Allow only Number !');
-                return false;
-            }
-        };
-
-
-        $('#priceVal').keyup(function() {
-            checkPrice();
-        });
-
-
-
-
-        function checkDisPrice() {
-            var discountPrice = $('#discountPrice').val();
-            var reg = /^[0-9]{1,10}$/;
-            if (reg.test(discountPrice)) {
-                $('#disCountPriceError').text(' ');
-                return true;
-            } else {
-                $('#disCountPriceError').text('Quantity  Must Be 1 to 10 Number & Allow only Number !');
-                return false;
-            }
-        };
-
-
-        $('#discountPrice').keyup(function() {
-            checkDisPrice()
-        });
+  
 
 
         function checkDiscontType() {
@@ -456,22 +358,6 @@ input[type="file"]{
                 return true;
             }
         };
-
-
-        function checkAfterDiscount() {
-            var disResult = $('#disResult').val();
-            var reg = /^[0-9]{1,10}$/;
-                if (reg.test(disResult)) {
-                $('#priDisError').text(' ');
-            return true;
-            } else {
-                $('#priDisError').text('Quantity  Must Be 1 to 10 Number & Allow only Number !');
-                return false;
-            }
-        };
-        $('#disResult').keyup(function() {
-            checkAfterDiscount();
-        });
 
 
 
@@ -490,7 +376,7 @@ input[type="file"]{
        // form validation
     
         $('#productForm').submit(function() {
-            if (checkCategory() == true && checkSubCatId() == true && checkColor() == true && checkSize() == true && checkQty() == true && checkPrice() == true && checkDisPrice() == true && checkDiscontType() == true && checkAfterDiscount() == true && checkStatus() == true) {
+            if (checkCategory() == true && checkSubCatId() == true &&  checkStatus() == true) {
             return true;
             } else {
             return false;
