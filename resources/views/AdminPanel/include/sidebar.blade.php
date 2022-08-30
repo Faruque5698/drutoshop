@@ -128,10 +128,27 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('stock.index') }}" class="nav-link">
-                        <i class="nav-icon fa fa-tasks text-success"></i>
-                        <p>Stock Products</p>
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fa fas fa-database"></i>
+                      <p>
+                        Stock Management
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <a href="{{ route('stock.index') }}" class="nav-link">
+                            <i class="fas fa-arrow-right"></i>
+                            <p>Stock Products</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{{ route('stock.details.product') }}" class="nav-link">
+                          <i class="fas fa-arrow-right"></i>
+                          <p>Size & Color Stock</p>
+                        </a>
+                      </li>
+                    </ul>  
                 </li>
 
             </ul>

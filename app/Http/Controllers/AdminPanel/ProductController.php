@@ -71,10 +71,20 @@ class ProductController extends Controller
         $temp_data->quantity = $request->size_color_qty;
         $temp_data->save();
 
-        $datas = TempData::all();
+        $datas = TempData::get();
 
 
-        return $datas;
+
+
+        $row = "<div class='form-row mb-1 mt-1'><div class='col-4'><input type='text' value='' class='form-control' disabled></div><div class='col-4'><input type='text' value='' class='form-control' disabled></div><div class='col-2'><input type='number' value='' class='form-control' disabled></div><div class='col-2 text-center'><button id='remove' class='ml-2 btn btn-danger'>remove</button></div></div>";
+
+
+        foreach($datas as $data){
+            echo $row = "<div class='form-row mb-1 mt-1'><div class='col-4'><input type='text' value='".$data->size_name."' class='form-control' disabled></div><div class='col-4'><input type='text' value='".$data->color_name."' class='form-control' disabled></div><div class='col-2'><input type='number' id='subQunatity' value='".$data->quantity."' class='form-control' disabled></div><div class='col-2 text-center'><button id='remove' class='ml-2 btn btn-danger'>remove</button></div></div>";
+        }
+
+
+
 
 
     }
@@ -90,22 +100,22 @@ class ProductController extends Controller
 
         $this->validate($request, [
             'product_name' => 'required',
-            'quantity' => 'required',
             'discount_type'=>'required',
             'price' => 'required',
             'discount_price' => 'required',
             'discription' => 'required',
             'image' => 'required',
-            'image.*' => 'mimes:jpeg,jpg,png',
-            'image1.*' => 'mimes:jpeg,jpg,png',
-            'image2.*' => 'mimes:jpeg,jpg,png',
-            'image3.*' => 'mimes:jpeg,jpg,png',
+            'image' => 'mimes:jpeg,jpg,png',
+            'image1' => 'mimes:jpeg,jpg,png',
+            'image2' => 'mimes:jpeg,jpg,png',
+            'image3' => 'mimes:jpeg,jpg,png',
             'status' => 'required|in:active,inactive'
         ]);
 
 
 
         $temp_datas = TempData::all();
+        $total = TempData::sum('quantity');
         $colors = [];
         foreach($temp_datas as $color){
              $colors[] =  $color->color_code;
@@ -116,6 +126,9 @@ class ProductController extends Controller
         foreach($temp_datas as $size){
           $sizes[] = $size->size_name;
         };
+
+
+
 
     
 
@@ -144,7 +157,7 @@ class ProductController extends Controller
                     'color' => json_encode($colors),
                     'discount_rate' => $request->discount_rate,
                     'price' => $request->price,
-                    'quantity' => $request->quantity,
+                    'quantity' => $total,
                     'discount_price' => $request->discount_price,
                     'discription' => $request->discription,
                     'image' => $imageUrl,
@@ -166,7 +179,7 @@ class ProductController extends Controller
                     if ($request->hasFile('image1')) {
                         $product_image = $request->file('image1');
                         $ext = $product_image->getClientOriginalExtension();
-                        $imageName1 = time().'-'.'.'.$ext;
+                        $imageName1 = time().'-1'.'.'.$ext;
                         $directory = 'assets/images/product/';
                         $imageUrl1 = $directory.$imageName1;
                         $product_image ->move($directory,$imageName1);
@@ -179,7 +192,7 @@ class ProductController extends Controller
                     if ($request->hasFile('image2')) {
                         $product_image = $request->file('image2');
                         $ext = $product_image->getClientOriginalExtension();
-                        $imageName2 = time().'-'.'.'.$ext;
+                        $imageName2 = time().'-2'.'.'.$ext;
                         $directory = 'assets/images/product/';
                         $imageUrl2 = $directory.$imageName2;
                         $product_image ->move($directory,$imageName2);
@@ -192,7 +205,7 @@ class ProductController extends Controller
                     if ($request->hasFile('image3')) {
                         $product_image = $request->file('image3');
                         $ext = $product_image->getClientOriginalExtension();
-                        $imageName3 = time().'-'.'.'.$ext;
+                        $imageName3 = time().'-3'.'.'.$ext;
                         $directory = 'assets/images/product/';
                         $imageUrl3 = $directory.$imageName3;
                         $product_image ->move($directory,$imageName3);
@@ -228,8 +241,8 @@ class ProductController extends Controller
               
               $stock_product = new StockProduct();
               $stock_product->product_id = $product_id;
-              $stock_product->total_qty = $request->quantity;
-              $stock_product->last_qty = $request->quantity;
+              $stock_product->total_qty = $total;
+              $stock_product->last_qty = $total;
               $stock_product->sale_qty = 0;
               $stock_product->save();
 

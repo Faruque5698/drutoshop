@@ -147,25 +147,22 @@ input[type="file"]{
 
                         <hr>
                         <div class="form-row">
-                            <div class="col-6">
-                                <input type="number"  class="form-control @error('quantity') is-invalid @enderror" name="quantity" placeholder="Quantity"   >
-                               
-                            </div>
                             
                             <div class="col-6">
                                 <input type="number" name="price" id="priceVal" class="form-control @error('price') is-invalid @enderror" placeholder="Price">
                             </div>
-                            
-                            <span id="priceError" class="pl-2" style="color: red;"></span>
-                        </div>
-                        <hr>
-                        
-                        <div class="form-row">
+
+
                             <div class="col-6">
                                 <input type="number" name="discount_rate" class="form-control discount-price" id="discountPrice" placeholder="Discount Price">
                                 <span id="disCountPriceError" class="pl-2" style="color: red;"></span>
                             </div>
-                            <div class="col-6">
+                        
+                        </div>
+                        <hr>
+                        
+                        <div class="form-row">
+                            <div class="col-12">
                                 <select class="form-control " id="discount" name="discount_type">
                                     <option selected>Select Discount Type</option>
                                     <option value="-">TK</option>
@@ -291,23 +288,12 @@ input[type="file"]{
                     color_text:colorText,
                     size_color_qty:sizeColorQty,
                 },
-                success: function(data){
-
-                    $.each(data, function(i, item){
-                        var row = "<div class='form-row mb-1 mt-1'><div class='col-4'><input type='text' value='"+item[i].size_name+"' class='form-control' hidden></div><div class='col-4'><input type='text' value='"+item[i].color_name+"' class='form-control' hidden></div><div class='col-2'><input type='number' value='"+item[i].quantity+"' class='form-control' hidden></div><div class='col-2 text-center'><button id='remove' class='ml-2 btn btn-danger'>remove</button></div></div>";
-      
-                         $('#myTable').append(row);
-                    });
-
-
-
-                   
-                      
+                success: function(data){ 
+                         $('#myTable').html(data);
                 }
             });
         
         });
-
 
 
 

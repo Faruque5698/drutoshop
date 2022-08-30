@@ -19,6 +19,7 @@ class StockProductController extends Controller
 
    
         $datas = Product::with('product_stock')->get();
+        //return  $datas;
         return view('AdminPanel.StockProduct.index', compact('datas'));
     }
 
@@ -51,7 +52,16 @@ class StockProductController extends Controller
      */
     public function show($id)
     {
-        //
+
+    }
+
+
+    public function details_product(){
+         $product =  Product::with('size_color_qty_product','product_stock')->get();
+
+         //return $product;
+
+         return view('AdminPanel.StockProduct.size_color_wise_product', compact('product'));
     }
 
     /**

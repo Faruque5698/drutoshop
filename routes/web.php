@@ -107,5 +107,6 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],
 
 
     Route::resource('/stock', StockProductController::class,);
+    Route::get('/stock/details/product', [StockProductController::class, 'details_product'])->name('stock.details.product');
 
 });
