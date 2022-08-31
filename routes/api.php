@@ -35,6 +35,7 @@ Route::get('product/details/{id}',[\App\Http\Controllers\Api\ProductController::
 
 
 
+
 Route::group(["middleware" => ["auth:api"]], function(){
 
     Route::get("profile", [\App\Http\Controllers\Api\AuthController::class, "profile"]);
@@ -52,12 +53,16 @@ Route::group(["middleware" => ["auth:api"]], function(){
     Route::get('product/favourite/remove/{id}',[\App\Http\Controllers\Api\FavouriteProductController::class,'remove']);
 
     Route::post('cart/add',[\App\Http\Controllers\Api\CartController::class,'add']);
+    Route::post('cart/update',[\App\Http\Controllers\Api\CartController::class,'update']);
     Route::get('cart/view',[\App\Http\Controllers\Api\CartController::class,'view']);
     Route::get('cart/remove/{id}',[\App\Http\Controllers\Api\CartController::class,'remove']);
 
     Route::post('rating',[\App\Http\Controllers\Api\RatingController::class,'add']);
 
 //    Route::post('comment',[\App\Http\Controllers\Api\CommentController::class,'add']);
+    Route::post('order/cash-on-delivery',[\App\Http\Controllers\Api\OrderController::class,'cash_on_delivary']);
+    Route::get('order/all',[\App\Http\Controllers\Api\OrderController::class,'order_all']);
+
 
 
 

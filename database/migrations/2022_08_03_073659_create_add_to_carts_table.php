@@ -20,6 +20,8 @@ class CreateAddToCartsTable extends Migration
             $table->integer('product_quantity')->nullable();
             $table->double('product_price',10,2)->nullable();
             $table->double('product_total_price',10,2)->nullable();
+            $table->string('color_code',255)->nullable();
+            $table->string('size',6)->nullable();
             $table->timestamps();
         });
     }
