@@ -10,59 +10,60 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function product(){
-        $product = Product::with('productToCategory','productToSubcategory','productToBrand','productToColor','productToSize')->where('status','=','active')->get();
-        return response()->json([
-            'data'=>['product'=>$product],
-        ],200);
+        $product = Product::with('productToCategory','productToSubcategory','productToBrand')->where('status','=','active')->get();
+        return ApiResponse::success($product);
     }
 
     public function pro_details($id)
     {
-        $product = Product::with('productToCategory', 'productToSubcategory', 'productToBrand','productToColor','productToSize')->find($id);
+        $product = Product::with('productToCategory', 'productToSubcategory', 'productToBrand')->find($id);
 
             return ApiResponse::success($product);
 
     }
 
     public function trending(){
-        $product = Product::with('productToCategory','productToSubcategory','productToBrand','productToColor','productToSize')->where('trending','=',1)->get();
+        $product = Product::with('productToCategory','productToSubcategory','productToBrand')->where('trand_product','=',1)->get();
 //        return response()->json([
 //
 //        ]);
 
 
         if ($product->isEmpty()){
-            return ApiResponse::not_found();
+            $data = [];
+            return ApiResponse::success($data);
         }
         else{
-           return ApiResponse::success($product);
+            return ApiResponse::success($product);
         }
 
     }
 
     public function popular(){
-        $product = Product::with('productToCategory','productToSubcategory','productToBrand','productToColor','productToSize')->where('popular','=',1)->get();
+        $product = Product::with('productToCategory','productToSubcategory','productToBrand')->where('feature_product','=',1)->get();
 //        return response()->json([
 //
 //        ]);
 
 
         if ($product->isEmpty()){
-            return ApiResponse::not_found();
+            $data = [];
+            return ApiResponse::success($data);
         }
         else{
             return ApiResponse::success($product);
         }
     }
     public function exclusive(){
-        $product = Product::with('productToCategory','productToSubcategory','productToBrand','productToColor','productToSize')->where('exclusive','=',1)->get();
+        $product = Product::with('productToCategory','productToSubcategory','productToBrand')->where('exclusive_product','=',1)->get();
 //        return response()->json([
 //
 //        ]);
 
 
         if ($product->isEmpty()){
-            return ApiResponse::not_found();
+            $data = [];
+            return ApiResponse::success($data);
         }
         else{
             return ApiResponse::success($product);

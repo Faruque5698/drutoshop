@@ -55,6 +55,10 @@ Route::group(["middleware" => ["auth:api"]], function(){
     Route::get('cart/view',[\App\Http\Controllers\Api\CartController::class,'view']);
     Route::get('cart/remove/{id}',[\App\Http\Controllers\Api\CartController::class,'remove']);
 
+    Route::post('rating',[\App\Http\Controllers\Api\RatingController::class,'add']);
+
+//    Route::post('comment',[\App\Http\Controllers\Api\CommentController::class,'add']);
+
 
 
 
