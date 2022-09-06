@@ -10,6 +10,7 @@ use \App\Http\Controllers\AdminPanel\ColorController;
 use \App\Http\Controllers\AdminPanel\SizeController;
 use \App\Http\Controllers\AdminPanel\ProductController;
 use \App\Http\Controllers\AdminPanel\StockProductController;
+use \App\Http\Controllers\AdminPanel\OrderDetailController;
 //use Image;
 
 /*
@@ -108,5 +109,10 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],
 
     Route::resource('/stock', StockProductController::class,);
     Route::get('/stock/details/product', [StockProductController::class, 'details_product'])->name('stock.details.product');
+
+    Route::get('order/list', [OrderDetailController::class, 'order'])->name('admin.order');
+    Route::get('order/approve/{id}', [OrderDetailController::class, 'approve'])->name('order.approve');
+    Route::get('order/success/{id}', [OrderDetailController::class, 'success'])->name('order.success');
+    Route::get('order/cancel/{id}', [OrderDetailController::class, 'cancel'])->name('order.cancel');
 
 });
