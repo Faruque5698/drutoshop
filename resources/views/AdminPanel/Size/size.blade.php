@@ -107,10 +107,6 @@
 @endsection
 
 
-
-
-
-
 @section('js')
 
 <script>

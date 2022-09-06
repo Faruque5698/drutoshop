@@ -43,43 +43,42 @@
 {{--                            <span class="right badge badge-danger">New</span>--}}
                         </p>
                     </a>
-                </li>
-{{--                <li class="nav-item">--}}
-{{--                    <a href="#" class="nav-link">--}}
-{{--                        <i class="nav-icon fas fa-chart-pie"></i>--}}
-{{--                        <p>--}}
-{{--                            Charts--}}
-{{--                            <i class="right fas fa-angle-left"></i>--}}
-{{--                        </p>--}}
-{{--                    </a>--}}
-{{--                    <ul class="nav nav-treeview">--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="../charts/chartjs.html" class="nav-link">--}}
-{{--                                <i class="far fa-circle nav-icon"></i>--}}
-{{--                                <p>ChartJS</p>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="../charts/flot.html" class="nav-link">--}}
-{{--                                <i class="far fa-circle nav-icon"></i>--}}
-{{--                                <p>Flot</p>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="../charts/inline.html" class="nav-link">--}}
-{{--                                <i class="far fa-circle nav-icon"></i>--}}
-{{--                                <p>Inline</p>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="../charts/uplot.html" class="nav-link">--}}
-{{--                                <i class="far fa-circle nav-icon"></i>--}}
-{{--                                <p>uPlot</p>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
-
+ <!--                </li>
+               <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <p>
+                            <i class="right fas fa-angle-left"></i>
+                       </p>
+                    </a>
+                   <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="../charts/chartjs.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>ChartJS</p>
+                           </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../charts/flot.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                               <p>Flot</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../charts/inline.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Inline</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../charts/uplot.html" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>uPlot</p>
+                            </a>
+                        </li>
+                    </ul>
+                    </li>
+ -->
                 <li class="nav-header">Sections</li>
                {{--  <li class="nav-item">
                     <a href="{{route('admin.homes')}}" class="nav-link">
@@ -87,44 +86,58 @@
                         <p class="text">Home</p>
                     </a>
                 </li> --}}
-                <li class="nav-item">
-                    <a href="{{route('admin.category')}}" class="nav-link">
-                        <i class="nav-icon fa fa-list-alt text-primary"></i>
-                        <p>category</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('admin.subcategory')}}" class="nav-link">
-                        <i class="nav-icon fa fa-list-alt text-success"></i>
-                        <p>Sub category</p>
-                    </a>
-                </li>
 
-                 <li class="nav-item">
-                    <a href="{{ route('admin.brand') }}" class="nav-link">
-                        <i class="nav-icon fa fa-star text-warning"></i>
-                        <p>Brand</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.color') }}" class="nav-link">
-                        <i class="nav-icon fa fa-globe text-primary"></i>
-                        <p>Color</p>
-                    </a>
-                </li>
+
 
                 <li class="nav-item">
-                    <a href="{{ route('admin.size') }}" class="nav-link">
-                        <i class="nav-icon fa fa-th-large text-danger"></i>
-                        <p>Size</p>
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fa fa-tasks text-success"></i>
+                      <p>
+                        Product Management
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
                     </a>
-                </li>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('admin.category')}}" class="nav-link">
+                                <i class="nav-icon fa fa-list-alt text-primary"></i>
+                                <p>category</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.subcategory')}}" class="nav-link">
+                                <i class="nav-icon fa fa-list-alt text-success"></i>
+                                <p>Sub category</p>
+                            </a>
+                        </li>
 
-                 <li class="nav-item">
-                    <a href="{{ route('admin.product') }}" class="nav-link">
-                        <i class="nav-icon fa fa-tasks text-success"></i>
-                        <p>Product</p>
-                    </a>
+                         <li class="nav-item">
+                            <a href="{{ route('admin.brand') }}" class="nav-link">
+                                <i class="nav-icon fa fa-star text-warning"></i>
+                                <p>Brand</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.color') }}" class="nav-link">
+                                <i class="nav-icon fa fa-globe text-primary"></i>
+                                <p>Color</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('admin.size') }}" class="nav-link">
+                                <i class="nav-icon fa fa-th-large text-danger"></i>
+                                <p>Size</p>
+                            </a>
+                        </li>
+
+                         <li class="nav-item">
+                            <a href="{{ route('admin.product') }}" class="nav-link">
+                                <i class="nav-icon fa fa-tasks text-success"></i>
+                                <p>Product</p>
+                            </a>
+                        </li>
+                    </ul>  
                 </li>
 
                 <li class="nav-item">
@@ -146,6 +159,30 @@
                         <a href="{{ route('stock.details.product') }}" class="nav-link">
                           <i class="fas fa-arrow-right"></i>
                           <p>Size & Color Stock</p>
+                        </a>
+                      </li>
+                    </ul>  
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon fa fa-globe text-primary"></i>
+                      <p>
+                        Order
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <a href="{{ route('admin.order') }}" class="nav-link">
+                            <i class="fas fa-arrow-right"></i>
+                            <p>Order List</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="" class="nav-link">
+                            <i class="fas fa-arrow-right"></i>
+                            <p>Success Order List</p>
                         </a>
                       </li>
                     </ul>  
