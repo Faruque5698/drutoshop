@@ -165,7 +165,6 @@ input[type="file"]{
                             <div class="col-12">
                                 <select class="form-control " id="discount" name="discount_type">
                                     <option selected>Select Discount Type</option>
-                                    <option value="-">TK</option>
                                     <option value="%">Parcentage</option>
                                 </select>
                                 <span id="discountError" class="pl-2" style="color: red;"></span>
@@ -178,6 +177,13 @@ input[type="file"]{
                                 <input  type="number" name="discount_price" id="disResult"  class="form-control @error('price') is-invalid @enderror" placeholder="Total">
                             </div>
                             <span id="priDisError" class="pl-2" style="color: red;"></span>
+                        </div>
+                        <hr>
+                        <div class="form-row">
+                            <div class="col-12">
+                                <input  type="number" name="quantity" id="updateQuantity"  class="form-control" placeholder="Quantity">
+                            </div>
+                            <span id="QuantityErrr" class="pl-2" style="color: red;"></span>
                         </div>
                         <hr>
                         <div class="form-row">
@@ -249,16 +255,18 @@ input[type="file"]{
         var catId = $(this).val();
         $.ajaxSetup({
         headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
+
         $.ajax({
             type   : 'POST',
             url: "{{ route('product.subcatid') }}",
             data   : {cat_id:catId},
             success: function(data){
-                $('#subCatId').html(data);
-            }
+                    $('#subCatId').html(data);
+                   
+                } 
             })
         });
 
@@ -290,10 +298,31 @@ input[type="file"]{
                 },
                 success: function(data){ 
                          $('#myTable').html(data);
+                          updateQunatity();
                 }
             });
         
         });
+
+        
+
+        function updateQunatity(){
+             $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+               }
+            });
+            $.ajax({
+
+                type   : 'GET',
+                url: "{{ route('update.quantity') }}",
+                success: function(data){ 
+                        $("#updateQuantity").val(data);
+
+                        // console.log(data);
+                }
+            });
+        }
 
 
 
@@ -303,14 +332,10 @@ input[type="file"]{
             var priceVal = $('#priceVal').val();
             var discountPrice = $('#discountPrice').val();
         
-            if (discountType == "-") {
-            var result = (priceVal - discountPrice)
-            
-            $('#disResult').val(result);
-            }else if(discountType == "%"){
-            var result = ((priceVal * (100 - discountPrice)) / 100);
-            $('#disResult').val(Math.round(result));
-            
+            if(discountType == "%"){
+                var result = ((priceVal * (100 - discountPrice)) / 100);
+                $('#disResult').val(result);
+                
             }
         });
 

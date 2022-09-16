@@ -13,7 +13,7 @@
                 <img src="{{asset(auth()->user()->image)}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{auth()->user()->name}}</a>
+                <a href="{{ route('admin.profile') }}" class="d-block">{{auth()->user()->name}}</a>
             </div>
         </div>
 
@@ -89,7 +89,7 @@
 
 
 
-                <li class="nav-item">
+                <li class="nav-item menu-open">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fa fa-tasks text-success"></i>
                       <p>
@@ -134,13 +134,13 @@
                          <li class="nav-item">
                             <a href="{{ route('admin.product') }}" class="nav-link">
                                 <i class="nav-icon fa fa-tasks text-success"></i>
-                                <p>Product</p>
+                                <p>Product list</p>
                             </a>
                         </li>
                     </ul>  
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item menu-open">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fa fas fa-database"></i>
                       <p>
@@ -164,7 +164,7 @@
                     </ul>  
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item menu-open">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fa fa-globe text-primary"></i>
                       <p>

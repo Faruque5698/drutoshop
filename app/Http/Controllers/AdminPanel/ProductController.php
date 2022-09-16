@@ -89,6 +89,12 @@ class ProductController extends Controller
 
     }
 
+    public function updateQunatity()
+    {
+        $total = TempData::sum('quantity');
+        return $total;
+    }
+
 
 
 
@@ -157,7 +163,7 @@ class ProductController extends Controller
                     'color' => json_encode($colors),
                     'discount_rate' => $request->discount_rate,
                     'price' => $request->price,
-                    'quantity' => $total,
+                    'quantity' => $request->quantity,
                     'discount_price' => $request->discount_price,
                     'discription' => $request->discription,
                     'image' => $imageUrl,
@@ -224,27 +230,40 @@ class ProductController extends Controller
 
                        $color_sizes = TempData::all();
                   
-                        foreach($color_sizes as $color_size){
-                            $color_size_qty = new ColorSizeQty();
-                            $color_size_qty->product_id = $product_id;
-                            $color_size_qty->size_id = $color_size['size_id'];
-                            $color_size_qty->size_name = $color_size['size_name'];
-                            $color_size_qty->color_code = $color_size['color_code'];
-                            $color_size_qty->color_name = $color_size['color_name'];
-                            $color_size_qty->size_color_qty = $color_size['quantity'];
-                            $color_size_qty->save();   
-                        }
+                       if (!$color_sizes) {
+                         
+                       }else{
+                            foreach($color_sizes as $color_size){
+                                $color_size_qty = new ColorSizeQty();
+                                $color_size_qty->product_id = $product_id;
+                                $color_size_qty->size_id = $color_size['size_id'];
+                                $color_size_qty->size_name = $color_size['size_name'];
+                                $color_size_qty->color_code = $color_size['color_code'];
+                                $color_size_qty->color_name = $color_size['color_name'];
+                                $color_size_qty->size_color_qty = $color_size['quantity'];
+                                $color_size_qty->save();   
+                            }
+                       }
                    
                 }
 
 
-              
-              $stock_product = new StockProduct();
-              $stock_product->product_id = $product_id;
-              $stock_product->total_qty = $total;
-              $stock_product->last_qty = $total;
-              $stock_product->sale_qty = 0;
-              $stock_product->save();
+              if (!$color_sizes) {
+                  $stock_product = new StockProduct();
+                  $stock_product->product_id = $product_id;
+                  $stock_product->total_qty = $total;
+                  $stock_product->last_qty = $total;
+                  $stock_product->sale_qty = 0;
+                  $stock_product->save();
+              }else{
+                  $stock_product = new StockProduct();
+                  $stock_product->product_id = $product_id;
+                  $stock_product->total_qty = $request->quantity;
+                  $stock_product->last_qty = $request->quantity;
+                  $stock_product->sale_qty = 0;
+                  $stock_product->save();
+              }
+           
 
                
             }

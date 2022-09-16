@@ -11,6 +11,7 @@ use \App\Http\Controllers\AdminPanel\SizeController;
 use \App\Http\Controllers\AdminPanel\ProductController;
 use \App\Http\Controllers\AdminPanel\StockProductController;
 use \App\Http\Controllers\AdminPanel\OrderDetailController;
+use \App\Http\Controllers\AdminPanel\ProfileController;
 //use Image;
 
 /*
@@ -42,6 +43,11 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],
     Route::get('dashboard',[AdminController::class,'dashboard'])->name('admin.dashboard');
     Route::get('homes',[HomeSectionController::class,'home'])->name('admin.homes');
     Route::post('update_home',[HomeSectionController::class,'update_home'])->name('update.homes');
+
+    // profile 
+
+    Route::get('profile', [ProfileController::class, 'profile'])->name('admin.profile');
+    Route::post('profile/update', [ProfileController::class, 'profileUpdate'])->name('profile.update');
 
     Route::get('category',[CategoryController::class,'index'])->name('admin.category');
     Route::get('category/add',[CategoryController::class,'add'])->name('add_category');
@@ -90,6 +96,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],
 
     Route::get('product', [ProductController::class, 'index'])->name('admin.product');
     Route::get('product/add', [ProductController::class, 'add'])->name('product.add');
+    Route::get('update/qantity', [ProductController::class, 'updateQunatity'])->name('update.quantity');
     Route::post('product/subcateoryid',[ProductController::class, 'getSubId'])->name('product.subcatid');
     Route::post('product/getcolor',[ProductController::class, 'getColor'])->name('product.colorid');
     Route::post('product/getsize',[ProductController::class, 'getSize'])->name('product.sizeid');
