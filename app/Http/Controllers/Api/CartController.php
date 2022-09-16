@@ -22,6 +22,7 @@ class CartController extends Controller
         $user_id = auth()->user()->id;
 //        $product = AddToCart::where('user_id',$user_id)->where('product_id',$request->product_id)->first();
 //        if ($product == null){
+
             $cart = new AddToCart();
             $cart->user_id = auth()->user()->id;
             $cart->product_id = $request->product_id;
