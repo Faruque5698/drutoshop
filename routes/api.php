@@ -65,6 +65,12 @@ Route::group(["middleware" => ["auth:api"]], function(){
     Route::post('order/cash-on-delivery',[\App\Http\Controllers\Api\OrderController::class,'cash_on_delivary']);
     Route::get('order/all',[\App\Http\Controllers\Api\OrderController::class,'order_all']);
 
+    Route::get('order/history',[\App\Http\Controllers\Api\OrderController::class,'history']);
+    Route::get('order/history/pending',[\App\Http\Controllers\Api\OrderController::class,'pending']);
+    Route::get('order/history/confirm',[\App\Http\Controllers\Api\OrderController::class,'confirm']);
+    Route::get('order/history/cancel',[\App\Http\Controllers\Api\OrderController::class,'cancel']);
+    Route::get('order/history/success',[\App\Http\Controllers\Api\OrderController::class,'success']);
+
 
 
 
