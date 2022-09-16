@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helper\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -83,5 +84,17 @@ class AuthController extends Controller
             'status'=>true,
             'message'=>"User Logged Out Successfully"
         ],200);
+    }
+
+    public function  edit(Request $request){
+        $user = auth()->user();
+        $user->username = $request->username;
+        $user->dob = $request->dob;
+        $user->gender = $request->gender;
+        $user->save();
+//        $user->username = $request->username;
+
+//        return $user->role;
+        return ApiResponse::success($user);
     }
 }
