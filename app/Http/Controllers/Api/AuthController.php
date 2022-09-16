@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 
 class AuthController extends Controller
 {
@@ -96,5 +97,35 @@ class AuthController extends Controller
 
 //        return $user->role;
         return ApiResponse::success($user);
+    }
+
+    public function imageUpdate(Request $request){
+        $request->validate(
+            [
+             'image'=>'required|image'
+            ]
+        );
+        $user= auth()->user();
+        if ($user->image){
+            unlink($user->image);
+        }
+        $image =  $request->file('image');
+//        return $logo;
+
+        $directory = 'assets/images/profile/';
+        $imageName = uniqid().$image->getClientOriginalName();
+        $imageUrl = $directory.$imageName;
+        Image::make($image)->resize(450,450)->save($imageUrl);
+        $user->image = $imageUrl;
+
+        $user->save();
+
+        return ApiResponse::success($user);
+
+
+
+
+
+
     }
 }

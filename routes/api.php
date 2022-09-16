@@ -40,6 +40,7 @@ Route::group(["middleware" => ["auth:api"]], function(){
 
     Route::get("profile", [\App\Http\Controllers\Api\AuthController::class, "profile"]);
     Route::post("profile/edit", [\App\Http\Controllers\Api\AuthController::class, "edit"]);
+    Route::post("profile/image/update", [\App\Http\Controllers\Api\AuthController::class, "imageUpdate"]);
 
     Route::post('address/save',[\App\Http\Controllers\Api\AddressController::class,'save']);
     Route::get('address/all',[\App\Http\Controllers\Api\AddressController::class,'all']);
