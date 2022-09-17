@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Address;
 use Hash;
+use Auth;
 
 class ProfileController extends Controller
 {
@@ -18,12 +19,14 @@ class ProfileController extends Controller
     	return view('AdminPanel.Profile.index', compact("profile"));
     }
 
+
+
+
+
     public function profileUpdate(Request $request)
     {
 
  
-    	//return $request->all();
-
 	    if ($request->file('image')) {
 	     	$file = $request->file('image');
 	     	$filename= date('YmdHi')."-".$file->getClientOriginalName();
@@ -38,7 +41,7 @@ class ProfileController extends Controller
 			   $user->password = isset($request->password) ? Hash::make($request->password) : $user->password;
 			   $user->image = $imageUrl;
 			   $user->save();
-			   $user->user()->update([
+			   $user->user()->updateOrCreate(['user_id'=> Auth::user()->id],[
 				    "address_name" => $request->address_name,
 			   		"address" => $request->address,
 			   		"zipcode" => $request->zipcode,
@@ -53,7 +56,7 @@ class ProfileController extends Controller
 		   $user->mobile_no = $request->mobile_no;
 		   $user->password = isset($request->password) ? Hash::make($request->password) : $user->password;
 		   $user->save();
-		   $user->user()->update([
+		   $user->user()->updateOrCreate(['user_id'=> Auth::user()->id],[
 			    "address_name" => $request->address_name,
 		   		"address" => $request->address,
 		   		"zipcode" => $request->zipcode,

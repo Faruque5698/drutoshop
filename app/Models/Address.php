@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
+
 
 
 class Address extends Model
@@ -14,10 +14,7 @@ class Address extends Model
     protected $fillable = ['address_name', 'address', 'zipcode','city'];
 
 
-    // public function user()
-    // {
-    //     return $this->belongsTo('\App\Models\User');
-    // }
+
 
 
 
@@ -25,6 +22,7 @@ class Address extends Model
     {
         return $this->belongsTo(User::class, 'id', 'user_id');
     }
+
 
 
 
