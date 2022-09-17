@@ -48,13 +48,8 @@ class User extends Authenticatable
     ];
 
 
-     public function user()
+    public function user()
     {
         return $this->hasOne(Address::class);
-    }
-
-
-    
-
-    
+    } 
 }
