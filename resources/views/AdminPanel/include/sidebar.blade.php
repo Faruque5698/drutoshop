@@ -188,6 +188,15 @@
                     </ul>  
                 </li>
 
+                <li class="nav-item menu-open">
+                    <a href="{{ route('admin.setting') }}" class="nav-link">
+                      <i class="nav-icon fa fas fa-cog"></i>
+                      <p>
+                       Setting
+                      </p>
+                    </a>
+                </li>
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

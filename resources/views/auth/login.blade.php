@@ -91,6 +91,17 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
+
+  
+   @if(session('message'))
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Message!</strong> {{ session('message') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+   @endif
     <div class="login-logo">
         <a href="{{asset('assets')}}/index2.html"><b>USER</b>Login</a>
     </div>
@@ -159,7 +170,7 @@
                 @if (Route::has('password.request'))
 
 
-                    <a href="{{ route('password.request') }}">I forgot my password</a>
+                    <a href="{{ route('forget.email') }}">I forgot my password</a>
 
                 @endif
             </p>

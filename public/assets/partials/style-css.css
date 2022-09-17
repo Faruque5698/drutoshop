@@ -1,0 +1,59 @@
+.partials-card-border{
+	border-top: 5px solid purple;
+}
+
+.partials-menu{
+	
+}
+.partials-menu .partials-ul{
+	list-style-type: none;
+	background: #ddd;
+	height: 100%;
+	padding-left: 0px;
+}
+
+.partials-menu .partials-ul .partials-li{
+	padding: 7px 0px 7px 20px;
+	position: relative;
+}
+
+.partials-menu .partials-ul .partials-li:hover{
+	border-left: 4px solid purple;
+	background: #fb2b;
+}
+
+.partials-menu .partials-ul .partials-li:hover::after{
+	content: '';
+	position: absolute;
+	height: 100%;
+	top: 0;
+	right: 0px;
+	border-left: 15px solid transparent;
+    border-top: 18px solid transparent;
+    border-right: 16px solid #fff;
+    border-bottom: 18px solid transparent;
+  
+}
+.partials-menu .partials-ul .active{
+	border-left: 4px solid purple;
+	background: #fb2b;
+	position: relative;
+}
+
+.partials-menu .partials-ul .active::after{
+	content: '';
+	position: absolute;
+	height: 100%;
+	top: 0;
+	right: 0px;
+	border-left: 15px solid transparent;
+    border-top: 18px solid transparent;
+    border-right: 16px solid #fff;
+    border-bottom: 18px solid transparent;
+}
+
+
+.partials-menu .partials-ul .partials-li a{
+	color: #000;
+	text-decoration: none;
+} 

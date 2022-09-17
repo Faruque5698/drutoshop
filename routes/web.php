@@ -12,6 +12,10 @@ use \App\Http\Controllers\AdminPanel\ProductController;
 use \App\Http\Controllers\AdminPanel\StockProductController;
 use \App\Http\Controllers\AdminPanel\OrderDetailController;
 use \App\Http\Controllers\AdminPanel\ProfileController;
+
+use \App\Http\Controllers\AdminPanel\AdminForgetPassController;
+use \App\Http\Controllers\AdminPanel\SettingController;
+
 //use Image;
 
 /*
@@ -38,6 +42,13 @@ Auth::routes();
 Route::get('/homes', [App\Http\Controllers\HomeController::class, 'index'])->name('homes');
 
 //Route::get('dashboard',[AdminController::class,'dashboard'])->name('admin.dashboard');
+
+// Forget Password 
+
+Route::get('forget-password', [AdminForgetPassController::class, "forgetEmail"])->name('forget.email');
+Route::post('forget/password', [AdminForgetPassController::class, "getEmail"])->name('send.email');
+Route::post('check/otp', [AdminForgetPassController::class, "checkOTP"])->name('check.otp');
+Route::post('chenge/password', [AdminForgetPassController::class, "changePass"])->name('change.password');
 
 Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],function (){
     Route::get('dashboard',[AdminController::class,'dashboard'])->name('admin.dashboard');
@@ -122,4 +133,16 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],
     Route::get('order/success/{id}', [OrderDetailController::class, 'success'])->name('order.success');
     Route::get('order/cancel/{id}', [OrderDetailController::class, 'cancel'])->name('order.cancel');
 
+
+
+    // Settings
+
+     Route::get('setting', [SettingController::class, 'setting'])->name('admin.setting');
+
+     // partials routes
+
+    Route::get('setting/email', [SettingController::class, 'email'])->name('partials.email');
+    Route::get('setting/email-templete', [SettingController::class, 'email_templete'])->name('partials.email-templete');
+
+    
 });

@@ -61,7 +61,6 @@ class ProfileController extends Controller
 			]);
 
 
-			return "hi";
 	    }
 
 
