@@ -12,8 +12,10 @@ use \App\Http\Controllers\AdminPanel\ProductController;
 use \App\Http\Controllers\AdminPanel\StockProductController;
 use \App\Http\Controllers\AdminPanel\OrderDetailController;
 use \App\Http\Controllers\AdminPanel\ProfileController;
+
 use \App\Http\Controllers\AdminPanel\AdminForgetPassController;
 use \App\Http\Controllers\AdminPanel\SettingController;
+
 //use Image;
 
 /*
