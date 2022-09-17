@@ -20,10 +20,10 @@ class Address extends Model
     // }
 
 
-    public function address()
-    {
-        return $this->belongsTo(User::class, 'id', 'user_id');
-    }
+    // public function address()
+    // {
+    //     return $this->belongsTo(User::class, 'id', 'user_id');
+    // }
 
 
 

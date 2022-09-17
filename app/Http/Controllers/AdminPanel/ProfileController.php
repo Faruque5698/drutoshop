@@ -60,8 +60,6 @@ class ProfileController extends Controller
 		   		"city" => $request->city,
 			]);
 
-
-			return "hi";
 	    }
 
 
