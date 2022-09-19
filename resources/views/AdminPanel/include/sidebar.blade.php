@@ -99,40 +99,40 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('admin.category')}}" class="nav-link">
+                            <a href="{{route('admin.category')}}" class="nav-link pl-5">
                                 <i class="nav-icon fa fa-list-alt text-primary"></i>
                                 <p>category</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('admin.subcategory')}}" class="nav-link">
+                            <a href="{{route('admin.subcategory')}}" class="nav-link pl-5">
                                 <i class="nav-icon fa fa-list-alt text-success"></i>
                                 <p>Sub category</p>
                             </a>
                         </li>
 
                          <li class="nav-item">
-                            <a href="{{ route('admin.brand') }}" class="nav-link">
+                            <a href="{{ route('admin.brand') }}" class="nav-link pl-5">
                                 <i class="nav-icon fa fa-star text-warning"></i>
                                 <p>Brand</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.color') }}" class="nav-link">
+                            <a href="{{ route('admin.color') }}" class="nav-link pl-5">
                                 <i class="nav-icon fa fa-globe text-primary"></i>
                                 <p>Color</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{ route('admin.size') }}" class="nav-link">
+                            <a href="{{ route('admin.size') }}" class="nav-link pl-5">
                                 <i class="nav-icon fa fa-th-large text-danger"></i>
                                 <p>Size</p>
                             </a>
                         </li>
 
                          <li class="nav-item">
-                            <a href="{{ route('admin.product') }}" class="nav-link">
+                            <a href="{{ route('admin.product') }}" class="nav-link pl-5">
                                 <i class="nav-icon fa fa-tasks text-success"></i>
                                 <p>Product list</p>
                             </a>
@@ -150,14 +150,12 @@
                     </a>
                     <ul class="nav nav-treeview">
                       <li class="nav-item">
-                        <a href="{{ route('stock.index') }}" class="nav-link">
-                            <i class="fas fa-arrow-right"></i>
+                        <a href="{{ route('stock.index') }}" class="nav-link pl-5">
                             <p>Stock Products</p>
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="{{ route('stock.details.product') }}" class="nav-link">
-                          <i class="fas fa-arrow-right"></i>
+                        <a href="{{ route('stock.details.product') }}" class="nav-link pl-5">
                           <p>Size & Color Stock</p>
                         </a>
                       </li>
@@ -174,14 +172,12 @@
                     </a>
                     <ul class="nav nav-treeview">
                       <li class="nav-item">
-                        <a href="{{ route('admin.order') }}" class="nav-link">
-                            <i class="fas fa-arrow-right"></i>
+                        <a href="{{ route('admin.order') }}" class="nav-link pl-5">
                             <p>Order List</p>
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="" class="nav-link">
-                            <i class="fas fa-arrow-right"></i>
+                        <a href="" class="nav-link pl-5">
                             <p>Success Order List</p>
                         </a>
                       </li>
@@ -189,12 +185,53 @@
                 </li>
 
                 <li class="nav-item menu-open">
-                    <a href="{{ route('admin.setting') }}" class="nav-link">
+                    <a href="#" class="nav-link">
                       <i class="nav-icon fa fas fa-cog"></i>
                       <p>
-                       Setting
+                      Genarel Setting
                       </p>
+                      <i class="right fas fa-angle-left"></i>
                     </a>
+                     <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <a href="{{ route('setting.genarel') }}" class="nav-link pl-5">
+                            <p>Genarel</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{{ route('setting.email') }}" class="nav-link pl-5">
+                            <p>Email</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="" class="nav-link pl-5">
+                            <p>Payment</p>
+                             <i class="right fas fa-angle-left"></i>
+                        </a>
+
+                        <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                            <a href="{{ route('setting.payment.stripe') }}" class="nav-link pl-5">
+                                <i class="fab fa-cc-stripe pr-2"></i>
+                                <p>Stripe</p>
+                            </a>
+                          </li>
+                         
+                          <li class="nav-item">
+                            <a href="{{ route('setting.payment.paypal') }}" class="nav-link pl-5">
+                                <i class="fab fa-cc-paypal pr-2"></i>
+                                <p>Paypal</p>
+                            </a>
+                          </li>
+                           <li class="nav-item">
+                            <a href="{{ route('setting.payment.sslcommerz') }}" class="nav-link pl-5">
+                                 <i class="fab fa-expeditedssl pr-2"></i>
+                                <p>SSLCommerz</p>
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
                 </li>
 
             </ul>

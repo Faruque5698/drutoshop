@@ -1,7 +1,7 @@
 .partials-card-border{
 	border-top: 5px solid purple;
 }
-
+/*
 .partials-menu{
 	
 }
@@ -40,6 +40,10 @@
 	position: relative;
 }
 
+.partials-menu .partials-ul i{
+	padding-left: 140px;
+}
+
 .partials-menu .partials-ul .active::after{
 	content: '';
 	position: absolute;
@@ -56,4 +60,33 @@
 .partials-menu .partials-ul .partials-li a{
 	color: #000;
 	text-decoration: none;
-} 
+}
+
+
+.partials-menu .partials-ul .partials-li .subnav-content {
+	  display: none;
+	  position: absolute;
+	  top: 0;
+	  left: 100%;
+	  list-style-type: none;
+	  background: #ddd;
+	  padding-left: 0px;
+	  width: 100%;
+	  z-index: 1;
+}
+
+
+
+.partials-menu .partials-ul .partials-li .subnav-content .sub-li{
+	padding: 7px 0px 7px 20px;
+	position: relative;
+}
+
+.partials-menu .partials-ul .partials-li .subnav-content .sub-li:hover{
+	border-left: 4px solid purple;
+	background: #fb2b;
+}
+
+.partials-menu .subnav-pay:hover .subnav-content {
+  	display: block;
+}*/
