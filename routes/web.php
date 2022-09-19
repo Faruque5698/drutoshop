@@ -15,6 +15,7 @@ use \App\Http\Controllers\AdminPanel\ProfileController;
 
 use \App\Http\Controllers\AdminPanel\AdminForgetPassController;
 use \App\Http\Controllers\AdminPanel\SettingController;
+use \App\Http\Controllers\AdminPanel\GatewayController;
 
 //use Image;
 
@@ -137,12 +138,20 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],
 
     // Settings
 
-     Route::get('setting', [SettingController::class, 'setting'])->name('admin.setting');
+     Route::get('setting/genarel', [SettingController::class, 'setting'])->name('setting.genarel');
 
      // partials routes
 
-    Route::get('setting/email', [SettingController::class, 'email'])->name('partials.email');
-    Route::get('setting/email-templete', [SettingController::class, 'email_templete'])->name('partials.email-templete');
+    Route::get('setting/email', [SettingController::class, 'email'])->name('setting.email');
+    Route::get('setting/payment/stripe', [SettingController::class, 'stripe_payment'])->name('setting.payment.stripe');
+    Route::get('setting/payment/paypal', [SettingController::class, 'paypal_payment'])->name('setting.payment.paypal');
+    Route::get('setting/payment/sslcommerz', [SettingController::class, 'paypal_sslcommerz'])->name('setting.payment.sslcommerz');
+
+
+    // Gateway Route
+    Route::post('gateway/payment/sslcommerz', [GatewayController::class, 'gateway_sslcommerz'])->name('gateway.payment.sslcommerz');
+    Route::post('gateway/payment/paypal', [GatewayController::class, 'gateway_paypal'])->name('gateway.payment.paypal');
+    Route::post('gateway/payment/stripe', [GatewayController::class, 'gateway_stripe'])->name('gateway.payment.stripe');
 
     
 });

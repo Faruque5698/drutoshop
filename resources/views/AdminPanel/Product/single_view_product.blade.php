@@ -83,7 +83,7 @@
                                    </tr>
                                    <tr>
                                        <th>Discount Type</th>
-                                       <td>{{ $single_product->discount_type }}</td>
+                                       <td>{{ $single_product->credit }}</td>
                                    </tr>
                                    <tr>
                                        <th>Total Price</th>

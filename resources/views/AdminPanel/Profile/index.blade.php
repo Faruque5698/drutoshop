@@ -55,26 +55,8 @@
 					            <div class="d-flex justify-content-center mb-2">
 					    
 					            </div>
-					             <div class="row">
-					              <div class="col-sm-12 mb-2">
-					                <p class="mb-0 text-left">New Password</p>
-					              </div>
-					              <div class="col-sm-12">
-					             <!--    <p class="text-muted mb-0">{{ $profile->name }}</p> -->
-					                <input type="password" name="password"  class="text-muted form-control mb-0" placeholder="12345678">
-					              </div>
-					            </div>
-					            <hr>
-					            <div class="row">
-					              <div class="col-sm-12 mb-2">
-					                <p class="mb-0 text-left">Password Confirmation</p>
-					              </div>
-					              <div class="col-sm-12">
-					             <!--    <p class="text-muted mb-0">example@example.com</p> -->
-					                 <input type="password" name="password_confiramtion"  class="text-muted form-control mb-0" placeholder="12345678">
-					              </div>
-					            </div>
-					            <hr>
+					            
+					      
 					          </div>
 	                        </div>
 	                    </div>
@@ -82,70 +64,69 @@
 	                    	<div class="card">
 					          <div class="card-body">
 					            <div class="row">
-					              <div class="col-sm-3">
+					              <div class="col-sm-5">
 					                <p class="mb-0">Full Name</p>
 					              </div>
-					              <div class="col-sm-9">
+					              <div class="col-sm-7">
 					             <!--    <p class="text-muted mb-0">{{ $profile->name }}</p> -->
 					                <input type="text" name="name" value="{{ $profile->name }}" class="text-muted mb-0">
 					              </div>
 					            </div>
 					            <hr>
+					   
 					            <div class="row">
-					              <div class="col-sm-3">
-					                <p class="mb-0">Email</p>
-					              </div>
-					              <div class="col-sm-9">
-					             <!--    <p class="text-muted mb-0">example@example.com</p> -->
-					                 <input type="text" name="email" value="{{ $profile->email }}" class="text-muted mb-0">
-					              </div>
-					            </div>
-					            <hr>
-				
-					            <div class="row">
-					              <div class="col-sm-3">
-					                <p class="mb-0">Mobile</p>
-					              </div>
-					              <div class="col-sm-9">
-					               <!--  // <p class="text-muted mb-0">(098) 765-4321</p> -->
-					                  <input type="text" name="mobile_no" value="@if(isset($profile->mobile_no)) {{ $profile->mobile_no }} @endif" class="text-muted mb-0">
-					              </div>
-					            </div>
-					           
-					            <hr>
-					            <div class="row">
-					              <div class="col-sm-3">
+					              <div class="col-sm-5">
 					                <p class="mb-0">Address Name</p>
 					              </div>
-					              <div class="col-sm-9">
+					              <div class="col-sm-7">
 					                 <input type="text" name="address_name" value="@if(isset($profile->user->address_name)) {{ $profile->user->address_name }} @endif" class="text-muted mb-0">
 					              </div>
 					            </div>
 					             <hr>
 					             <div class="row">
-					              <div class="col-sm-3">
+					              <div class="col-sm-5">
 					                <p class="mb-0">Address</p>
 					              </div>
-					              <div class="col-sm-9">
+					              <div class="col-sm-7">
 					                 <input type="text" name="address" value="@if(isset($profile->user->address)) {{ $profile->user->address }} @endif" class="text-muted mb-0">
 					              </div>
 					            </div>
 					             <hr>
 					             <div class="row">
-					              <div class="col-sm-3">
+					              <div class="col-sm-5">
 					                <p class="mb-0">Zip Code</p>
 					              </div>
-					              <div class="col-sm-9">
+					              <div class="col-sm-7">
 					                 <input type="text" name="zipcode" value="@if(isset($profile->user->zipcode)) {{ $profile->user->zipcode }} @endif" class="text-muted mb-0">
 					              </div>
 					            </div>
 					             <hr>
 					            <div class="row">
-					              <div class="col-sm-3">
+					              <div class="col-sm-5">
 					                <p class="mb-0">City</p>
 					              </div>
-					              <div class="col-sm-9">
+					              <div class="col-sm-7">
 					                 <input type="text" name="city" value="@if(isset($profile->user->city)) {{ $profile->user->city }} @endif" class="text-muted mb-0">
+					              </div>
+					            </div>
+					            <hr>
+					             <div class="row">
+					              <div class="col-sm-5">
+					                <p class="mb-0 text-left">New Password</p>
+					              </div>
+					              <div class="col-sm-7">
+					             <!--    <p class="text-muted mb-0">{{ $profile->name }}</p> -->
+					                <input type="password" name="password"  class="text-muted mb-0" placeholder="12345678">
+					              </div>
+					            </div>
+					            <hr>
+					            <div class="row">
+					              <div class="col-sm-5">
+					                <p class="mb-0 text-left">Password Confirmation</p>
+					              </div>
+					              <div class="col-sm-7">
+					             <!--    <p class="text-muted mb-0">example@example.com</p> -->
+					                 <input type="password" name="password_confiramtion"  class="text-muted mb-0" placeholder="12345678">
 					              </div>
 					            </div>
 					          </div>
@@ -157,7 +138,7 @@
                     </div>
                     <div class="row">
                     	<div class="col-4 offset-4">
-                    		<input type="submit" value="Save" class="btn btn-warning m-auto">
+                    		<input type="submit" value="Update" class="btn btn-warning m-auto w-25">
                     	</div>
                     </div>
                 </form>  

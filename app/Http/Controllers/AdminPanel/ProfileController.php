@@ -36,8 +36,6 @@ class ProfileController extends Controller
 
 	           $user = User::find($request->id);
 			   $user->name = $request->name;
-			   $user->email = $request->email;
-			   $user->mobile_no = $request->mobile_no; 
 			   $user->password = isset($request->password) ? Hash::make($request->password) : $user->password;
 			   $user->image = $imageUrl;
 			   $user->save();
@@ -52,8 +50,6 @@ class ProfileController extends Controller
 	    }else{
 		   $user = User::find($request->id);
 		   $user->name = $request->name;
-		   $user->email = $request->email;
-		   $user->mobile_no = $request->mobile_no;
 		   $user->password = isset($request->password) ? Hash::make($request->password) : $user->password;
 		   $user->save();
 		   $user->user()->updateOrCreate(['user_id'=> Auth::user()->id],[
