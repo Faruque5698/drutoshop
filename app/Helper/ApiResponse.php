@@ -78,5 +78,65 @@ public function dataExsits(){
 
         ],409);
 }
+    function getTrx($length = 12)
+    {
+        $characters = 'ABCDEFGHJKMNOPQRSTUVWXYZ123456789';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
+    function api_method_payment($method_code){
+        if($method_code == 101){
+            $code = 'paypal';
+        }elseif($method_code == 102){
+            $code = 'PerfectMoney';
+        }elseif($method_code == 103){
+            $code = 'Stripe';
+        }elseif($method_code == 104){
+            $code = 'Skrill';
+        }elseif($method_code == 105){
+            $code = 'PayTM';
+        }elseif($method_code == 106){
+            $code = 'Payeer';
+        }elseif($method_code == 107){
+            $code = 'PayStack';
+        }elseif($method_code == 108){
+            $code = 'VoguePay';
+        }elseif($method_code == 109){
+            $code = 'flutterwave';
+        }elseif($method_code == 110){
+            $code = 'RozarPay';
+        }elseif($method_code == 111){
+            $code= 'stripeJs';
+        }elseif($method_code == 112){
+            $code = 'instamojo';
+        }
+        elseif($method_code == 501){
+            $code = 'Blockchain';
+        }elseif($method_code == 502){
+            $code = 'Block.io';
+        }elseif($method_code == 503){
+            $code = 'CoinPayment';
+        }elseif($method_code == 504){
+            $code = 'CoinPaymentALL';
+        }elseif($method_code == 505){
+            $code = 'Coingate';
+        }elseif($method_code == 506){
+            $code = 'CoinBaseCommerce';
+        }
+
+        return $code;
+    }
+
+    function notify($user, $type, $shortcodes = null)
+    {
+
+        send_email($user, $type, $shortcodes);
+        send_sms($user, $type, $shortcodes);
+    }
 
 }

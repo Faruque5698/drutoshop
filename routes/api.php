@@ -72,7 +72,13 @@ Route::group(["middleware" => ["auth:api"]], function(){
     Route::get('order/history/success',[\App\Http\Controllers\Api\OrderController::class,'success']);
 
 
+    Route::post('payment',[\App\Http\Controllers\Api\DepositController::class,'depositInsert'])->name('api.deposit');
 
+    Route::get('deposit-confirm/{track}',[\App\Http\Controllers\Gateway\PaymentController::class,'apiDepositConfirm'])->name('deposit-api.confirm');
+
+
+
+    Route::post('ipn/api/g103', [\App\Http\Controllers\Gateway\g103\ProcessController::class,'ipnApi'])->name('ipn.api.g103'); // API Stripe
 
 
 

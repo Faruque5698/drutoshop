@@ -44,7 +44,7 @@ Route::get('/homes', [App\Http\Controllers\HomeController::class, 'index'])->nam
 
 //Route::get('dashboard',[AdminController::class,'dashboard'])->name('admin.dashboard');
 
-// Forget Password 
+// Forget Password
 
 Route::get('forget-password', [AdminForgetPassController::class, "forgetEmail"])->name('forget.email');
 Route::post('forget/password', [AdminForgetPassController::class, "getEmail"])->name('send.email');
@@ -56,7 +56,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],
     Route::get('homes',[HomeSectionController::class,'home'])->name('admin.homes');
     Route::post('update_home',[HomeSectionController::class,'update_home'])->name('update.homes');
 
-    // profile 
+    // profile
 
     Route::get('profile', [ProfileController::class, 'profile'])->name('admin.profile');
     Route::post('profile/update', [ProfileController::class, 'profileUpdate'])->name('profile.update');
@@ -153,5 +153,5 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],
     Route::post('gateway/payment/paypal', [GatewayController::class, 'gateway_paypal'])->name('gateway.payment.paypal');
     Route::post('gateway/payment/stripe', [GatewayController::class, 'gateway_stripe'])->name('gateway.payment.stripe');
 
-    
+
 });
