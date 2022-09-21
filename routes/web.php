@@ -13,12 +13,14 @@ use \App\Http\Controllers\AdminPanel\ProductController;
 use \App\Http\Controllers\AdminPanel\StockProductController;
 use \App\Http\Controllers\AdminPanel\OrderDetailController;
 use \App\Http\Controllers\AdminPanel\ProfileController;
-
+use \App\Http\Controllers\AdminPanel\GenarelSettingController;
 use \App\Http\Controllers\AdminPanel\AdminForgetPassController;
 use \App\Http\Controllers\AdminPanel\SettingController;
 use \App\Http\Controllers\AdminPanel\GatewayController;
 
 //use Image;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -154,6 +156,11 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],
     Route::get('setting/payment/stripe', [SettingController::class, 'stripe_payment'])->name('setting.payment.stripe');
     Route::get('setting/payment/paypal', [SettingController::class, 'paypal_payment'])->name('setting.payment.paypal');
     Route::get('setting/payment/sslcommerz', [SettingController::class, 'paypal_sslcommerz'])->name('setting.payment.sslcommerz');
+
+
+    // genarel settings
+
+    Route::post('setting/save/genarel', [GenarelSettingController::class, 'genarelStore'])->name('setting.save.genarel');
 
 
     // Gateway Route

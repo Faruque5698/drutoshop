@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 
+
 class AuthController extends Controller
 {
     public function login(Request $request){
@@ -128,4 +129,7 @@ class AuthController extends Controller
 
 
     }
+
+
+    
 }

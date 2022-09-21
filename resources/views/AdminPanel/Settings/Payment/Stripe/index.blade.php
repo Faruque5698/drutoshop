@@ -109,7 +109,7 @@
                                    <div class="col-sm-6">
                                       <div class="row">
                                         <div class="col-sm-12">
-                                          <p class="mb-2">STRIPE SECRET KEY</p>
+                                          <p class="mb-2">STRIPE SECRATE KEY</p>
                                        </div>
                                       <div class="col-sm-12">
                                          <input type="text" name="screet_key" value="{{ $stripe_page->screet_key }}" class="text-muted form-control mb-0">
