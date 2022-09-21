@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminPanel\AdminController;
 use App\Http\Controllers\AdminPanel\HomeSectionController;
+use App\Http\Controllers\AdminPanel\BannerController;
 use App\Http\Controllers\AdminPanel\CategoryController;
 use \App\Http\Controllers\AdminPanel\SubcategoryController;
 use \App\Http\Controllers\AdminPanel\BrandController;
@@ -60,6 +61,9 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],
 
     Route::get('profile', [ProfileController::class, 'profile'])->name('admin.profile');
     Route::post('profile/update', [ProfileController::class, 'profileUpdate'])->name('profile.update');
+
+    Route::resource('banner', BannerController::class);
+    Route::get('banner/status/{id}', [BannerController::class, 'status'])->name('banner.status');
 
     Route::get('category',[CategoryController::class,'index'])->name('admin.category');
     Route::get('category/add',[CategoryController::class,'add'])->name('add_category');
@@ -130,6 +134,10 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],
     Route::get('/stock/details/product', [StockProductController::class, 'details_product'])->name('stock.details.product');
 
     Route::get('order/list', [OrderDetailController::class, 'order'])->name('admin.order');
+    Route::get('order/cancel-order-list', [OrderDetailController::class, 'order_cancel'])->name('cancel.order-list');
+    Route::get('order/confirm-order-list', [OrderDetailController::class, 'order_confirm'])->name('confirm.order-list');
+    Route::get('order/success-order-list', [OrderDetailController::class, 'order_success'])->name('success.order-list');
+    Route::get('order/pending-order-list', [OrderDetailController::class, 'order_panding'])->name('panding.order-list');
     Route::get('order/approve/{id}', [OrderDetailController::class, 'approve'])->name('order.approve');
     Route::get('order/success/{id}', [OrderDetailController::class, 'success'])->name('order.success');
     Route::get('order/cancel/{id}', [OrderDetailController::class, 'cancel'])->name('order.cancel');

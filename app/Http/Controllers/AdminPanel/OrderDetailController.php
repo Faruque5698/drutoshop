@@ -15,13 +15,69 @@ class OrderDetailController extends Controller
 
 
     	// fetch data order model
-    	$orders = Order::with('order_to_product')->get();
+    	$orders = Order::with('order_to_product')->orderBy('id', 'DESC')->get();
 
     	//return $orders;
     	// return view 
     	return view('AdminPanel.Order.order-list', [
     		"orders" => $orders
     	]);
+    }
+
+    public function order_panding()
+    {
+
+
+        // fetch data order model
+        $orders = Order::with('order_to_product')->where('status', 0)->get();
+
+        //return $orders;
+        // return view 
+        return view('AdminPanel.Order.pending-order', [
+            "orders" => $orders
+        ]);
+    }
+
+    public function order_cancel()
+    {
+
+
+        // fetch data order model
+        $orders = Order::with('order_to_product')->where('status', 3)->get();
+
+        //return $orders;
+        // return view 
+        return view('AdminPanel.Order.cancel-order', [
+            "orders" => $orders
+        ]);
+    }
+
+    public function order_confirm()
+    {
+
+
+        // fetch data order model
+        $orders = Order::with('order_to_product')->where('status', 1)->get();
+
+        //return $orders;
+        // return view 
+        return view('AdminPanel.Order.confirma-order', [
+            "orders" => $orders
+        ]);
+    }
+
+      public function order_success()
+    {
+
+
+        // fetch data order model
+        $orders = Order::with('order_to_product')->where('status', 2)->get();
+
+        //return $orders;
+        // return view 
+        return view('AdminPanel.Order.success-order', [
+            "orders" => $orders
+        ]);
     }
 
 

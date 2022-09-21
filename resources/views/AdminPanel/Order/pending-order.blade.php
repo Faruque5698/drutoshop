@@ -1,7 +1,7 @@
 @extends('AdminPanel.Master')
 
 @section('title')
-    Order List
+    Pending Orders
 @endsection
 
 
@@ -15,7 +15,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1><strong>Order List</strong></h1>
+                        <h1><strong> Pending Orders</strong></h1>
                        </i></a>
                     </div>
 
@@ -41,7 +41,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Order List</h3>
+                                <h3 class="card-title"> Pending Orders</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
