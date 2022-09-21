@@ -21,6 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('register',[\App\Http\Controllers\Api\AuthController::class,'register']);
 Route::post('login',[\App\Http\Controllers\Api\AuthController::class,'login']);
 
+Route::post('reset-password/email', [\App\Http\Controllers\Api\UserPasswordResetController::class, 'resetPassword']);
+Route::post('reset-token/check', [\App\Http\Controllers\Api\UserPasswordResetController::class, 'resetToken']);
+Route::post('password-change', [\App\Http\Controllers\Api\UserPasswordResetController::class, 'changePassword']);
+
+Route::get('banner',[\App\Http\Controllers\Api\BannerController::class,'banner']);
 Route::get('brand',[\App\Http\Controllers\Api\CategoryController::class,'brand']);
 Route::get('category',[\App\Http\Controllers\Api\CategoryController::class,'category']);
 Route::get('subcat-product/{id}',[\App\Http\Controllers\Api\CategoryController::class,'subcatProduct']);
@@ -75,8 +80,6 @@ Route::group(["middleware" => ["auth:api"]], function(){
     Route::post('payment',[\App\Http\Controllers\Api\DepositController::class,'depositInsert'])->name('api.deposit');
 
     Route::get('deposit-confirm/{track}',[\App\Http\Controllers\Gateway\PaymentController::class,'apiDepositConfirm'])->name('deposit-api.confirm');
-
-
 
     Route::post('ipn/api/g103', [\App\Http\Controllers\Gateway\g103\ProcessController::class,'ipnApi'])->name('ipn.api.g103'); // API Stripe
 

@@ -7,12 +7,16 @@ use App\Http\Controllers\Controller;
 use App\Models\Pusher;
 use Illuminate\Http\Request;
 use App\Models\Gateway;
+use App\Models\GenarelSetting;
+
 
 class SettingController extends Controller
 {
     public function setting()
     {
-    	return view('AdminPanel.Settings.Genarel.index');
+
+        $genarel = GenarelSetting::find(1);
+    	return view('AdminPanel.Settings.Genarel.index', compact('genarel'));
     }
 
     public function email()

@@ -108,7 +108,7 @@
                                    <div class="col-sm-6">
                                       <div class="row">
                                         <div class="col-sm-12">
-                                          <p class="mb-2">Screet KEY</p>
+                                          <p class="mb-2">Secrate key</p>
                                        </div>
                                       <div class="col-sm-12">
                                          <input type="text" name="screet_key" value="{{ $paypal_page->screet_key }}" class="text-muted form-control mb-0">
