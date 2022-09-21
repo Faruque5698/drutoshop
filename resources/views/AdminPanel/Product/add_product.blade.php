@@ -4,37 +4,42 @@ Add Product
 @endsection
 @section('style')
 <style type="text/css">
-.show-color{
-  display: none;
-}
-.show-size{
-  display: none;
-}
-input[type="file"]{
-    position: relative;
-    width: 50%;
-    background: red;
-    display: none;
-}
-.lable-custom{
-    position: relative;
-    width: 100%;
-    left: 0;
-    top: 0;
-    box-sizing: border-box;
-    border: 1px solid rgb(224, 72, 118);
-    border-radius: 20px;
-    padding: 10px 10px;
-    text-align: left;
-    color: #000;
-    font-size: 15px;
-    font-weight: 300;
-}
-.lable-custom:hover{
-    background-color: rgb(172, 70, 101);
-    border-color: #ffff;
-    color: #ffff;
-}
+    .show-color{
+      display: none;
+    }
+    .show-size{
+      display: none;
+    }
+    input[type="file"]{
+        position: relative;
+        width: 50%;
+        background: red;
+        display: none;
+    }
+    .lable-custom{
+        position: relative;
+        width: 100%;
+        left: 0;
+        top: 0;
+        box-sizing: border-box;
+        border: 1px solid rgb(224, 72, 118);
+        border-radius: 20px;
+        padding: 10px 10px;
+        text-align: left;
+        color: #000;
+        font-size: 15px;
+        font-weight: 300;
+    }
+    .lable-custom:hover{
+        background-color: rgb(172, 70, 101);
+        border-color: #ffff;
+        color: #ffff;
+    }
+    .prev{
+        margin-top: 10px;
+        box-sizing: border-box;
+        box-shadow: 0px 0px 3px gray;
+    }
 </style>
 @endsection
 @section('content')
@@ -135,7 +140,7 @@ input[type="file"]{
                                     <input type="number" id="sizeColorQty" class="form-control"  placeholder="Quantity">
                                 </div>
                                 <div class="col-2 text-center">
-                                    <button id="addRow" class="ml-2 btn btn-primary">Add</button>
+                                    <button id="addRow" class="ml-2 btn btn-primary w-100">Add</button>
                                 </div>
                             </div>
                         </div>
@@ -198,14 +203,14 @@ input[type="file"]{
                             <div class="col-3">
                                 <input type="file" id="mainImg" class="@error('image') is-invalid @enderror" name="image" onchange="checkFiles()" />
                                 <label for="mainImg" class="lable-custom"><i class="fas fa-upload mr-2"></i>Upload Image (Compulsery)</label>
-                                <div class="text-center">
+                                <div class="text-center prev">
                                     <img src="{{ asset('assets/images/noimage.jpeg') }}" id="mainPreview"/ width="100px" height="100px">
                                 </div>
                             </div>
                             <div class="col-3">
                                 <input type="file" id="optionImg1" class="@error('image') is-invalid @enderror" name="image1" onchange="checkImage();" />
                                 <label for="optionImg1" class="lable-custom"><i class="fas fa-upload mr-2"></i>Upload Image (Optional)</label>
-                                <div class="text-center">
+                                <div class="text-center prev">
                                     <img src="{{ asset('assets/images/noimage.jpeg') }}" id="option1Preview"/ width="100px" height="100px">
                                 </div>
                                 
@@ -213,14 +218,14 @@ input[type="file"]{
                             <div class="col-3">
                                 <input type="file" id="optionImg2" class="@error('image') is-invalid @enderror" name="image2" onchange="checkImage();" />
                                 <label for="optionImg2" class="lable-custom"><i class="fas fa-upload mr-2"></i>Upload Image (Optional)</label>
-                                <div class="text-center">
+                                <div class="text-center prev">
                                     <img src="{{ asset('assets/images/noimage.jpeg') }}" id="option2Preview"/ width="100px" height="100px">
                                 </div>
                             </div>
                             <div class="col-3">
                                 <input type="file" id="optionImg3" class="@error('image') is-invalid @enderror" name="image3" onchange="checkImage();" />
                                 <label for="optionImg3" class="lable-custom"><i class="fas fa-upload mr-2"></i>Upload Image (Optional)</label>
-                                <div class="text-center">
+                                <div class="text-center prev">
                                     <img src="{{ asset('assets/images/noimage.jpeg') }}" id="option3Preview"/ width="100px" height="100px">
                                 </div>
                             </div>

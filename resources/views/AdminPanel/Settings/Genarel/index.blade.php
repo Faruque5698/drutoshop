@@ -14,7 +14,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="text-warning"><strong>Paypal Payment Setting</strong></h1>
+                        <h1 class="text-warning"><strong> Genarel Settings</strong></h1>
                        </i></a>
                     </div>
 

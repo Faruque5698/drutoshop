@@ -99,6 +99,12 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <a href="{{route('banner.index')}}" class="nav-link pl-5">
+                                <i class="nav-icon fa fa-list-alt text-primary"></i>
+                                <p>Banner</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{route('admin.category')}}" class="nav-link pl-5">
                                 <i class="nav-icon fa fa-list-alt text-primary"></i>
                                 <p>category</p>
@@ -177,8 +183,18 @@
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="" class="nav-link pl-5">
+                        <a href="{{ route('panding.order-list') }}" class="nav-link pl-5">
+                            <p>Pending Order List</p>
+                        </a>
+                        <a href="{{ route('confirm.order-list') }}" class="nav-link pl-5">
+                            <p>Confiram Order List</p>
+                        </a>
+                      
+                        <a href="{{ route('success.order-list') }}" class="nav-link pl-5">
                             <p>Success Order List</p>
+                        </a>
+                        <a href="{{ route('cancel.order-list') }}" class="nav-link pl-5">
+                          <p>Cancel Order List</p>
                         </a>
                       </li>
                     </ul>  
@@ -188,24 +204,24 @@
                     <a href="#" class="nav-link">
                       <i class="nav-icon fa fas fa-cog"></i>
                       <p>
-                      Genarel Setting
+                      Settings
                       </p>
                       <i class="right fas fa-angle-left"></i>
                     </a>
                      <ul class="nav nav-treeview">
                       <li class="nav-item">
                         <a href="{{ route('setting.genarel') }}" class="nav-link pl-5">
-                            <p>Genarel</p>
+                            <p>Genarel Settings</p>
                         </a>
                       </li>
                       <li class="nav-item">
                         <a href="{{ route('setting.email') }}" class="nav-link pl-5">
-                            <p>Email</p>
+                            <p>Email Settings</p>
                         </a>
                       </li>
                       <li class="nav-item">
                         <a href="" class="nav-link pl-5">
-                            <p>Payment</p>
+                            <p>Payment Settings</p>
                              <i class="right fas fa-angle-left"></i>
                         </a>
 
