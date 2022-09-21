@@ -143,7 +143,7 @@
                                 <p class="text-{{ (request()->is('admin/product*')) ? 'warning' : '' }}">Product list</p>
                             </a>
                         </li>
-                    </ul>  
+                    </ul>
                 </li>
 
                 <li class="nav-item menu-open">
@@ -165,7 +165,7 @@
                           <p class="text-{{ (request()->is('admin/stock/details/product')) ? 'warning' : '' }}">Size & Color Stock</p>
                         </a>
                       </li>
-                    </ul>  
+                    </ul>
                 </li>
 
                 <li class="nav-item menu-open">
@@ -189,7 +189,7 @@
                         <a href="{{ route('confirm.order-list') }}" class="nav-link pl-5">
                             <p class="text-{{ (request()->is('admin/order/confirm-order-list')) ? 'warning' : '' }}">Confiram Order List</p>
                         </a>
-                      
+
                         <a href="{{ route('success.order-list') }}" class="nav-link pl-5">
                             <p class="text-{{ (request()->is('admin/order/success-order-list')) ? 'warning' : '' }}">Success Order List</p>
                         </a>
@@ -197,7 +197,7 @@
                           <p class="text-{{ (request()->is('admin/order/cancel-order-list')) ? 'warning' : '' }}">Cancel Order List</p>
                         </a>
                       </li>
-                    </ul>  
+                    </ul>
                 </li>
 
                 <li class="nav-item menu-open">
@@ -219,6 +219,11 @@
                             <p class="text-{{ (request()->is('admin/setting/email')) ? 'warning' : '' }}">Email Settings</p>
                         </a>
                       </li>
+                         <li class="nav-item">
+                        <a href="{{ route('setting.pusher') }}" class="nav-link pl-5">
+                            <p>Pusher Settings</p>
+                        </a>
+                      </li>
                       <li class="nav-item">
                         <a href="" class="nav-link pl-5">
                             <p class="text-{{ (request()->is('admin/banner')) ? 'warning' : '' }}">Payment Settings</p>
@@ -232,13 +237,15 @@
                                 <p class="text-{{ (request()->is('admin/setting/payment/stripe')) ? 'warning' : '' }}">Stripe</p>
                             </a>
                           </li>
-                         
-                          <li class="nav-item">
-                            <a href="{{ route('setting.payment.paypal') }}" class="nav-link pl-5">
-                                <i class="fab fa-cc-paypal pr-2"></i>
-                                <p class="text-{{ (request()->is('admin/setting/payment/paypal')) ? 'warning' : '' }}">Paypal</p>
-                            </a>
-                          </li>
+
+
+{{--                          <li class="nav-item">--}}
+{{--                            <a href="{{ route('setting.payment.paypal') }}" class="nav-link pl-5">--}}
+{{--                                <i class="fab fa-cc-paypal pr-2"></i>--}}
+{{--                                <p>Paypal</p>--}}
+{{--                            </a>--}}
+{{--                          </li>--}}
+
                            <li class="nav-item">
                             <a href="{{ route('setting.payment.sslcommerz') }}" class="nav-link pl-5">
                                  <i class="fab fa-expeditedssl pr-2"></i>
