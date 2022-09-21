@@ -143,7 +143,7 @@
                                 <p>Product list</p>
                             </a>
                         </li>
-                    </ul>  
+                    </ul>
                 </li>
 
                 <li class="nav-item menu-open">
@@ -165,7 +165,7 @@
                           <p>Size & Color Stock</p>
                         </a>
                       </li>
-                    </ul>  
+                    </ul>
                 </li>
 
                 <li class="nav-item menu-open">
@@ -189,7 +189,7 @@
                         <a href="{{ route('confirm.order-list') }}" class="nav-link pl-5">
                             <p>Confiram Order List</p>
                         </a>
-                      
+
                         <a href="{{ route('success.order-list') }}" class="nav-link pl-5">
                             <p>Success Order List</p>
                         </a>
@@ -197,7 +197,7 @@
                           <p>Cancel Order List</p>
                         </a>
                       </li>
-                    </ul>  
+                    </ul>
                 </li>
 
                 <li class="nav-item menu-open">
@@ -219,6 +219,11 @@
                             <p>Email Settings</p>
                         </a>
                       </li>
+                         <li class="nav-item">
+                        <a href="{{ route('setting.pusher') }}" class="nav-link pl-5">
+                            <p>Pusher Settings</p>
+                        </a>
+                      </li>
                       <li class="nav-item">
                         <a href="" class="nav-link pl-5">
                             <p>Payment Settings</p>
@@ -232,13 +237,13 @@
                                 <p>Stripe</p>
                             </a>
                           </li>
-                         
-                          <li class="nav-item">
-                            <a href="{{ route('setting.payment.paypal') }}" class="nav-link pl-5">
-                                <i class="fab fa-cc-paypal pr-2"></i>
-                                <p>Paypal</p>
-                            </a>
-                          </li>
+
+{{--                          <li class="nav-item">--}}
+{{--                            <a href="{{ route('setting.payment.paypal') }}" class="nav-link pl-5">--}}
+{{--                                <i class="fab fa-cc-paypal pr-2"></i>--}}
+{{--                                <p>Paypal</p>--}}
+{{--                            </a>--}}
+{{--                          </li>--}}
                            <li class="nav-item">
                             <a href="{{ route('setting.payment.sslcommerz') }}" class="nav-link pl-5">
                                  <i class="fab fa-expeditedssl pr-2"></i>
