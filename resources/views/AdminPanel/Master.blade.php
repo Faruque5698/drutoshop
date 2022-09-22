@@ -90,6 +90,31 @@
     });
 </script>
 
+<script src="{{ asset('js/app.js') }}" ></script>
+{{--<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>--}}
+<script>
+    Echo.channel('users')
+        .listen('OrderStatusEvent', (e)=>{
+            // console.log(e.order);
+
+            $(document).ready(function (){
+                Swal.fire({
+                    title: 'ORDER',
+                    text: "New order arrived!",
+                    icon: 'info',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+
+                    confirmButtonText: 'Ok'
+                }).then((result) => {
+                    if (result) {
+                        location.reload()
+                    }
+                })
+            })
+        })
+</script>
+
 @yield('js')
 </body>
 </html>
