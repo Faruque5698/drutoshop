@@ -54,6 +54,7 @@ Route::group(["middleware" => ["auth:api"]], function(){
     Route::post("logout", [\App\Http\Controllers\Api\AuthController::class, "logout"]);
 
 
+
     Route::post('product/favourite/add',[\App\Http\Controllers\Api\FavouriteProductController::class,'favproduct']);
 
     Route::get('product/favourite',[\App\Http\Controllers\Api\FavouriteProductController::class,'favproductlist']);

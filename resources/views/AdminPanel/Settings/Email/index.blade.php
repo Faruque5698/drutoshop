@@ -5,7 +5,7 @@
 @endsection
 
 
-
+@php($mail_setting = \App\Models\EmailSetting::find(1))
 @section('content')
     <div class="content-wrapper">
 
@@ -39,7 +39,8 @@
               <div class="card partials-card-border p-3">
                   <div class="row">
                       <div class="col-sm-12">
-                              <form>
+                              <form action="{{ route('setting.mail.update') }}" method="POST">
+                                @csrf
                                    <div class="row">
                                      <div class="col-sm-6">
                                         <div class="row">
@@ -47,7 +48,8 @@
                                             <p class="mb-2">MAIL MAILER</p>
                                          </div>
                                         <div class="col-sm-12">
-                                           <input type="text" name="name" value="" class="text-muted form-control mb-0">
+                                          <input type="hidden" name="id" value="{{ $mail_setting->id }}">
+                                           <input type="text" name="mail_transport" value="{{ $mail_setting->mail_transport }}" class="text-muted form-control mb-0">
                                         </div>
                                         </div>
                                      </div>
@@ -57,7 +59,7 @@
                                             <p class="mb-2">MAIL HOST</p>
                                          </div>
                                         <div class="col-sm-12">
-                                           <input type="text" name="name" value="" class="text-muted form-control mb-0">
+                                           <input type="text" name="mail_host" value="{{ $mail_setting->mail_host }}" class="text-muted form-control mb-0">
                                         </div>
                                         </div>
                                      </div>
@@ -70,7 +72,7 @@
                                             <p class="mb-2">MAIL PORT</p>
                                          </div>
                                         <div class="col-sm-12">
-                                           <input type="text" name="name" value="" class="text-muted form-control mb-0">
+                                           <input type="text" name="mail_port" value="{{ $mail_setting->mail_port }}" class="text-muted form-control mb-0">
                                         </div>
                                         </div>
                                      </div>
@@ -80,7 +82,7 @@
                                             <p class="mb-2">MAIL USERNAME</p>
                                          </div>
                                         <div class="col-sm-12">
-                                           <input type="text" name="name" value="" class="text-muted form-control mb-0">
+                                           <input type="text" name="mail_username" value="{{ $mail_setting->mail_username }}" class="text-muted form-control mb-0">
                                         </div>
                                         </div>
                                      </div>
@@ -95,7 +97,7 @@
                                             <p class="mb-2">MAIL PASSWORD</p>
                                          </div>
                                         <div class="col-sm-12">
-                                           <input type="text" name="name" value="" class="text-muted form-control mb-0">
+                                           <input type="text" name="mail_password" value="{{ $mail_setting->mail_password }}" class="text-muted form-control mb-0">
                                         </div>
                                         </div>
                                      </div>
@@ -105,7 +107,7 @@
                                             <p class="mb-2">MAIL ENCRYPTION</p>
                                          </div>
                                         <div class="col-sm-12">
-                                           <input type="text" name="name" value="" class="text-muted form-control mb-0">
+                                           <input type="text" name="mail_encryption" value="{{ $mail_setting->mail_encryption }}" class="text-muted form-control mb-0">
                                         </div>
                                         </div>
                                      </div>
@@ -119,7 +121,7 @@
                                             <p class="mb-2">MAIL FROM ADDRESS</p>
                                          </div>
                                         <div class="col-sm-12">
-                                           <input type="text" name="name" value="" class="text-muted form-control mb-0">
+                                           <input type="text" name="mail_from" value="{{ $mail_setting->mail_from }}" class="text-muted form-control mb-0">
                                         </div>
                                         </div>
                                      </div>

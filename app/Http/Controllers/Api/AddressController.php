@@ -12,7 +12,7 @@ class AddressController extends Controller
 {
     public function save(Request $request){
         $request->validate([
-           'address_name' => 'required',
+            'address_name' => 'required',
             'address'=> 'required',
             'zipcode'=> 'required',
             'city'=> 'required',

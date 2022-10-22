@@ -10,20 +10,20 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function product(){
-        $product = Product::with('productToCategory','productToSubcategory','productToBrand')->where('status','=','active')->get();
+        $product = Product::with('productToCategory','productToSubcategory','productToBrand','gallery_product')->where('status','=','active')->get();
         return ApiResponse::success($product);
     }
 
     public function pro_details($id)
     {
-        $product = Product::with('productToCategory', 'productToSubcategory', 'productToBrand')->find($id);
+        $product = Product::with('productToCategory', 'productToSubcategory', 'productToBrand','gallery_product')->find($id);
 
             return ApiResponse::success($product);
 
     }
 
     public function trending(){
-        $product = Product::with('productToCategory','productToSubcategory','productToBrand')->where('trand_product','=',1)->get();
+        $product = Product::with('productToCategory','productToSubcategory','productToBrand','gallery_product')->where('trand_product','=',1)->get();
 //        return response()->json([
 //
 //        ]);
@@ -40,7 +40,7 @@ class ProductController extends Controller
     }
 
     public function popular(){
-        $product = Product::with('productToCategory','productToSubcategory','productToBrand')->where('feature_product','=',1)->get();
+        $product = Product::with('productToCategory','productToSubcategory','productToBrand','gallery_product')->where('feature_product','=',1)->get();
 //        return response()->json([
 //
 //        ]);

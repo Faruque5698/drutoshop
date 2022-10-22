@@ -113,53 +113,16 @@ Add Product
                             <span id="subCatError" class="pl-2" style="color: red;"></span>
                         </div>
                         
-                        
-                        <hr>
-                        <div class="addSection">
-                            <div class="form-row">
-                                <div class="col-4">
-                                    <select  id="sizeId" class="select-size form-control mb-1" >
-                                        <option value="0">Select Size</option>
-                                        @foreach($sizes as $size)
-                                        <option value="{{ $size->id }}">{{ $size->size_name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <span id="sizeError" class="pl-2" style="color: red;"></span>
-                                </div>
-                                <div class="col-4">
-                                    <select  id="colorId"  class="select-color form-control  mb-1" >
-                                        <option value="0">Select Color</option>
-                                        @foreach($colors as $color)
-                                        <option class="colorText" value="{{ $color->color_code }}">{{ $color->color_name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <span id="colorError" class="pl-2" style="color: red;"></span>
-                                    
-                                </div>
-                                <div class="col-2">
-                                    <input type="number" id="sizeColorQty" class="form-control"  placeholder="Quantity">
-                                </div>
-                                <div class="col-2 text-center">
-                                    <button id="addRow" class="ml-2 btn btn-primary w-100">Add</button>
-                                </div>
-                            </div>
-                        </div>
-
-                     
-                        <div id="myTable">
-                            
-                        </div>
-
                         <hr>
                         <div class="form-row">
                             
                             <div class="col-6">
-                                <input type="number" name="price" id="priceVal" class="form-control @error('price') is-invalid @enderror" placeholder="Price">
+                                <input type="text" name="price" id="priceVal" class="form-control @error('price') is-invalid @enderror" placeholder="Price">
                             </div>
 
 
                             <div class="col-6">
-                                <input type="number" name="discount_rate" class="form-control discount-price" id="discountPrice" placeholder="Discount Price">
+                                <input type="text" name="discount_rate" class="form-control discount-price" id="discountPrice" placeholder="Discount Rate (1-100%)">
                                 <span id="disCountPriceError" class="pl-2" style="color: red;"></span>
                             </div>
                         
@@ -185,11 +148,49 @@ Add Product
                         </div>
                         <hr>
                         <div class="form-row">
-                            <div class="col-12">
-                                <input  type="number" name="quantity" id="updateQuantity"  class="form-control" placeholder="Quantity">
+                            <div class="col-3">
+                                <input class="form-check-input ml-1" id="check" type="checkbox" id="check1" value="something">
+                                <label class="ml-4">Add Variant</label>
                             </div>
-                            <span id="QuantityErrr" class="pl-2" style="color: red;"></span>
+                            <div class="col-9">
+                                <input  type="number" name="quantity" id="updateQuantity"  class="form-control" placeholder="Quantity">
+                                <span id="QuantityErrr" class="pl-2" style="color: red;"></span>
+                            </div>
                         </div>
+                      
+                        <div class="form-row variant">
+                            <div class="col-4">
+                                <select  id="sizeId" class="select-size form-control mb-1" >
+                                    <option value="0">Select Size</option>
+                                    @foreach($sizes as $size)
+                                    <option value="{{ $size->id }}">{{ $size->size_name }}</option>
+                                    @endforeach
+                                </select>
+                                <span id="sizeError" class="pl-2" style="color: red;"></span>
+                            </div>
+                            <div class="col-4">
+                                <select  id="colorId"  class="select-color form-control  mb-1" >
+                                    <option value="0">Select Color</option>
+                                    @foreach($colors as $color)
+                                    <option class="colorText" value="{{ $color->color_code }}">{{ $color->color_name }}</option>
+                                    @endforeach
+                                </select>
+                                <span id="colorError" class="pl-2" style="color: red;"></span>
+                                
+                            </div>
+                            <div class="col-2">
+                                <input type="number" id="sizeColorQty" class="form-control"  placeholder="Quantity">
+                            </div>
+                            <div class="col-2 text-center">
+                                <button id="addRow" class="ml-2 btn btn-primary w-100">Add</button>
+                            </div>
+                        </div>
+                        
+                     
+                        <div id="myTable">
+                            
+                        </div>
+
                         <hr>
                         <div class="form-row">
                             <div class="col-12">
@@ -255,14 +256,16 @@ Add Product
     @section('js')
     
     <script type="text/javascript">
+
         $(document).ready(function(){
-        $('#catId').change(function(){
-        var catId = $(this).val();
-        $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+            $('.variant').hide();
+            $('#catId').change(function(){
+                var catId = $(this).val();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
         $.ajax({
             type   : 'POST',
@@ -307,6 +310,16 @@ Add Product
                 }
             });
         
+        });
+
+        $("#check").click(function(){
+            if(this.checked){
+                $('#updateQuantity').hide();
+                $('.variant').show();
+            }else{
+               $('#updateQuantity').show();
+               $('.variant').hide();
+            }
         });
 
         
