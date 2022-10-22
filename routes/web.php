@@ -17,6 +17,7 @@ use \App\Http\Controllers\AdminPanel\GenarelSettingController;
 use \App\Http\Controllers\AdminPanel\AdminForgetPassController;
 use \App\Http\Controllers\AdminPanel\SettingController;
 use \App\Http\Controllers\AdminPanel\GatewayController;
+use \App\Http\Controllers\AdminPanel\MailSettingController;
 
 //use Image;
 
@@ -153,6 +154,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],
      // partials routes
 
     Route::get('setting/email', [SettingController::class, 'email'])->name('setting.email');
+    Route::post('setting/mail-update',[MailSettingController::class,'update'])->name('setting.mail.update');
     Route::get('setting/payment/stripe', [SettingController::class, 'stripe_payment'])->name('setting.payment.stripe');
     Route::get('setting/payment/paypal', [SettingController::class, 'paypal_payment'])->name('setting.payment.paypal');
     Route::get('setting/payment/sslcommerz', [SettingController::class, 'paypal_sslcommerz'])->name('setting.payment.sslcommerz');

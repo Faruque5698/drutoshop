@@ -23,14 +23,14 @@ class GenarelSettingController extends Controller
    		if ($request->file('fav_icon') && $request->file('logo')) {
    			$fav_file          = $request->file('fav_icon');
             $fav_file_ext      = $fav_file->getClientOriginalExtension();
-            $fav_file_name     = uniqid()."-".$fav_file_ext;
+            $fav_file_name     = uniqid().".".$fav_file_ext;
             $fav_url           = "Admin/image/genarel/";
             $fav_dbUrl         = $fav_url.$fav_file_name;
             $fav_file->move($fav_url,$fav_file_name);
 
             $logo_file          = $request->file('logo');
             $logo_file_ext      = $logo_file->getClientOriginalExtension();
-            $logo_file_name     = uniqid()."-".$logo_file_ext;
+            $logo_file_name     = uniqid().".".$logo_file_ext;
             $logo_url           = "Admin/image/genarel/";
             $logo_dbUrl         = $logo_url.$logo_file_name;
             $logo_file->move($logo_url,$logo_file_name);
@@ -54,7 +54,7 @@ class GenarelSettingController extends Controller
    			if ($request->file('fav_icon')) {
    				$fav_file          = $request->file('fav_icon');
 	            $fav_file_ext      = $fav_file->getClientOriginalExtension();
-	            $fav_file_name     = uniqid()."-".$fav_file_ext;
+	            $fav_file_name     = uniqid().".".$fav_file_ext;
 	            $fav_url           = "Admin/image/genarel/";
 	            $fav_dbUrl         = $fav_url.$fav_file_name;
 	            $fav_file->move($fav_url,$fav_file_name);
@@ -73,7 +73,7 @@ class GenarelSettingController extends Controller
 
    				$logo_file          = $request->file('logo');
 	            $logo_file_ext      = $logo_file->getClientOriginalExtension();
-	            $logo_file_name     = uniqid()."-".$logo_file_ext;
+	            $logo_file_name     = uniqid().".".$logo_file_ext;
 	            $logo_url           = "Admin/image/genarel/";
 	            $logo_dbUrl         = $logo_url.$logo_file_name;
 	            $logo_file->move($logo_url,$logo_file_name);

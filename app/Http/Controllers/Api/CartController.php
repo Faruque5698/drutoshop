@@ -11,9 +11,9 @@ class CartController extends Controller
 {
     public function add(Request $request){
         $request->validate([
-           'product_id'=>'required',
-           'product_quantity'=>'required',
-           'product_price' => 'required',
+            'product_id'=>'required',
+            'product_quantity'=>'required',
+            'product_price' => 'required',
             'product_total_price'=>'required',
             'size'=>'required',
             'color_code'=>'required'
@@ -71,7 +71,7 @@ class CartController extends Controller
     }
 
     public function view(){
-        $p = AddToCart::where('user_id',auth()->user()->id)->get();
+        $p = AddToCart::where('user_id',auth()->user()->id)->with('products')->get();
         if ($p -> isEmpty()){
             return ApiResponse::not_found();
         }else{

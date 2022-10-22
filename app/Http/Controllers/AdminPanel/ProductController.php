@@ -23,7 +23,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::orderBy('id','DESC')->get();
         return view('AdminPanel.Product.product', compact('products'));
     }
 

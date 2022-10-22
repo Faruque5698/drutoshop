@@ -89,8 +89,10 @@ class AuthController extends Controller
     }
 
     public function  edit(Request $request){
+
         $user = auth()->user();
-        $user->username = $request->username;
+        $user->name = $request->username;
+        $user->mobile_no = $request->mobile_no;
         $user->dob = $request->dob;
         $user->gender = $request->gender;
         $user->save();
