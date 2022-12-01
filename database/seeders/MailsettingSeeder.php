@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\EmailSetting;
 
 class MailsettingSeeder extends Seeder
-{s
+{
     /**
      * Run the database seeds.
      *

@@ -1,5 +1,5 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
- 
+
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -11,7 +11,7 @@
             </div>
         </div>
 
-     
+
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -112,13 +112,22 @@
                     </a>
                 </li>
 
-                 <li class="nav-item">
+                <li class="nav-item">
                     <a href="{{ route('admin.product') }}" class="nav-link">
                         <i class="nav-icon fa fa-tasks text-success"></i>
                         <p class="text-{{ (request()->is('admin/product*')) ? 'warning' : '' }}">Product list</p>
                     </a>
                 </li>
-                
+
+                <li class="nav-item">
+                    <a href="{{ route('product.flash.deal.all') }}" class="nav-link">
+                        <i class="nav-icon fa fa-tasks text-success"></i>
+                        <p class="text-{{ (request()->is('product/flash-deal/all')) ? 'warning' : '' }}">Flash Deal</p>
+                    </a>
+                </li>
+
+
+
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
