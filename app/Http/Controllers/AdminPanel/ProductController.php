@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\AdminPanel;
 
-use Str;
 use Auth;
 use Carbon\Carbon;
 use App\Models\Size;
@@ -10,14 +9,16 @@ use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\TempData;
 use App\Models\Subcategory;
+use Illuminate\Support\Str;
 use App\Models\ColorSizeQty;
 use App\Models\StockProduct;
-use App\Models\TempData;
 use Illuminate\Http\Request;
 use App\Models\GalleryProduct;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth as E;
 
 class ProductController extends Controller
 {
@@ -48,17 +49,17 @@ class ProductController extends Controller
 
     public function getSubId(Request $request)
     {
-    
+
        $category_id = Subcategory::where('category_id', $request->cat_id)->get();
        $output =   '<option value="" selected>-----Select  Subategory------</option>';
        foreach ($category_id as $subcategory) {
         echo $output = '<option  value="'.$subcategory->id.'">'.$subcategory->title.'</option>';
-       
+
        }
 
 
     }
-  
+
     public function storeColorSize(Request $request)
     {
 
@@ -126,7 +127,7 @@ class ProductController extends Controller
         foreach($temp_datas as $color){
              $colors[] =  $color->color_code;
         };
-    
+
 
         $sizes = [];
         foreach($temp_datas as $size){
@@ -136,7 +137,7 @@ class ProductController extends Controller
 
 
 
-    
+
 
 
 
@@ -154,7 +155,7 @@ class ProductController extends Controller
 
             if ($product_image) {
                $product_id = Product::insertGetId([
-                    'user_id' => Auth::user()->id,
+                    'user_id' => E::user()->id,
                     'product_name' => $request->product_name,
                     'brand_id' => $request->brand_id,
                     'category_id' => $request->category_id,
@@ -222,16 +223,16 @@ class ProductController extends Controller
                     }
 
 
-                    
+
 
                 }
 
                 if ($product_id) {
 
                        $color_sizes = TempData::all();
-                  
+
                        if (!$color_sizes) {
-                         
+
                        }else{
                             foreach($color_sizes as $color_size){
                                 $color_size_qty = new ColorSizeQty();
@@ -241,10 +242,10 @@ class ProductController extends Controller
                                 $color_size_qty->color_code = $color_size['color_code'];
                                 $color_size_qty->color_name = $color_size['color_name'];
                                 $color_size_qty->size_color_qty = $color_size['quantity'];
-                                $color_size_qty->save();   
+                                $color_size_qty->save();
                             }
                        }
-                   
+
                 }
 
 
@@ -263,9 +264,9 @@ class ProductController extends Controller
                   $stock_product->sale_qty = 0;
                   $stock_product->save();
               }
-           
 
-               
+
+
             }
 
         }
@@ -429,7 +430,7 @@ class ProductController extends Controller
                     'total_price' =>$total_price,
                     'status' => $request->status,
                     'updated_at' => Carbon::now(),
-                ]); 
+                ]);
         }
 
         return redirect()->route('admin.product')->with('message', 'Product Update Successfully');
@@ -446,7 +447,7 @@ class ProductController extends Controller
             $Gallery_photo = GalleryProduct::where('product_id', $product_id)->get();
 
             foreach($Gallery_photo as $gall){
-                
+
                  unlink(public_path('/assets/images/gallery/'.$gall->gallery));
                  $gall->delete();
             }
@@ -457,6 +458,6 @@ class ProductController extends Controller
         $product_id->delete();
 
         return response()->json(['success'=>'Deleted Successfully!!']);
-    
-    } 
+
+    }
 }

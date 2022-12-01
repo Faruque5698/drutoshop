@@ -1,7 +1,7 @@
 @extends('AdminPanel.Master')
 
 @section('title')
-    Product
+   Flash Deal Product
 @endsection
 
 
@@ -26,7 +26,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1><strong>Product List</strong></h1>
+                        <h1><strong>Flash Deal List</strong></h1>
                     </div>
 
                     @if(Session::get('message'))
@@ -51,61 +51,40 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Product List</h3>
+                                <h3 class="card-title">Flase=h Deal List</h3>
                                 {{--                            <p>total category : {{$total_category}}</p>--}}
-                                <a href="{{route('product.add')}}" class="btn btn-primary float-right"><i class="fa fa-plus"></i></a>
+
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped table-responsive">
+                                <table id="example1" class="table table-bordered table-striped">
                                     <thead>
 
                                     <tr>
                                         <th>Sl</th>
                                         <th>Product Title</th>
-                                        <th>Price</th>
-                                        <th>Seling Price</th>
-                                        <th>Feature</th>
-                                        <th>Tranding</th>
-                                        <th>Exclusive</th>
-                                        <th>Status</th>
+                                        <th>Flash Deal (100%)</th>
+                                        <th>Flash Deal Price</th>
+                                        <th>Ending Date</th>
                                         <th>Action</th>
 
                                     </tr>
                                     </thead>
                                     <tbody>
-
-
-
-
                                     @php($i=1)
 
-                                    @foreach($products as $product)
+                                    @foreach($flash_daels as $f_deal)
                                         <tr>
-                                           <input type="hidden" value="{{ $product->id }}" class="product-id" />
+                                           {{-- <input type="hidden" value="{{ $product->id }}" class="product-id" /> --}}
                                            <td>{{$i++}}</td>
-                                            <td>{{$product->product_name}}</td>
-                                            <td>{{number_format($product->price)}}</td>
-                                            <td>{{number_format($product->discount_price)}}</td>
+                                            <td>{{$f_deal->product->product_name}}</td>
+                                            <td>{{$f_deal->flash_deal}}</td>
+                                            <td>{{number_format($f_deal->flash_price)}}</td>
+                                            <td>{{$f_deal->end_date->diffForHumans()}}</td>
                                             <td>
-
-                                                <a href="{{ route('product.futurs', ["id"=>$product->id]) }}" class="btn btn-{{$product->future_product == 1 ? 'primary':'warning'}} btn-sm">{{$product->future_product == 1 ? 'On':'Off'}}</a>
-
-                                            </td>
-                                            <td>
-                                                <a href="{{ route('product.trands', ["id"=>$product->id]) }}" class="btn btn-{{$product->trand_product == 1 ? 'primary':'warning'}} btn-sm">{{$product->trand_product == 1 ? 'On':'Off'}}</a>
-
-                                            </td>
-                                            <td>
-                                                 <a href="{{ route('product.exclusive', ["id"=>$product->id]) }}" class="btn btn-{{$product->exclusive_product == 1 ? 'primary':'warning'}} btn-sm">{{$product->exclusive_product == 1 ? 'On':'Off'}}</a>
-                                            </td>
-                                            <td>{{$product->status == 'active' ? 'Published':'Unpublished'}}</td>
-                                            <td>
-                                                <a href="{{ route('product.status', ["id"=>$product->id]) }}" class="btn btn-sm btn-{{$product->status == 'active' ? 'success':'warning'}} mb-1"><i class="fa fa-{{$product->status == 'active' ? 'arrow-up':'arrow-down'}}"></i></a>
-                                                <a href="{{ route('product.edit', ["id"=>$product->id]) }}" class="btn btn-sm btn-info mb-1"><i class="fa fa-edit"></i></a>
-                                                <a href="{{ route('product.single', ["id"=>$product->id]) }}" class="btn btn-sm btn-primary mb-1"><i class="fa fa-eye"></i></a>
-                                                <a href="{{ route('product.flash.deal', ["id"=>$product->id]) }}" class="btn btn-sm btn-dark mb-1"><i class="fa fa-bolt"></i></a>
-
+                                                <a href="{{ route('product.status', ["id"=>$f_deal->id]) }}" class="btn btn-sm btn-{{$f_deal->status == 'active' ? 'success':'warning'}} mb-1"><i class="fa fa-{{$f_deal->status == 'active' ? 'arrow-up':'arrow-down'}}"></i></a>
+                                                <a href="{{ route('product.edit', ["id"=>$f_deal->id]) }}" class="btn btn-sm btn-info mb-1"><i class="fa fa-edit"></i></a>
+                                                <a href="{{ route('product.single', ["id"=>$f_deal->product_id]) }}" class="btn btn-sm btn-primary mb-1"><i class="fa fa-eye"></i></a>
                                                 <a href="" class="btn btn-sm btn-danger mb-1 delete" data-toggle="modal" data-target="#modal-product" ><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
@@ -114,18 +93,6 @@
 
                                     </tbody>
 
-                                    <tfoot>
-                                    <tr>
-                                       <th>Sl</th>
-                                        <th>Product Title</th>
-                                        <th>Price</th>
-                                         <th>Quantity</th>
-                                        <th>Feature</th>
-                                        <th>Tranding</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                             <!-- /.card-body -->

@@ -1,23 +1,29 @@
 <?php
 
+use Intervention\Image\Image;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\AdminPanel\SizeController;
 use App\Http\Controllers\AdminPanel\AdminController;
-use App\Http\Controllers\AdminPanel\HomeSectionController;
-use App\Http\Controllers\AdminPanel\BannerController;
-use App\Http\Controllers\AdminPanel\CategoryController;
-use \App\Http\Controllers\AdminPanel\SubcategoryController;
 use \App\Http\Controllers\AdminPanel\BrandController;
 use \App\Http\Controllers\AdminPanel\ColorController;
-use \App\Http\Controllers\AdminPanel\SizeController;
+use App\Http\Controllers\AdminPanel\BannerController;
+use \App\Http\Controllers\AdminPanel\GatewayController;
 use \App\Http\Controllers\AdminPanel\ProductController;
-use \App\Http\Controllers\AdminPanel\StockProductController;
-use \App\Http\Controllers\AdminPanel\OrderDetailController;
 use \App\Http\Controllers\AdminPanel\ProfileController;
+use \App\Http\Controllers\AdminPanel\SettingController;
+use App\Http\Controllers\AdminPanel\CategoryController;
+use App\Http\Controllers\AdminPanel\FlashDealController;
+use App\Http\Controllers\AdminPanel\HomeSectionController;
+use \App\Http\Controllers\AdminPanel\MailSettingController;
+use \App\Http\Controllers\AdminPanel\OrderDetailController;
+use \App\Http\Controllers\AdminPanel\SubcategoryController;
+use \App\Http\Controllers\AdminPanel\StockProductController;
 use \App\Http\Controllers\AdminPanel\GenarelSettingController;
 use \App\Http\Controllers\AdminPanel\AdminForgetPassController;
-use \App\Http\Controllers\AdminPanel\SettingController;
-use \App\Http\Controllers\AdminPanel\GatewayController;
-use \App\Http\Controllers\AdminPanel\MailSettingController;
+
+
+
 
 //use Image;
 
@@ -130,6 +136,11 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],
     Route::delete('product-delete/{id}',[ProductController::class, 'destroy'])->name('product.delete');
 
     Route::get('product/single/view/{id}', [ProductController::class, 'show'])->name('product.single');
+
+    Route::get('product/flash-deal/all',[FlashDealController::class, 'all_flash'])->name('product.flash.deal.all');
+    Route::get('product/flash-deal/{id}',[FlashDealController::class, 'index'])->name('product.flash.deal');
+    Route::post('product/flash-deal/store',[FlashDealController::class, 'store'])->name('product.flash.deal.store');
+
 
 
 
