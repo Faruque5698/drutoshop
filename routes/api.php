@@ -31,6 +31,7 @@ Route::get('category',[\App\Http\Controllers\Api\CategoryController::class,'cate
 Route::get('subcat-product/{id}',[\App\Http\Controllers\Api\CategoryController::class,'subcatProduct']);
 Route::get('brand-product/{id}',[\App\Http\Controllers\Api\CategoryController::class,'brandProduct']);
 Route::get('all-products',[\App\Http\Controllers\Api\ProductController::class,'product']);
+Route::get('just-landed',[\App\Http\Controllers\Api\ProductController::class,'justLanded']);
 
 Route::get('product/trending',[\App\Http\Controllers\Api\ProductController::class,'trending']);
 Route::get('product/popular',[\App\Http\Controllers\Api\ProductController::class,'popular']);
@@ -46,6 +47,7 @@ Route::group(["middleware" => ["auth:api"]], function(){
     Route::get("profile", [\App\Http\Controllers\Api\AuthController::class, "profile"]);
     Route::post("profile/edit", [\App\Http\Controllers\Api\AuthController::class, "edit"]);
     Route::post("profile/image/update", [\App\Http\Controllers\Api\AuthController::class, "imageUpdate"]);
+    Route::post("change-password", [\App\Http\Controllers\Api\AuthController::class, "changePassword"]);
 
     Route::post('address/save',[\App\Http\Controllers\Api\AddressController::class,'save']);
     Route::get('address/all',[\App\Http\Controllers\Api\AddressController::class,'all']);

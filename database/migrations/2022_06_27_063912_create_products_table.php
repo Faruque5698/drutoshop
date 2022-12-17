@@ -28,6 +28,7 @@ class CreateProductsTable extends Migration
             $table->float('discount_price',10,2);
             $table->text('discription');
             $table->string('image');
+            $table->json('images')->nullable();
             $table->string('slug');
             $table->string('sku');
             $table->string('credit');

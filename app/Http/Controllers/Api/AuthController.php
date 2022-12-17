@@ -92,6 +92,8 @@ class AuthController extends Controller
 
         $user = auth()->user();
         $user->name = $request->username;
+        $user->fname = $request->fname;
+        $user->lname = $request->lname;
         $user->mobile_no = $request->mobile_no;
         $user->dob = $request->dob;
         $user->gender = $request->gender;
@@ -125,13 +127,25 @@ class AuthController extends Controller
 
         return ApiResponse::success($user);
 
+    }
 
 
 
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
 
+
+        $user = auth()->user();
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return ApiResponse::success($user);
 
     }
 
 
-    
+
 }

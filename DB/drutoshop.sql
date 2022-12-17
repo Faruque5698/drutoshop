@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2022 at 07:25 AM
+-- Generation Time: Dec 17, 2022 at 06:57 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -244,7 +244,19 @@ INSERT INTO `color_size_qties` (`id`, `product_id`, `size_id`, `size_name`, `col
 (22, 18, 8, 'M', 'Ornge', '#f8960d', 100, '2022-10-22 01:06:39', '2022-10-22 01:06:39'),
 (23, 18, 9, 'L', 'Green', '#0ff01e', 50, '2022-10-22 01:06:39', '2022-10-22 01:06:39'),
 (24, 19, 3, 'S', 'Black', '#000000', 20, '2022-10-22 01:12:04', '2022-10-22 01:12:04'),
-(25, 19, 8, 'M', 'Green', '#0ff01e', 10, '2022-10-22 01:12:04', '2022-10-22 01:12:04');
+(25, 19, 8, 'M', 'Green', '#0ff01e', 10, '2022-10-22 01:12:04', '2022-10-22 01:12:04'),
+(26, 21, 3, 'S', 'White', '#fafafa', 20, '2022-12-14 01:32:38', '2022-12-14 01:32:38'),
+(27, 21, 8, 'M', 'Black', '#000000', 20, '2022-12-14 01:32:39', '2022-12-14 01:32:39'),
+(28, 1, 3, 'S', 'Black', '#000000', 20, '2022-12-15 01:23:22', '2022-12-15 01:23:22'),
+(29, 1, 8, 'M', 'Ornge', '#f8960d', 50, '2022-12-15 01:23:22', '2022-12-15 01:23:22'),
+(30, 2, 3, 'S', 'Black', '#000000', 10, '2022-12-15 01:55:08', '2022-12-15 01:55:08'),
+(31, 2, 8, 'M', 'Ornge', '#f8960d', 30, '2022-12-15 01:55:08', '2022-12-15 01:55:08'),
+(32, 3, 8, 'M', 'Black', '#000000', 50, '2022-12-15 02:39:41', '2022-12-15 02:39:41'),
+(33, 3, 9, 'L', 'Ornge', '#f8960d', 50, '2022-12-15 02:39:41', '2022-12-15 02:39:41'),
+(34, 4, 8, 'M', 'Black', '#000000', 20, '2022-12-15 02:45:31', '2022-12-15 02:45:31'),
+(35, 4, 9, 'L', 'Ornge', '#f8960d', 40, '2022-12-15 02:45:31', '2022-12-15 02:45:31'),
+(36, 5, 8, 'M', 'Black', '#000000', 100, '2022-12-15 03:00:23', '2022-12-15 03:00:23'),
+(37, 5, 10, 'XXL', 'Ornge', '#f8960d', 100, '2022-12-15 03:00:23', '2022-12-15 03:00:23');
 
 -- --------------------------------------------------------
 
@@ -348,48 +360,6 @@ INSERT INTO `flash_deals` (`id`, `product_id`, `flash_deal`, `end_date`, `flash_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gallery_products`
---
-
-CREATE TABLE `gallery_products` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image3` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `gallery_products`
---
-
-INSERT INTO `gallery_products` (`id`, `product_id`, `image`, `image1`, `image2`, `image3`, `created_at`, `updated_at`) VALUES
-(1, 1, 'assets/images/product/1661783161-.jpeg', 'assets/images/product/1661783161-.jpeg', NULL, NULL, NULL, '2022-08-29 08:26:01'),
-(2, 2, 'assets/images/product/1661783301-.jpeg', 'assets/images/product/1661783301-.jpeg', 'assets/images/product/1661783301-.jpeg', NULL, NULL, '2022-08-29 08:28:21'),
-(3, 3, 'assets/images/product/1661783387-.jpeg', 'assets/images/product/1661783387-.jpeg', 'assets/images/product/1661783387-.jpeg', NULL, NULL, '2022-08-29 08:29:47'),
-(4, 4, 'assets/images/product/1661784814-.jpeg', 'assets/images/product/1661784815-.jpeg', 'assets/images/product/1661784815-.jpeg', NULL, NULL, '2022-08-29 08:53:35'),
-(5, 5, 'assets/images/product/1661785844-.jpeg', 'assets/images/product/1661785844-.jpeg', 'assets/images/product/1661785844-.jpeg', NULL, NULL, '2022-08-29 09:10:44'),
-(6, 6, 'assets/images/product/1663305473-.jpeg', NULL, NULL, NULL, NULL, NULL),
-(7, 7, 'assets/images/product/1663305590-.jpeg', NULL, NULL, NULL, NULL, NULL),
-(8, 8, 'assets/images/product/1663306698-.jpeg', NULL, NULL, NULL, NULL, NULL),
-(9, 9, 'assets/images/product/1663306960-.jpeg', NULL, NULL, NULL, NULL, NULL),
-(10, 10, 'assets/images/product/1663307216-.jpeg', NULL, NULL, NULL, NULL, NULL),
-(11, 11, 'assets/images/product/1663307842-.jpeg', NULL, NULL, NULL, NULL, NULL),
-(12, 12, 'assets/images/product/1663309437-.jpeg', NULL, NULL, NULL, NULL, NULL),
-(13, 13, 'assets/images/product/1663324984-.jpeg', NULL, NULL, NULL, NULL, NULL),
-(14, 14, 'assets/images/product/1663327040-.jpeg', 'assets/images/product/1663327040-1.jpeg', NULL, NULL, NULL, '2022-09-16 05:17:20'),
-(15, 15, 'assets/images/product/1663327386-.jpeg', NULL, NULL, NULL, NULL, NULL),
-(16, 16, 'assets/images/product/1663327491-.jpeg', NULL, NULL, NULL, NULL, NULL),
-(17, 17, 'assets/images/product/1663488611-.jpeg', NULL, NULL, NULL, NULL, NULL),
-(18, 18, 'assets/images/product/1666422398-.jpg', NULL, NULL, NULL, NULL, NULL),
-(19, 19, 'assets/images/product/1666422724-.jpg', NULL, NULL, NULL, NULL, NULL);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `gateways`
 --
 
@@ -478,7 +448,6 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(29, '2014_10_12_000000_create_users_table', 1),
 (30, '2014_10_12_100000_create_password_resets_table', 1),
 (31, '2016_06_01_000001_create_oauth_auth_codes_table', 1),
 (32, '2016_06_01_000002_create_oauth_access_tokens_table', 1),
@@ -496,8 +465,6 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (51, '2022_07_27_091629_create_addresses_table', 7),
 (52, '2022_08_03_054431_create_favourite_products_table', 7),
 (53, '2022_08_03_073659_create_add_to_carts_table', 7),
-(99, '2022_06_27_063912_create_products_table', 8),
-(100, '2022_08_18_090234_create_gallery_products_table', 8),
 (101, '2022_08_22_043426_create_color_size_qties_table', 8),
 (102, '2022_08_22_043936_create_stock_products_table', 8),
 (103, '2022_08_29_081300_create_temp_data_table', 8),
@@ -512,7 +479,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (118, '2022_09_21_120542_create_genarel_settings_table', 15),
 (119, '2022_09_21_102851_create_pushers_table', 16),
 (120, '2022_10_22_072637_create_email_settings_table', 16),
-(122, '2022_10_26_102553_create_flash_deals_table', 17);
+(122, '2022_10_26_102553_create_flash_deals_table', 17),
+(124, '2022_06_27_063912_create_products_table', 18),
+(125, '2014_10_12_000000_create_users_table', 19);
 
 -- --------------------------------------------------------
 
@@ -555,9 +524,13 @@ CREATE TABLE `oauth_access_tokens` (
 
 INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes`, `revoked`, `created_at`, `updated_at`, `expires_at`) VALUES
 ('13b8fe652e3c7aebeabc8aa0349683fd29c2fc63665036c2990cf7756bea2ce740b1c97225921a73', 6, 7, 'authToken', '[]', 0, '2022-09-16 02:23:07', '2022-09-16 02:23:07', '2023-09-16 08:23:07'),
+('15d4882a0ec0ffb2f048ce973e78186f718bf0b5ad1e29041dba956e070568afb20fa37494efe1d3', 2, 11, 'authToken', '[]', 0, '2022-12-15 07:45:55', '2022-12-15 07:45:55', '2023-12-15 13:45:55'),
+('25958e626039a975d2548358cddc3b85a857a8bab677a2fc7decfe7879548e907d4ba07c89ebddf3', 9, 11, 'authToken', '[]', 0, '2022-12-14 00:04:59', '2022-12-14 00:04:59', '2023-12-14 06:04:59'),
 ('437d8e0aed16cbaf17a258c30f5dd7db26011c0d006bddcc817cb41bf5bf75f2362580432cea22c4', 4, 1, 'authToken', '[]', 0, '2022-08-31 00:58:14', '2022-08-31 00:58:14', '2023-08-31 06:58:14'),
+('5f33ebd3ad2d47cd910eb2b6c007babe5f9862c25847f1f8c36658e8153932cd5f462985171942b4', 2, 11, 'authToken', '[]', 0, '2022-12-15 03:19:19', '2022-12-15 03:19:19', '2023-12-15 09:19:19'),
 ('7bc76be95bdf408d6c22c51e1e84f1672bb0d18e5c4328c91b38620983c68b7876fdb1bf32c7d77f', 6, 11, 'authToken', '[]', 0, '2022-10-06 07:57:31', '2022-10-06 07:57:31', '2023-10-06 13:57:31'),
 ('9b443e0f8124431c78ca2fb75df17fed10b98ef8d661c3057cc234708b07ac7bc911e7e908662f74', 6, 7, 'authToken', '[]', 0, '2022-09-16 02:35:58', '2022-09-16 02:35:58', '2023-09-16 08:35:58'),
+('a58a5f6e3381e5d3d1ede89b26a2718d5d57fc677c4e263e58907927779392e2641fa4c5faec4a67', 2, 11, 'authToken', '[]', 0, '2022-12-15 08:36:26', '2022-12-15 08:36:26', '2023-12-15 14:36:26'),
 ('bfab6c53ee121a3f0d63a036840cc04b10c06e0d6389fe8c395965470bd28a97d04eaad71874127a', 9, 11, 'authToken', '[]', 0, '2022-10-22 00:01:35', '2022-10-22 00:01:35', '2023-10-22 06:01:35'),
 ('ca3f16f606546ff759de37dcfc50176abcd9ff2f1591ed93598e0f3abd2341335881cb992ee0924a', 6, 11, 'authToken', '[]', 0, '2022-10-06 21:33:15', '2022-10-06 21:33:15', '2023-10-07 03:33:15'),
 ('d3958287d2c4e5c1bd01ef8b85eaaa6d7243251e4c33afaa052a8a804278c193ed608b95d187162a', 4, 1, 'authToken', '[]', 0, '2022-08-31 02:48:33', '2022-08-31 02:48:33', '2023-08-31 08:48:33'),
@@ -683,7 +656,9 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `order_id`, `product_id`, `user_id`, `quantity`, `total_price`, `payment_type`, `size`, `color_code`, `isPaid`, `address`, `city`, `status`, `created_at`, `updated_at`) VALUES
-(8, 'ord-44875', 3, 9, 100, 66500.00, 'COD', 'M', '#f8960d', 0, 'Pg, Dhaka-1205', 'Dhaka', 0, '2022-10-22 00:23:15', '2022-10-22 00:23:15');
+(1, 'ord-84731', 1, 2, 5, 3500.00, 'COD', '\"S\"', '\"#000000\"', 0, 'Panchagarh', 'Rangpur', 3, '2022-12-15 03:23:56', '2022-12-15 04:29:03'),
+(2, 'ord-10967', 1, 2, 5, 3500.00, 'COD', '\"S\"', '\"#000000\"', 0, 'Panchagarh', 'Rangpur', 1, '2022-12-15 03:26:03', '2022-12-15 09:27:52'),
+(3, 'ord-10967', 2, 2, 5, 3500.00, 'COD', '\"M\"', '\"#f8960d\"', 0, 'Panchagarh', 'Rangpur', 1, '2022-12-15 03:26:03', '2022-12-15 09:27:52');
 
 -- --------------------------------------------------------
 
@@ -736,6 +711,7 @@ CREATE TABLE `products` (
   `discount_price` double(10,2) NOT NULL,
   `discription` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `images` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`images`)),
   `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `sku` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `credit` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -743,7 +719,6 @@ CREATE TABLE `products` (
   `feature_product` tinyint(4) NOT NULL DEFAULT 0,
   `trand_product` tinyint(4) NOT NULL DEFAULT 0,
   `exclusive_product` tinyint(4) NOT NULL DEFAULT 0,
-  `rate` double NOT NULL DEFAULT 0,
   `status` enum('active','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -753,26 +728,12 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `user_id`, `product_name`, `brand_id`, `category_id`, `subcategory_id`, `size`, `color`, `price`, `discount_rate`, `quantity`, `discount_price`, `discription`, `image`, `slug`, `sku`, `credit`, `total_price`, `feature_product`, `trand_product`, `exclusive_product`, `rate`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Malachi Gordon', 2, 2, 4, '[\"S\",\"M\",\"L\"]', '[\"#fafafa\",\"#000000\",\"#f8960d\"]', 675.00, 75.00, 700, 600.00, 'Culpa voluptas volup', 'assets/images/product/1661783161-.jpeg', 'malachi-gordon', 'PRO-BD-71622', '-', 420000.00, 1, 1, 1, 5, 'active', '2022-08-29 08:26:01', '2022-08-31 01:18:01'),
-(2, 1, 'Emery French', 5, 6, 13, '[\"M\",\"L\",\"XXL\"]', '[\"#000000\",\"#f8960d\",\"#0ff01e\"]', 1520.00, 15.00, 700, 1292.00, 'Error sit iste id', 'assets/images/product/1661783301-.jpeg', 'emery-french', 'PRO-BD-61989', '%', 904400.00, 1, 1, 1, 0, 'active', '2022-08-29 08:28:21', '2022-08-29 23:01:09'),
-(3, 1, 'Ciaran Lawson', 3, 5, 10, '[\"S\",\"M\"]', '[\"#000000\",\"#f8960d\"]', 700.00, 5.00, 800, 665.00, 'Dolore tempor velit', 'assets/images/product/1661783387-.jpeg', 'ciaran-lawson', 'PRO-BD-32219', '%', 532000.00, 0, 1, 1, 0, 'active', '2022-08-29 08:29:47', '2022-08-29 23:01:11'),
-(4, 1, 'Aline Lucas', 5, 2, 5, '[\"S\",\"M\",\"L\",\"XXL\"]', '[\"#fafafa\",\"#000000\",\"#f8960d\",\"#fff242\"]', 1500.00, 70.00, 500, 1430.00, 'Delectus sed odio q', 'assets/images/product/1661784814-.jpeg', 'aline-lucas', 'PRO-BD-63983', '-', 715000.00, 0, 1, 1, 0, 'active', '2022-08-29 08:53:35', '2022-08-29 23:01:13'),
-(5, 1, 'Zachary Gordon', 2, 6, 13, '[\"S\",\"M\",\"L\",\"XXL\"]', '[\"#fafafa\",\"#000000\",\"#f8960d\",\"#fff242\"]', 460.00, 50.00, 347, 230.00, 'Incididunt anim culp', 'assets/images/product/1661785844-.jpeg', 'zachary-gordon', 'PRO-BD-40174', '%', 79810.00, 0, 1, 0, 0, 'active', '2022-08-29 09:10:44', '2022-10-26 04:34:06'),
-(6, 1, 'Aladdin Hurst', 2, 5, 10, '[\"M\"]', '[\"#fafafa\"]', 496.00, 50.00, 661, 248.00, 'Ratione quaerat quia', 'assets/images/product/1663305473-.jpeg', 'aladdin-hurst', 'PRO-BD-19708', '%', 0.00, 0, 0, 0, 0, 'active', '2022-09-15 23:17:53', NULL),
-(7, 1, 'Raja Cummings', 3, 7, 15, '[]', '[]', 412.00, 50.00, 0, 206.00, 'Magna repudiandae qu', 'assets/images/product/1663305590-.jpeg', 'raja-cummings', 'PRO-BD-66563', '%', 0.00, 0, 0, 0, 0, 'active', '2022-09-15 23:19:50', NULL),
-(8, 1, 'Vladimir Black', 3, 3, 6, '[]', '[]', 804.00, 72.00, 0, 570.00, 'Voluptatem est tempo', 'assets/images/product/1663306698-.jpeg', 'vladimir-black', 'PRO-BD-76339', 'Select Discount Type', 526110.00, 0, 0, 0, 0, 'active', '2022-09-15 23:38:18', NULL),
-(9, 1, 'Ira Flowers', 4, 3, 6, '[]', '[]', 460.00, 10.00, 0, 414.00, 'Dolorum sunt totam l', 'assets/images/product/1663306960-.jpeg', 'ira-flowers', 'PRO-BD-24580', '%', 200790.00, 0, 0, 1, 0, 'active', '2022-09-15 23:42:40', '2022-09-15 23:43:44'),
-(10, 1, 'Velma Guy', 3, 1, 1, '[]', '[]', 58.00, 10.00, 0, 52.00, 'Vel sunt in voluptas', 'assets/images/product/1663307216-.jpeg', 'velma-guy', 'PRO-BD-17758', '%', 19396.00, 0, 0, 0, 0, 'active', '2022-09-15 23:46:56', NULL),
-(11, 1, 'Dakota Acosta', 2, 4, 9, '[\"S\",\"M\"]', '[\"#fafafa\",\"#f8960d\"]', 797.00, 50.00, 150, 398.00, 'Optio id labore qui', 'assets/images/product/1663307842-.jpeg', 'dakota-acosta', 'PRO-BD-39660', '%', 131738.00, 0, 0, 0, 0, 'active', '2022-09-15 23:57:22', NULL),
-(12, 1, 'Nadine Sanders', 2, 2, 4, '[\"S\",\"M\",\"L\"]', '[\"#000000\",\"#f8960d\",\"#0ff01e\"]', 254.00, 65.00, 650, 88.00, 'Esse eos pariatur L', 'assets/images/product/1663309437-.jpeg', 'nadine-sanders', 'PRO-BD-63612', '%', 57200.00, 0, 0, 0, 0, 'active', '2022-09-16 00:23:57', NULL),
-(13, 1, 'Raja Cummings', 3, 3, 6, '[\"S\",\"M\"]', '[\"#fafafa\",\"#000000\"]', 500.00, 29.00, 550, 355.00, 'oijdasjd hfjkdsfdosifhios jfoskdflksdf', 'assets/images/product/1663324984-.jpeg', 'raja-cummings', 'PRO-BD-18036', '%', 195250.00, 0, 0, 0, 0, 'active', '2022-09-16 04:43:04', NULL),
-(14, 1, 'Mark Walter', 5, 6, 13, '[]', '[]', 1000.00, 20.00, 0, 800.00, 'Tempora placeat com', 'assets/images/product/1663327040-.jpeg', 'mark-walter', 'PRO-BD-65685', '%', 657600.00, 0, 0, 0, 0, 'active', '2022-09-16 05:17:20', NULL),
-(15, 1, 'Quail Simpson', 3, 2, 4, '[]', '[]', 357.00, 50.00, 533, 178.00, 'Rem qui qui non exer', 'assets/images/product/1663327386-.jpeg', 'quail-simpson', 'PRO-BD-47240', '%', 94874.00, 0, 0, 0, 0, 'active', '2022-09-16 05:23:06', NULL),
-(16, 1, 'Matthew Riddle', 2, 1, 1, '[\"S\",\"M\"]', '[\"#fafafa\",\"#f8960d\"]', 908.00, 21.00, 847, 717.00, 'Rerum aliquam a sit', 'assets/images/product/1663327491-.jpeg', 'matthew-riddle', 'PRO-BD-92559', '%', 607299.00, 0, 0, 0, 0, 'active', '2022-09-16 05:24:51', NULL),
-(17, 1, 'Raja Cummings', 2, 2, 4, '[\"L\",\"XXL\"]', '[\"#000000\",\"#f8960d\"]', 1500.00, 15.00, 110, 1275.00, 'This is product', 'assets/images/product/1663488611-.jpeg', 'raja-cummings', 'PRO-BD-73584', '%', 140250.00, 0, 0, 0, 0, 'active', '2022-09-18 02:10:11', NULL),
-(18, 1, 'Wesley Mccarthy', 2, 4, 8, '[\"M\",\"L\"]', '[\"#f8960d\",\"#0ff01e\"]', 660.00, 10.00, 352, 594.00, 'Reprehenderit velit', 'assets/images/product/1666422398-.jpg', 'wesley-mccarthy', 'PRO-BD-23335', '%', 209088.00, 0, 0, 0, 0, 'active', '2022-10-22 01:06:38', NULL),
-(19, 1, 'Samson Decker', 2, 2, 4, '[\"S\",\"M\"]', '[\"#000000\",\"#0ff01e\"]', 500.00, 15.00, 30, 425.00, 'Esse aut enim labore', 'assets/images/product/1666422724-.jpg', 'samson-decker', 'PRO-BD-79896', '%', 12750.00, 0, 0, 0, 0, 'active', '2022-10-22 01:12:04', NULL);
+INSERT INTO `products` (`id`, `user_id`, `product_name`, `brand_id`, `category_id`, `subcategory_id`, `size`, `color`, `price`, `discount_rate`, `quantity`, `discount_price`, `discription`, `image`, `images`, `slug`, `sku`, `credit`, `total_price`, `feature_product`, `trand_product`, `exclusive_product`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Meredith Salazar', 3, 4, 8, '[\"S\",\"M\"]', '[\"#000000\",\"#f8960d\"]', 677.00, 631.00, 70, 559.00, 'Aute commodo ut iure', 'assets/images/product/1671089002-.jpg', '[\"assets\\/images\\/product\\/1671089002-.jpg\",\"assets\\/images\\/product\\/1671089002-1.jpg\",\"assets\\/images\\/product\\/1671089002-2.jpg\",\"\"]', 'meredith-salazar', 'PRO-BD-26712', 'Select Discount Type', 39130.00, 0, 0, 0, 'active', '2022-12-15 01:23:22', NULL),
+(2, 1, 'Chloe Glover', 5, 4, 8, '[\"S\",\"M\"]', '[\"#000000\",\"#f8960d\"]', 15.00, 576.00, 40, 331.00, 'Officiis omnis venia', 'assets/images/product/1671090907-.jpg', '[\"assets\\/images\\/product\\/1671090907-.jpg\",\"assets\\/images\\/product\\/1671090907-1.jpg\",\"assets\\/images\\/product\\/1671090907-2.jpg\",\"assets\\/images\\/product\\/1671090907-3.jpg\"]', 'chloe-glover', 'PRO-BD-95633', 'Select Discount Type', 13240.00, 0, 0, 0, 'active', '2022-12-15 01:55:07', NULL),
+(3, 1, 'Vernon Ward', 5, 3, 6, '[\"M\",\"L\"]', '[\"#000000\",\"#f8960d\"]', 303.00, 10.00, 500, 272.00, 'Quidem nisi totam ut', 'assets/images/product/1671093581-.jpg', '[\"assets\\/images\\/product\\/1671093581-.jpg\",\"assets\\/images\\/product\\/1671093581-1.jpg\",\"assets\\/images\\/product\\/1671093581-2.jpg\",\"assets\\/images\\/product\\/1671093581-3.jpg\"]', 'vernon-ward', 'PRO-BD-14193', '%', 136000.00, 0, 0, 0, 'active', '2022-12-15 02:39:41', NULL),
+(4, 1, 'Gary Kent', 3, 1, 1, '[\"M\",\"L\"]', '[\"#000000\",\"#f8960d\"]', 854.00, 15.00, 60, 725.00, 'Assumenda id deseru', 'assets/images/product/1671093930-.jpg', '[\"assets\\/images\\/product\\/1671093930-.jpg\",\"assets\\/images\\/product\\/1671093930-1.jpg\",\"assets\\/images\\/product\\/1671093930-2.jpg\",\"assets\\/images\\/product\\/1671093930-3.jpg\"]', 'gary-kent', 'PRO-BD-62841', '%', 43500.00, 0, 0, 0, 'active', '2022-12-15 02:45:30', NULL),
+(5, 1, 'Geraldine Ruiz', 3, 6, 13, '[\"M\",\"XXL\"]', '[\"#000000\",\"#f8960d\"]', 811.00, 567.00, 117, 864.00, 'Repudiandae dolor qu', 'assets/images/product/1671094823-.png', '[\"assets\\/images\\/product\\/1671094823-.png\",\"assets\\/images\\/product\\/1671094823-1.png\"]', 'geraldine-ruiz', 'PRO-BD-41886', 'Select Discount Type', 101088.00, 0, 0, 0, 'active', '2022-12-15 03:00:23', NULL);
 
 -- --------------------------------------------------------
 
@@ -858,9 +819,9 @@ CREATE TABLE `stock_products` (
 --
 
 INSERT INTO `stock_products` (`id`, `product_id`, `total_qty`, `last_qty`, `sale_qty`, `created_at`, `updated_at`) VALUES
-(1, 1, 700, 690, 10, '2022-08-29 08:26:02', '2022-08-31 05:21:35'),
-(2, 2, 700, 700, 0, '2022-08-29 08:28:22', '2022-08-29 08:28:22'),
-(3, 3, 800, 700, 100, '2022-08-29 08:29:47', '2022-10-22 00:23:18'),
+(1, 1, 700, 660, 40, '2022-08-29 08:26:02', '2022-12-15 03:26:03'),
+(2, 2, 700, 675, 25, '2022-08-29 08:28:22', '2022-12-15 03:26:03'),
+(3, 3, 800, 695, 105, '2022-08-29 08:29:47', '2022-12-14 00:23:48'),
 (4, 4, 500, 500, 0, '2022-08-29 08:53:35', '2022-08-29 08:53:35'),
 (5, 5, 347, 317, 30, '2022-08-29 09:10:45', '2022-10-06 21:42:48'),
 (6, 6, 661, 661, 0, '2022-09-15 23:17:53', '2022-09-15 23:17:53'),
@@ -876,7 +837,13 @@ INSERT INTO `stock_products` (`id`, `product_id`, `total_qty`, `last_qty`, `sale
 (16, 16, 847, 847, 0, '2022-09-16 05:24:51', '2022-09-16 05:24:51'),
 (17, 17, 110, 110, 0, '2022-09-18 02:10:12', '2022-09-18 02:10:12'),
 (18, 18, 352, 352, 0, '2022-10-22 01:06:39', '2022-10-22 01:06:39'),
-(19, 19, 30, 30, 0, '2022-10-22 01:12:05', '2022-10-22 01:12:05');
+(19, 19, 30, 30, 0, '2022-10-22 01:12:05', '2022-10-22 01:12:05'),
+(20, 21, 40, 40, 0, '2022-12-14 01:32:39', '2022-12-14 01:32:39'),
+(21, 1, 70, 70, 0, '2022-12-15 01:23:23', '2022-12-15 01:23:23'),
+(22, 2, 40, 40, 0, '2022-12-15 01:55:08', '2022-12-15 01:55:08'),
+(23, 3, 500, 500, 0, '2022-12-15 02:39:41', '2022-12-15 02:39:41'),
+(24, 4, 60, 60, 0, '2022-12-15 02:45:31', '2022-12-15 02:45:31'),
+(25, 5, 117, 117, 0, '2022-12-15 03:00:23', '2022-12-15 03:00:23');
 
 -- --------------------------------------------------------
 
@@ -962,13 +929,16 @@ CREATE TABLE `trxes` (
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mobile_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `dob` date DEFAULT NULL,
   `gender` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `role` tinyint(4) NOT NULL DEFAULT 0,
   `isBan` tinyint(4) NOT NULL DEFAULT 1,
   `is_delete` tinyint(4) NOT NULL DEFAULT 1,
@@ -982,15 +952,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `mobile_no`, `email_verified_at`, `password`, `image`, `dob`, `gender`, `role`, `isBan`, `is_delete`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Md Rabbi Hasan', 'admin@gmail.com', '01766053807', NULL, '$2y$10$0DlHZtXOBgmbz367Y6FUxesL3uvDx1PPsb2civuTyikAs7GJKtwDW', 'Admin/image/Profile/202209161538-admin.jpg', NULL, NULL, 1, 1, 1, 1, NULL, '2022-06-16 05:24:56', '2022-09-17 02:55:50'),
-(3, 'Rabbi Hasan', 'hasan610@gmail.com', NULL, NULL, '$2y$10$mn6NKFTnmUCLXqCckZl0DeHdjlS8XSVa2QcKvqWIF7Tjs8gH/0h.2', NULL, NULL, NULL, 1, 1, 1, 1, 'u1mN5DvbQbJyjYtriGIWQZBwyyFnXEQ4iST2aOpo9f5kfaZddNdTxbEWkn5I', '2022-06-28 11:24:30', '2022-06-28 11:24:30'),
-(4, 'testuser', 'testuser@gmail.com', NULL, NULL, '$2y$10$TORkFQYvCncdN4xZSMN0h.OaS29YzvQT67xfttGfH6YlC34X6929y', NULL, NULL, NULL, 0, 1, 1, 1, NULL, '2022-08-31 00:58:13', '2022-08-31 00:58:13'),
-(5, 'md rabbi hasan', 'rabbi@gmail.com', NULL, NULL, '$2y$10$SomAdkJk2pJltQQcHhuXj.qsK9rVtv6kJ9eaKaUfrvLUIgDWGCYb6', NULL, NULL, NULL, 0, 1, 1, 1, NULL, '2022-09-16 01:51:02', '2022-09-16 01:51:02'),
-(6, 'md rabbi hasan', 'hasan02@gmail.com', NULL, NULL, '$2y$10$od6Rr7DBvsoAjJPg2t0Gi.EEdIzUHJCKHT1e4eDayzimyCuxz/m2S', NULL, NULL, NULL, 0, 1, 1, 1, NULL, '2022-09-16 02:23:05', '2022-10-06 23:16:35'),
-(7, 'nowsad', 'nowsad@gmail.com', '01710528972', NULL, '$2y$10$njtDVSsFonlnfza7jvZ4j.3YgfdJlETacSuNIhxWOQlXsiLhlXCbC', 'Admin/image/Profile/202209170945-DSC_0000007.jpg', NULL, NULL, 1, 1, 1, 1, NULL, '2022-09-17 03:41:04', '2022-09-17 03:45:16'),
-(8, 'Remon', 'remon@gmail.com', '01710528973', NULL, '$2y$10$cPL96nqM27JZVHH78KfE5elbSO1trCtlKZMoz1.RAsWUUDY.qIMAq', 'Admin/image/Profile/202209171018-DSC_0000007.jpg', NULL, NULL, 1, 1, 1, 1, NULL, '2022-09-17 04:07:23', '2022-09-17 04:18:21'),
-(9, 'Rabbi Hasan Pro', 'rabbitest@gmail.com', '01710528910', NULL, '$2y$10$Gzdz8BZNPuz5/lteHE6n/eS3UBADa84PUGaRN02sJpk9HL.sG485i', NULL, '2022-10-19', 'male', 0, 1, 1, 1, NULL, '2022-10-21 23:59:12', '2022-10-22 04:18:39');
+INSERT INTO `users` (`id`, `name`, `fname`, `lname`, `email`, `mobile_no`, `email_verified_at`, `dob`, `gender`, `address`, `password`, `image`, `role`, `isBan`, `is_delete`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', NULL, NULL, 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, '$2y$10$0huw37OTmYJiss69lJW8tel9hPMu9uh.tCa08LVschcJMpceslVpu', NULL, 1, 1, 1, 1, NULL, '2022-12-15 08:35:04', '2022-12-15 08:35:04'),
+(2, 'hasan610', 'Rabbi', 'Hasan', 'user@gmail.com', '01710528972', NULL, NULL, 'Male', NULL, '$2y$10$wmYtrLL3zeiRqsLYzSBCtupDtVNJL3bx8k/AGTXHjgrGSQYZSrQsS', NULL, 0, 1, 1, 1, NULL, '2022-12-15 08:36:26', '2022-12-15 09:07:36');
 
 --
 -- Indexes for dumped tables
@@ -1076,13 +1040,6 @@ ALTER TABLE `favourite_products`
 --
 ALTER TABLE `flash_deals`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `gallery_products`
---
-ALTER TABLE `gallery_products`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `gallery_products_product_id_foreign` (`product_id`);
 
 --
 -- Indexes for table `gateways`
@@ -1231,6 +1188,7 @@ ALTER TABLE `trxes`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_name_unique` (`name`),
   ADD UNIQUE KEY `users_email_unique` (`email`),
   ADD UNIQUE KEY `users_mobile_no_unique` (`mobile_no`);
 
@@ -1248,7 +1206,7 @@ ALTER TABLE `addresses`
 -- AUTO_INCREMENT for table `add_to_carts`
 --
 ALTER TABLE `add_to_carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `admin_reset_passes`
@@ -1284,7 +1242,7 @@ ALTER TABLE `colors`
 -- AUTO_INCREMENT for table `color_size_qties`
 --
 ALTER TABLE `color_size_qties`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `deposits`
@@ -1317,12 +1275,6 @@ ALTER TABLE `flash_deals`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `gallery_products`
---
-ALTER TABLE `gallery_products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
---
 -- AUTO_INCREMENT for table `gateways`
 --
 ALTER TABLE `gateways`
@@ -1344,7 +1296,7 @@ ALTER TABLE `homes`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
 -- AUTO_INCREMENT for table `oauth_clients`
@@ -1362,7 +1314,7 @@ ALTER TABLE `oauth_personal_access_clients`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -1374,7 +1326,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `pushers`
@@ -1398,7 +1350,7 @@ ALTER TABLE `sizes`
 -- AUTO_INCREMENT for table `stock_products`
 --
 ALTER TABLE `stock_products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `subcategories`
@@ -1422,7 +1374,7 @@ ALTER TABLE `trxes`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -1439,12 +1391,6 @@ ALTER TABLE `addresses`
 --
 ALTER TABLE `color_size_qties`
   ADD CONSTRAINT `color_size_qties_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `gallery_products`
---
-ALTER TABLE `gallery_products`
-  ADD CONSTRAINT `gallery_products_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `orders`

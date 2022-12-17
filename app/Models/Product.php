@@ -19,7 +19,8 @@ class Product extends Model
     use HasFactory;
 
 
-    protected $fillable = [];
+    protected $guarded = ["id"];
+
 
     public function productToBrand(){
         return $this->belongsTo(Brand::class, 'brand_id', 'id');
@@ -30,7 +31,7 @@ class Product extends Model
     public function productToSubcategory(){
         return $this->belongsTo(Subcategory::class, 'subcategory_id', 'id');
     }
-    
+
 
     public function size_color_qty_product(){
         return $this->hasMany(ColorSizeQty::class);
@@ -51,5 +52,6 @@ class Product extends Model
     protected $casts = [
         'size' => 'array',
         'color' => 'array',
+        'images' => 'array'
     ];
 }
