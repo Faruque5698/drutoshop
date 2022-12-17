@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\AdminPanel;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Order;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class OrderDetailController extends Controller
 {
@@ -15,10 +16,15 @@ class OrderDetailController extends Controller
 
 
     	// fetch data order model
-    	$orders = Order::with('order_to_product')->orderBy('id', 'DESC')->get();
 
-    	//return $orders;
-    	// return view 
+        // $orders = DB::table('orders')
+        //         ->select('order_id', DB::raw('max(value)'))
+        //         ->groupBy('attr_group_id')
+        //         ->get();
+    	$orders = Order::with('order_to_product')->orderBy('id','DESC')->get()->groupBy('order_id');
+
+    	// return $orders;
+    	// // return view 
     	return view('AdminPanel.Order.order-list', [
     		"orders" => $orders
     	]);
@@ -85,20 +91,20 @@ class OrderDetailController extends Controller
 
     //order status  confirm = 1
 
-    public function approve($id){
-    	$order = Order::find($id);
+    public function approve($order_id){
+    	$orders = Order::where("order_id",$order_id)->get();
 
-    	if ($order->status == 0) {
-    		Order::where('id',$order->id)->update([
-    			'status' => 1
-    		]);
-    		return back()->with('message', 'Order Approve Successfully!');
-    	}else{
-    		Order::where('id',$order->id)->update([
-    			'status' => 0
-    		]);
-    		return back()->with('message', 'This order has pandening!');
-    	}
+        // return $orders;
+        foreach($orders as $order){
+            if ($order->status == 0) {
+            
+                    Order::where('id',$order->id)->update([
+                        'status' => 1
+                    ]);
+            }
+        }
+
+        return back()->with('message', 'Order Approve Successfully!');
 
 
     }
@@ -106,33 +112,38 @@ class OrderDetailController extends Controller
 
       //order status success = 2
 
-    public function success($id){
-    	$order = Order::find($id);
+    public function success($order_id){
+    	$orders = Order::where("order_id",$order_id)->get();
 
-    	if ($order->status == 1) {
-    		Order::where('id',$order->id)->update([
-    			'status' => 2
-    		]);
-    		return back()->with('message', 'This Order complete Successfully!');
-    	}else{
-    		Order::where('id',$order->id)->update([
-    			'status' => 1
-    		]);
-    		return back()->with('message', 'This order has Approve!');
-    	}
+
+        foreach($orders as $order){
+            if ($order->status == 1) {
+            
+                    Order::where('id',$order->id)->update([
+                        'status' => 2
+                    ]);
+            }
+        }
+
+        return back()->with('message', 'Order Delivery Successfully!');
 
 
     }
 
      //order status  cancel = 3
 
-    public function cancel($id){
-    	$order = Order::find($id);
+    public function cancel($order_id){
+    	$orders = Order::where("order_id",$order_id)->get();
 
-		Order::where('id',$order->id)->update([
-			'status' => 3
-		]);
-   		return back()->with('message', 'This Order complete Successfully!');
+		foreach($orders as $order){
+            if ($order->status == 0) {
+            
+                    Order::where('id',$order->id)->update([
+                        'status' => 3
+                    ]);
+            }
+        }
+   		return back()->with('message', 'This Order cancle Successfully!');
 
     }
 }

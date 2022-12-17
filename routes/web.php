@@ -152,9 +152,9 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],
     Route::get('order/confirm-order-list', [OrderDetailController::class, 'order_confirm'])->name('confirm.order-list');
     Route::get('order/success-order-list', [OrderDetailController::class, 'order_success'])->name('success.order-list');
     Route::get('order/pending-order-list', [OrderDetailController::class, 'order_panding'])->name('panding.order-list');
-    Route::get('order/approve/{id}', [OrderDetailController::class, 'approve'])->name('order.approve');
-    Route::get('order/success/{id}', [OrderDetailController::class, 'success'])->name('order.success');
-    Route::get('order/cancel/{id}', [OrderDetailController::class, 'cancel'])->name('order.cancel');
+    Route::get('order/approve/{order_id}', [OrderDetailController::class, 'approve'])->name('order.approve');
+    Route::get('order/success/{order_id}', [OrderDetailController::class, 'success'])->name('order.success');
+    Route::get('order/cancel/{order_id}', [OrderDetailController::class, 'cancel'])->name('order.cancel');
 
 
 

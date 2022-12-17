@@ -25,6 +25,8 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::orderBy('id','DESC')->get();
+
+        // return $products;
         return view('AdminPanel.Product.product', compact('products'));
     }
 
@@ -146,6 +148,7 @@ class ProductController extends Controller
         $total_price = $request->quantity * $request->discount_price;
 
         if ($request->hasFile('image')) {
+            $galleryImages = [];
             $product_image = $request->file('image');
             $ext = $product_image->getClientOriginalExtension();
             $imageName = time().'-'.'.'.$ext;
@@ -153,9 +156,76 @@ class ProductController extends Controller
             $imageUrl = $directory.$imageName;
             $product_image -> move($directory,$imageName);
 
+            $galleryImages[]  = $imageUrl;
+
+           
+            if ($request->hasFile('image1')) {
+                $product_image = $request->file('image1');
+                $ext = $product_image->getClientOriginalExtension();
+                $imageName1 = time().'-1'.'.'.$ext;
+                $directory = 'assets/images/product/';
+                $imageUrl1 = $directory.$imageName1;
+                $product_image ->move($directory,$imageName1);
+
+
+            //    GalleryProduct::where('id', $gallery)->update([
+            //         'image1' => $imageUrl1,
+            //     ]);
+
+            $galleryImages[]  = $imageUrl1;
+            }
+            if ($request->hasFile('image2')) {
+                $product_image = $request->file('image2');
+                $ext = $product_image->getClientOriginalExtension();
+                $imageName2 = time().'-2'.'.'.$ext;
+                $directory = 'assets/images/product/';
+                $imageUrl2 = $directory.$imageName2;
+                $product_image ->move($directory,$imageName2);
+
+                // GalleryProduct::where('id', $gallery)->update([
+                //     'image2' => $imageUrl2,
+                // ]);
+
+                $galleryImages[]  = $imageUrl2;
+
+            }
+            if ($request->hasFile('image3')) {
+                $product_image = $request->file('image3');
+                $ext = $product_image->getClientOriginalExtension();
+                $imageName3 = time().'-3'.'.'.$ext;
+                $directory = 'assets/images/product/';
+                $imageUrl3 = $directory.$imageName3;
+                $product_image ->move($directory,$imageName3);
+
+                //  GalleryProduct::where('id', $gallery)->update([
+                //     'image3' => $imageUrl3,
+                // ]
+
+                $galleryImages[]  = $imageUrl3;
+
+            }
+
+
+            
+
+            // return $galleryImages;
+
+           
+           
+           
+           
+           
+            
+            
+
+
+
+
+
+
             if ($product_image) {
                $product_id = Product::insertGetId([
-                    'user_id' => E::user()->id,
+                    'user_id' => auth()->user()->id,
                     'product_name' => $request->product_name,
                     'brand_id' => $request->brand_id,
                     'category_id' => $request->category_id,
@@ -168,6 +238,7 @@ class ProductController extends Controller
                     'discount_price' => $request->discount_price,
                     'discription' => $request->discription,
                     'image' => $imageUrl,
+                    'images' => json_encode($galleryImages),
                     'slug' => $slug_name,
                     'sku' => $sku,
                     'credit'=> $request->discount_type,
@@ -175,57 +246,6 @@ class ProductController extends Controller
                     'status' => $request->status,
                     'created_at' => Carbon::now(),
                 ]);
-
-                if($product_id){
-
-                    $gallery = GalleryProduct::insertGetId([
-                            'product_id' => $product_id,
-                            'image' => $imageUrl,
-                    ]);
-
-                    if ($request->hasFile('image1')) {
-                        $product_image = $request->file('image1');
-                        $ext = $product_image->getClientOriginalExtension();
-                        $imageName1 = time().'-1'.'.'.$ext;
-                        $directory = 'assets/images/product/';
-                        $imageUrl1 = $directory.$imageName1;
-                        $product_image ->move($directory,$imageName1);
-
-
-                       GalleryProduct::where('id', $gallery)->update([
-                            'image1' => $imageUrl1,
-                        ]);
-                    }
-                    if ($request->hasFile('image2')) {
-                        $product_image = $request->file('image2');
-                        $ext = $product_image->getClientOriginalExtension();
-                        $imageName2 = time().'-2'.'.'.$ext;
-                        $directory = 'assets/images/product/';
-                        $imageUrl2 = $directory.$imageName2;
-                        $product_image ->move($directory,$imageName2);
-
-                        GalleryProduct::where('id', $gallery)->update([
-                            'image2' => $imageUrl2,
-                        ]);
-
-                    }
-                    if ($request->hasFile('image3')) {
-                        $product_image = $request->file('image3');
-                        $ext = $product_image->getClientOriginalExtension();
-                        $imageName3 = time().'-3'.'.'.$ext;
-                        $directory = 'assets/images/product/';
-                        $imageUrl3 = $directory.$imageName3;
-                        $product_image ->move($directory,$imageName3);
-
-                         GalleryProduct::where('id', $gallery)->update([
-                            'image3' => $imageUrl3,
-                        ]);
-                    }
-
-
-
-
-                }
 
                 if ($product_id) {
 
