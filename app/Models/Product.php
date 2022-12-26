@@ -52,6 +52,7 @@ class Product extends Model
     protected $casts = [
         'size' => 'array',
         'color' => 'array',
-        'images' => 'array'
+        'images' => 'array',
+        'rate' => 'double',
     ];
 }

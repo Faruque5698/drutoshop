@@ -69,56 +69,86 @@ class OrderController extends Controller
 
 
     public function order_all(Request $request){
-        $orders = Order::with('product')->where('user_id','=',auth()->user()->id)->get()->groupBy('order_id');
+        $orders = Order::with('product')->where('user_id','=',auth()->user()->id)->get();
+        $order_id = [];
+        foreach ($orders as $order){
+            $order_id[] = $order->order_id;
+        }
+        $orders_details = ['order_id'=>$order_id,'orders'=>$orders];
         if ($orders->isEmpty()){
             return ApiResponse::not_found();
         }else{
-            return ApiResponse::success($orders);
+            return ApiResponse::success($orders_details);
 
         }
     }
 
     public function history(){
         $user_id = auth()->user()->id;
-        $history = Order::with('order_to_product')->where('user_id','=',$user_id)->get()->groupBy('order_id');
+        $history = Order::with('order_to_product')->where('user_id','=',$user_id)->get();
+        $order_id = [];
+        foreach ($history as $order){
+            $order_id[] = $order->order_id;
+        }
+        $orders_details = ['order_id'=>$order_id,'history'=>$history];
 //        if ($history -> isEmpty()){
 //            return ApiResponse::not_found();
 //        }
-        return ApiResponse::success($history);
+        return ApiResponse::success($orders_details);
     }
 
     public function pending(){
         $user_id = auth()->user()->id;
-        $history = Order::with('order_to_product')->where('user_id','=',$user_id)->where('status','=',0)->get()->groupBy('order_id');
+        $history = Order::with('order_to_product')->where('user_id','=',$user_id)->where('status','=',0)->get();
+        $order_id = [];
+        foreach ($history as $order){
+            $order_id[] = $order->order_id;
+        }
+        $orders_details = ['order_id'=>$order_id,'history'=>$history];
 //        if ($history -> isEmpty()){
 //            return ApiResponse::not_found();
 //        }
-        return ApiResponse::success($history);
+        return ApiResponse::success($orders_details);
     }
 
     public function confirm(){
         $user_id = auth()->user()->id;
-        $history = Order::with('order_to_product')->where('user_id','=',$user_id)->where('status','=',1)->get()->groupBy('order_id');
+        $history = Order::with('order_to_product')->where('user_id','=',$user_id)->where('status','=',1)->get();
+        $order_id = [];
+        foreach ($history as $order){
+            $order_id[] = $order->order_id;
+        }
+        $orders_details = ['order_id'=>$order_id,'history'=>$history];
 //        if ($history -> isEmpty()){
 //            return ApiResponse::not_found();
 //        }
-        return ApiResponse::success($history);
+        return ApiResponse::success($orders_details);
     }
     public function cancel(){
         $user_id = auth()->user()->id;
-        $history = Order::with('order_to_product')->where('user_id','=',$user_id)->where('status','=',3)->get()->groupBy('order_id');
+        $history = Order::with('order_to_product')->where('user_id','=',$user_id)->where('status','=',3)->get();
+        $order_id = [];
+        foreach ($history as $order){
+            $order_id[] = $order->order_id;
+        }
+        $orders_details = ['order_id'=>$order_id,'history'=>$history];
 //        if ($history -> isEmpty()){
 //            return ApiResponse::not_found();
 //        }
-        return ApiResponse::success($history);
+        return ApiResponse::success($orders_details);
     }
     public function success(){
         $user_id = auth()->user()->id;
-        $history = Order::with('order_to_product')->where('user_id','=',$user_id)->where('status','=',2)->get()->groupBy('order_id');
+        $history = Order::with('order_to_product')->where('user_id','=',$user_id)->where('status','=',2)->get();
+        $order_id = [];
+        foreach ($history as $order){
+            $order_id[] = $order->order_id;
+        }
+        $orders_details = ['order_id'=>$order_id,'history'=>$history];
 //        if ($history -> isEmpty()){
 //            return ApiResponse::not_found();
 //        }
-        return ApiResponse::success($history);
+        return ApiResponse::success($orders_details);
     }
 
 

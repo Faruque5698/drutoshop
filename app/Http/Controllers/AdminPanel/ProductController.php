@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\AdminPanel;
 
+use App\Models\ColorsPerSize;
 use Auth;
 use Carbon\Carbon;
 use App\Models\Size;
@@ -106,37 +107,21 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+//        return $request;
 
-        $this->validate($request, [
-            'product_name' => 'required',
-            'discount_type'=>'required',
-            'price' => 'required',
-            'discount_price' => 'required',
-            'discription' => 'required',
-            'image' => 'required',
-            'image' => 'mimes:jpeg,jpg,png',
-            'image1' => 'mimes:jpeg,jpg,png',
-            'image2' => 'mimes:jpeg,jpg,png',
-            'image3' => 'mimes:jpeg,jpg,png',
-            'status' => 'required|in:active,inactive'
-        ]);
-
-
-
-        $temp_datas = TempData::all();
-        $total = TempData::sum('quantity');
-        $colors = [];
-        foreach($temp_datas as $color){
-             $colors[] =  $color->color_code;
-        };
-
-
-        $sizes = [];
-        foreach($temp_datas as $size){
-          $sizes[] = $size->size_name;
-        };
-
-
+//        $this->validate($request, [
+//            'product_name' => 'required',
+//            'discount_type'=>'required',
+//            'price' => 'required',
+//            'discount_price' => 'required',
+//            'discription' => 'required',
+//            'image' => 'required',
+//            'image' => 'mimes:jpeg,jpg,png',
+//            'image1' => 'mimes:jpeg,jpg,png',
+//            'image2' => 'mimes:jpeg,jpg,png',
+//            'image3' => 'mimes:jpeg,jpg,png',
+//            'status' => 'required|in:active,inactive'
+//        ]);
 
 
 
@@ -158,7 +143,7 @@ class ProductController extends Controller
 
             $galleryImages[]  = $imageUrl;
 
-           
+
             if ($request->hasFile('image1')) {
                 $product_image = $request->file('image1');
                 $ext = $product_image->getClientOriginalExtension();
@@ -206,17 +191,17 @@ class ProductController extends Controller
             }
 
 
-            
+
 
             // return $galleryImages;
 
-           
-           
-           
-           
-           
-            
-            
+
+
+
+
+
+
+
 
 
 
@@ -230,8 +215,8 @@ class ProductController extends Controller
                     'brand_id' => $request->brand_id,
                     'category_id' => $request->category_id,
                     'subcategory_id' => $request->subcategory_id,
-                    'size' => json_encode($sizes),
-                    'color' => json_encode($colors),
+//                    'size' => json_encode($sizes),
+//                    'color' => json_encode($colors),
                     'discount_rate' => $request->discount_rate,
                     'price' => $request->price,
                     'quantity' => $request->quantity,
@@ -267,7 +252,7 @@ class ProductController extends Controller
                        }
 
                 }
-
+                $total = TempData::sum('quantity');
 
               if (!$color_sizes) {
                   $stock_product = new StockProduct();
@@ -290,6 +275,59 @@ class ProductController extends Controller
             }
 
         }
+
+        $temp_datas = TempData::all();
+
+//        return $temp_datas;
+
+
+
+        foreach($temp_datas as $color){
+//            $colors = [];
+//            if ($colorspersize->size_name == $color->size)
+            $colorspersize = ColorsPerSize::where('product_id',$product_id)->where('size',$color->size_name)->first();
+            if ($colorspersize){
+                $colors[] = $color->color_name;
+               if ($colorspersize->size == $color->size_name){
+                   $colors = array();
+
+
+                   $colorspersize->color_code = json_encode($colors);
+                   $colorspersize->save();
+
+               }else{
+                   $colorspersize->color_code = json_encode($colors);
+                   $colorspersize->save();
+//                $colors = array();
+                   $color->delete();
+               }
+
+//             $color_array = array($colorspersize->color_code, $color->color_code);
+
+
+            }
+            else{
+                $colors2[] = $color->color_name;
+                $colorspersize = new ColorsPerSize();
+//                $color_array[] = array($color->color_code);
+                $colorspersize->product_id = $product_id;
+                $colorspersize->size_id = $color->size_id;
+                $colorspersize->size = $color->size_name;
+                $colorspersize->color_code = json_encode($colors2);
+                $colorspersize->save();
+                $colors2= array();
+                $color->delete();
+
+
+            }
+//             $colors[] =  $color->color_code;
+        };
+
+
+//        $sizes = [];
+//        foreach($temp_datas as $size){
+//            $sizes[] = $size->size_name;
+//        };
 
         TempData::truncate();
 
