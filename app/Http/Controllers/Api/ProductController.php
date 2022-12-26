@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function product(){
-        $product = Product::with('productToCategory','productToSubcategory','productToBrand')->where('status','=','active')->get();
+        $product = Product::with('productToCategory','productToSubcategory','productToBrand','size_color_qty_product')->where('status','=','active')->get();
         return ApiResponse::success($product);
     }
 

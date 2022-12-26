@@ -71,7 +71,7 @@
                                             </div>
 
                                           @endforeach
-                                       </td> 
+                                       </td>
                                    </tr>
                                    <tr>
                                        <th>Price</th>
@@ -108,12 +108,13 @@
                                    <tr>
                                        <th>Gallery Image</th>
                                        <td>
-                            
-                                            <span><img src="{{asset($single_product->gallery_product->image)}}" alt="{{ $single_product->product_name }}" width="100px" height="100px"></span>
-                                            <span>@if(isset($single_product->gallery_product->image1))<img src="{{ asset($single_product->gallery_product->image1) }} " alt="{{$single_product->product_name}}" width="100px" height="100px">@endif</span>
-                                            <span>@if(isset($single_product->gallery_product->image2))<img src="{{ asset($single_product->gallery_product->image2)}}" alt="{{$single_product->product_name}}" width="100px" height="100px"> @endif</span>
-                                            <span>@if(isset($single_product->gallery_product->image3)) <img src="{{ asset($single_product->gallery_product->image3)}}" alt="{{$single_product->product_name}}" width="100px" height="100px"> @endif</span>
-                                    
+                                            @forelse($single_product->images as $galley)
+                                                <span><img src="{{asset($galley)}}" alt="{{ $single_product->product_name }}" width="100px" height="100px"></span>
+                                            @empty
+
+                                            @endforelse
+
+
                                        </td>
                                    </tr>
                                    <tr>

@@ -107,28 +107,36 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-        $this->validate($request, [
-            'product_name' => 'required',
-            'discount_type'=>'required',
-            'price' => 'required',
-            'discount_price' => 'required',
-            'discription' => 'required',
-            'image' => 'required',
-            'image' => 'mimes:jpeg,jpg,png',
-            'image1' => 'mimes:jpeg,jpg,png',
-            'image2' => 'mimes:jpeg,jpg,png',
-            'image3' => 'mimes:jpeg,jpg,png',
-            'status' => 'required|in:active,inactive'
-        ]);
+        // $this->validate($request, [
+        //     'product_name' => 'required',
+        //     'discount_type'=>'required',
+        //     'price' => 'required',
+        //     'discount_price' => 'required',
+        //     'discription' => 'required',
+        //     'image' => 'required',
+        //     'image' => 'mimes:jpeg,jpg,png',
+        //     'image1' => 'mimes:jpeg,jpg,png',
+        //     'image2' => 'mimes:jpeg,jpg,png',
+        //     'image3' => 'mimes:jpeg,jpg,png',
+        //     'status' => 'required|in:active,inactive'
+        // ]);
 
 
 
         $temp_datas = TempData::all();
+
+
+        // return $temp_datas;
+
+
+
         $total = TempData::sum('quantity');
         $colors = [];
         foreach($temp_datas as $color){
              $colors[] =  $color->color_code;
         };
+
+
 
 
         $sizes = [];
@@ -138,9 +146,7 @@ class ProductController extends Controller
 
 
 
-
-
-
+        return $sizes;
 
 
         $slug_name =  Str::slug(Str::lower($request->product_name));
@@ -158,7 +164,7 @@ class ProductController extends Controller
 
             $galleryImages[]  = $imageUrl;
 
-           
+
             if ($request->hasFile('image1')) {
                 $product_image = $request->file('image1');
                 $ext = $product_image->getClientOriginalExtension();
@@ -205,22 +211,7 @@ class ProductController extends Controller
 
             }
 
-
-            
-
             // return $galleryImages;
-
-           
-           
-           
-           
-           
-            
-            
-
-
-
-
 
 
             if ($product_image) {
@@ -302,7 +293,7 @@ class ProductController extends Controller
     public function show($id)
     {
 
-        $single_product = Product::with('size_color_qty_product','gallery_product')->find($id);
+        $single_product = Product::with('size_color_qty_product')->find($id);
 
         //return $single_product;
         return view('AdminPanel.Product.single_view_product', compact('single_product'));

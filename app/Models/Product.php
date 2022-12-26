@@ -40,9 +40,7 @@ class Product extends Model
     public function favouriteProduct(){
         return $this->hasMany(FavouriteProduct::class);
     }
-    public function gallery_product(){
-        return $this->hasOne(GalleryProduct::class);
-    }
+
     public function product_stock(){
         return $this->hasOne(StockProduct::class);
     }
