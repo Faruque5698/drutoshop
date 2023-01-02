@@ -10,13 +10,13 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function product(){
-        $product = Product::with('productToCategory','productToSubcategory','productToBrand','size_color_qty_product')->where('status','=','active')->get();
+        $product = Product::with('productToCategory','productToSubcategory','productToBrand','color_per_size','rating')->where('status','=','active')->get();
         return ApiResponse::success($product);
     }
 
     public function pro_details($id)
     {
-        $product = Product::with('productToCategory', 'productToSubcategory', 'productToBrand')->find($id);
+        $product = Product::with('productToCategory', 'productToSubcategory', 'productToBrand','color_per_size','rating')->find($id);
 
             return ApiResponse::success($product);
 
@@ -25,7 +25,7 @@ class ProductController extends Controller
 
     public function justLanded()
     {
-        $product = Product::with('productToCategory','productToSubcategory','productToBrand')->where('trand_product','=',1)->get();
+        $product = Product::with('productToCategory','productToSubcategory','productToBrand','rating')->where('trand_product','=',1)->get();
         if ($product->isEmpty()){
             $data = [];
             return ApiResponse::success($data);
@@ -36,7 +36,7 @@ class ProductController extends Controller
     }
 
     public function trending(){
-        $product = Product::with('productToCategory','productToSubcategory','productToBrand')->where('trand_product','=',1)->get();
+        $product = Product::with('productToCategory','productToSubcategory','productToBrand','rating')->where('trand_product','=',1)->get();
         if ($product->isEmpty()){
             $data = [];
             return ApiResponse::success($data);
@@ -48,12 +48,8 @@ class ProductController extends Controller
     }
 
     public function popular(){
-        $product = Product::with('productToCategory','productToSubcategory','productToBrand')->where('feature_product','=',1)->get();
-//        return response()->json([
-//
-//        ]);
 
-
+        $product = Product::with('productToCategory','productToSubcategory','productToBrand','color_per_size','rating')->where('feature_product','=',1)->get();
         if ($product->isEmpty()){
             $data = [];
             return ApiResponse::success($data);
@@ -63,10 +59,8 @@ class ProductController extends Controller
         }
     }
     public function exclusive(){
-        $product = Product::with('productToCategory','productToSubcategory','productToBrand')->where('exclusive_product','=',1)->get();
-//        return response()->json([
-//
-//        ]);
+        $product = Product::with('productToCategory','productToSubcategory','productToBrand','color_per_size','rating')->where('exclusive_product','=',1)->get();
+
 
 
 

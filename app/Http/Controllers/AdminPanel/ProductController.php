@@ -17,6 +17,7 @@ use App\Models\StockProduct;
 use Illuminate\Http\Request;
 use App\Models\GalleryProduct;
 use App\Http\Controllers\Controller;
+use App\Models\ColorPerSize;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth as E;
 
@@ -24,9 +25,9 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::orderBy('id','DESC')->get();
+        $products = Product::with('color_per_size')->orderBy('id','DESC')->get();
 
-        // return $products;
+        //return $products;
         return view('AdminPanel.Product.product', compact('products'));
     }
 
@@ -83,12 +84,48 @@ class ProductController extends Controller
 
 
         foreach($datas as $data){
-            echo $row = "<div class='form-row mb-1 mt-1'><div class='col-4'><input type='text' value='".$data->size_name."' class='form-control' disabled></div><div class='col-4'><input type='text' value='".$data->color_name."' class='form-control' disabled></div><div class='col-2'><input type='number' id='subQunatity' value='".$data->quantity."' class='form-control' disabled></div><div class='col-2 text-center'><button id='remove' class='ml-2 btn btn-danger w-100'>remove</button></div></div>";
+            echo $row = "<div class='form-row mb-1 mt-1'><div class='col-4'><input type='text' value='".$data->size_name."' class='form-control' disabled></div><div class='col-4'><input type='text' value='".$data->color_name."' class='form-control' disabled></div><div class='col-2'><input type='number' id='subQunatity' value='".$data->quantity."' class='form-control' disabled></div><div class='col-2 text-center'><button id='remove' value='".$data->id."' class='ml-2 btn btn-danger w-100'>remove</button></div></div>";
         }
 
 
 
 
+
+    }
+
+    public function colorPerSize()
+    {
+        $datas = TempData::get();
+        $row = "<div class='form-row mb-1 mt-1'><div class='col-4'><input type='text' value='' class='form-control' disabled></div><div class='col-4'><input type='text' value='' class='form-control' disabled></div><div class='col-2'><input type='number' value='' class='form-control' disabled></div><div class='col-2 text-center'><button id='remove' class='ml-2 btn btn-danger w-100'>remove</button></div></div>";
+
+
+        foreach($datas as $data){
+            echo $row = "<div class='form-row mb-1 mt-1'><div class='col-4'><input type='text' value='".$data->size_name."' class='form-control' disabled></div><div class='col-4'><input type='text' value='".$data->color_name."' class='form-control' disabled></div><div class='col-2'><input type='number' id='subQunatity' value='".$data->quantity."' class='form-control' disabled></div><div class='col-2 text-center'><button id='remove' value='".$data->id."' class='ml-2 btn btn-danger w-100'>remove</button></div></div>";
+        }
+    }
+
+    public function deleteColorSize($id)
+    {
+
+        $tem_data = TempData::find($id);
+
+        $tem_data->delete();
+
+
+
+    }
+
+    public function varientDelete()
+    {
+        Tempdata::truncate();
+
+        $datas = TempData::get();
+        $row = "<div class='form-row mb-1 mt-1'><div class='col-4'><input type='text' value='' class='form-control' disabled></div><div class='col-4'><input type='text' value='' class='form-control' disabled></div><div class='col-2'><input type='number' value='' class='form-control' disabled></div><div class='col-2 text-center'><button id='remove' class='ml-2 btn btn-danger w-100'>remove</button></div></div>";
+
+
+        foreach($datas as $data){
+            echo $row = "<div class='form-row mb-1 mt-1'><div class='col-4'><input type='text' value='".$data->size_name."' class='form-control' disabled></div><div class='col-4'><input type='text' value='".$data->color_name."' class='form-control' disabled></div><div class='col-2'><input type='number' id='subQunatity' value='".$data->quantity."' class='form-control' disabled></div><div class='col-2 text-center'><button id='remove' value='".$data->id."' class='ml-2 btn btn-danger w-100'>remove</button></div></div>";
+        }
 
     }
 
@@ -123,7 +160,7 @@ class ProductController extends Controller
 
 
 
-        $temp_datas = TempData::all();
+
 
 
         // return $temp_datas;
@@ -131,29 +168,28 @@ class ProductController extends Controller
 
 
         $total = TempData::sum('quantity');
-        $colors = [];
-        foreach($temp_datas as $color){
-             $colors[] =  $color->color_code;
-        };
+        // $colors = [];
+        // foreach($temp_datas as $color){
+        //      $colors[] =  $color->color_code;
+        // };
 
 
 
 
-        $sizes = [];
-        foreach($temp_datas as $size){
-          $sizes[] = $size->size_name;
-        };
+        // $sizes = [];
 
+        // foreach($temp_datas as $size){
+        //   $sizes[] = $size->size_name;
+        // };
 
-
-        return $sizes;
+        // return $sizes;
 
 
         $slug_name =  Str::slug(Str::lower($request->product_name));
         $sku = "PRO"."-"."BD"."-".rand(11111,99999);
         $total_price = $request->quantity * $request->discount_price;
 
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('image')){
             $galleryImages = [];
             $product_image = $request->file('image');
             $ext = $product_image->getClientOriginalExtension();
@@ -221,8 +257,6 @@ class ProductController extends Controller
                     'brand_id' => $request->brand_id,
                     'category_id' => $request->category_id,
                     'subcategory_id' => $request->subcategory_id,
-                    'size' => json_encode($sizes),
-                    'color' => json_encode($colors),
                     'discount_rate' => $request->discount_rate,
                     'price' => $request->price,
                     'quantity' => $request->quantity,
@@ -279,6 +313,81 @@ class ProductController extends Controller
 
 
             }
+
+        }
+
+        $temp_datas = TempData::all();
+
+        $s = [];
+        $m = [];
+        $l = [];
+        $xl = [];
+        $xxl = [];
+
+        foreach($temp_datas as $data){
+            if($data->size_name == "S"){
+                $s[] = $data->color_code;
+            }
+
+            if($data->size_name == "M"){
+                $m[] = $data->color_code;
+            }
+
+            if($data->size_name == "L"){
+                $l[] = $data->color_code;
+            }
+
+            if($data->size_name == "XL"){
+                $xl[] = $data->color_code;
+            }
+
+            if($data->size_name == "XXL"){
+                $xxl[] = $data->color_code;
+            }
+        }
+
+        if(!empty($s)){
+            $color_per_sizes = new ColorPerSize();
+            $color_per_sizes->product_id = $product_id;
+            $color_per_sizes->size_name  = "S";
+            $color_per_sizes->color_code = $s;
+            $color_per_sizes->save();
+
+        }
+
+        if(!empty($m)){
+            $color_per_sizes = new ColorPerSize();
+            $color_per_sizes->product_id = $product_id;
+            $color_per_sizes->size_name  = "M";
+            $color_per_sizes->color_code = $m;
+            $color_per_sizes->save();
+
+        }
+
+        if(!empty($l)){
+            $color_per_sizes = new ColorPerSize();
+            $color_per_sizes->product_id = $product_id;
+            $color_per_sizes->size_name  = "L";
+            $color_per_sizes->color_code =$l;
+            $color_per_sizes->save();
+
+        }
+
+        if(!empty($xl)){
+            $color_per_sizes = new ColorPerSize();
+            $color_per_sizes->product_id = $product_id;
+            $color_per_sizes->size_name  = "XL";
+            $color_per_sizes->color_code = $xl;
+            $color_per_sizes->save();
+
+        }
+
+        if(!empty($xxl)){
+            $color_per_sizes = new ColorPerSize();
+            $color_per_sizes->product_id = $product_id;
+            $color_per_sizes->size_name  = "XXL";
+            $color_per_sizes->color_code = $xxl;
+            $color_per_sizes->save();
 
         }
 
@@ -452,19 +561,6 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product_id = Product::find($id);
-
-
-        if ($product_id) {
-            $Gallery_photo = GalleryProduct::where('product_id', $product_id)->get();
-
-            foreach($Gallery_photo as $gall){
-
-                 unlink(public_path('/assets/images/gallery/'.$gall->gallery));
-                 $gall->delete();
-            }
-
-
-        }
 
         $product_id->delete();
 

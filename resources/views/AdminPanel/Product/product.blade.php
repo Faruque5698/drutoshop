@@ -57,7 +57,7 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped table-responsive">
+                                <table id="example1" class="table table-bordered table-striped">
                                     <thead>
 
                                     <tr>
@@ -179,7 +179,7 @@ $(document).ready(function(){
 
                 $.ajax({
                     type    : 'DELETE',
-                    url     : '/admin/product-delete/'+delete_id,
+                    url     : 'product-delete/'+delete_id,
                     data    : data,
                     success : function(response){
                         Swal.fire(
