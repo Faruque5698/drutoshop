@@ -129,7 +129,9 @@ Add Product
                         </div>
                         <hr>
 
-                        <!-- <div class="form-row">
+
+                        <div class="form-row">
+
                             <div class="col-12">
                                 <select class="form-control " id="discount" name="discount_type">
                                     <option selected>Select Discount Type</option>
@@ -259,6 +261,52 @@ Add Product
 
     <script type="text/javascript">
 
+
+        $(document).ready(function(){
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+               }
+            });
+            $.ajax({
+
+                type   : 'GET',
+                url: "{{ route('product.colorPerSize') }}",
+                success: function(data){
+                    $('#myTable').html(data);
+                }
+            });
+        });
+
+
+
+
+        $(document).on("click","#remove", function(){
+          var temData =  $(this).val();
+
+        //   alert(temData);
+
+                var data = {
+                    "_token" : $('input[name="csrf-token"]').val(),
+                    "id"     : temData,
+                }
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type    : 'GET',
+                url     : 'color-per-size/'+temData,
+                data    : temData,
+                success: function(data){
+                    $('#myTable').html(data);
+                }
+
+            });
+        });
+
         $(document).ready(function(){
             $('.variant').hide();
             $('#catId').change(function(){
@@ -307,9 +355,15 @@ Add Product
                     size_color_qty:sizeColorQty,
                 },
                 success: function(data){
-                         // $('#myTable').html(data);
-                          // updateQunatity();
-                          alert(data);
+
+                         $('#myTable').html(data);
+                         updateQunatity();
+
+                         $('#sizeId option:first').prop('selected',true);
+                         $('#colorId option:first').prop('selected',true);
+                         $('#sizeColorQty').val(' ');
+
+
                 }
             });
 
@@ -319,6 +373,7 @@ Add Product
             if(this.checked){
                 $('#updateQuantity').hide();
                 $('.variant').show();
+
             }else{
                $('#updateQuantity').show();
                $('.variant').hide();
@@ -351,11 +406,6 @@ Add Product
             var priceVal = $('#priceVal').val();
             var discountPrice = $('#discountPrice').val();
 
-            // if(discountType == "%"){
-              var result = ((priceVal * (100 - discountPrice)) / 100);
-              $('#disResult').val(result);
-
-            // }
         });
 
 
@@ -402,16 +452,7 @@ Add Product
 
 
 
-        // function checkStatus() {
-        //     var status = $('#status').val();
-        //     if (status == '0') {
-        //         $('#statusError').text('Please select status');
-        //         return false;
-        //     } else {
-        //         $('#statusError').text(' ');
-        //         return true;
-        //     }
-        // };
+   
 
 
        // form validation

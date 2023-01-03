@@ -126,6 +126,9 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],
     Route::post('product/getcolor',[ProductController::class, 'getColor'])->name('product.colorid');
     Route::post('product/getsize',[ProductController::class, 'getSize'])->name('product.sizeid');
     Route::post('product/store-size-color-qty',[ProductController::class, 'storeColorSize'])->name('product.store-size-color-qty');
+    Route::get('product/colorPersize',[ProductController::class, 'colorPerSize'])->name('product.colorPerSize');
+    Route::get('product/color-per-size/{id}',[ProductController::class, 'deleteColorSize']);
+    Route::get('product/varientdelete', [ProductController::class, 'varientDelete'])->name('product.varient.delete');
     Route::post('product/add',[ProductController::class, 'store'])->name('product.add');
     Route::get('product/status/{id}',[ProductController::class, 'status'])->name('product.status');
     Route::get('product/futurs/{id}',[ProductController::class, 'futurs'])->name('product.futurs');

@@ -12,18 +12,22 @@ class AddressController extends Controller
 {
     public function save(Request $request){
         $request->validate([
-            'address_name' => 'required',
-            'address'=> 'required',
-            'zipcode'=> 'required',
-            'city'=> 'required',
+            'location_name' => 'required',
+            'recever_name'=> 'required',
+            'recever_phone'=> 'required',
+            'recever_address'=> 'required',
+            'latitude'=> 'required',
+            'longitude'=> 'required',
         ]);
 
         $address = new Address();
         $address->user_id = auth()->user()->id;
-        $address->address_name = $request->address_name;
-        $address->address = $request->address;
-        $address->zipcode = $request->zipcode;
-        $address->city = $request->city;
+        $address->location_name = $request->location_name;
+        $address->recever_name = $request->recever_name;
+        $address->recever_phone = $request->recever_phone;
+        $address->recever_address = $request->recever_address;
+        $address->latitude = $request->latitude;
+        $address->longitude = $request->longitude;
         $address->save();
 
         return ApiResponse::success($address);

@@ -37,6 +37,10 @@ class Product extends Model
         return $this->hasMany(ColorSizeQty::class);
     }
 
+    public function color_per_size(){
+        return $this->hasMany(ColorPerSize::class);
+    }
+
     public function favouriteProduct(){
         return $this->hasMany(FavouriteProduct::class);
     }
@@ -45,13 +49,24 @@ class Product extends Model
         return $this->hasOne(StockProduct::class);
     }
 
+
+    public function rating()
+    {
+        return $this->hasOne(Rating::class,'product_id','id');
+    }
+
+
+
+    protected $casts = [
+        'images' => 'array',
+        'color_code' => 'array',
+
     public function colorPerSize()
     {
         
         return $this->hasMany(ColorPerSize::class);
     }
 
-    protected $casts = [
-        'images' => 'array'
+
     ];
 }
