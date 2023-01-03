@@ -179,7 +179,7 @@ $(document).ready(function(){
 
                 $.ajax({
                     type    : 'DELETE',
-                    url     : '/admin/product-delete/'+delete_id,
+                    url     : 'product-delete/'+delete_id,
                     data    : data,
                     success : function(response){
                         Swal.fire(

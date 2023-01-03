@@ -88,7 +88,7 @@ Add Product
                                     @endforeach
                                 </select>
                             </div>
-                            
+
                             <span id="brandError" class="pl-2" style="color: red;"></span>
                         </div>
                         <hr>
@@ -101,7 +101,7 @@ Add Product
                                     @endforeach
                                 </select>
                             </div>
-                            
+
                             <span id="categoryError" class="pl-2" style="color: red;"></span>
                         </div>
                         <hr>
@@ -109,13 +109,13 @@ Add Product
                             <select class="form-control" name="subcategory_id" id="subCatId">
                                 <option value="">-----Select Sub Category------</option>
                             </select>
-                            
+
                             <span id="subCatError" class="pl-2" style="color: red;"></span>
                         </div>
-                        
+
                         <hr>
                         <div class="form-row">
-                            
+
                             <div class="col-6">
                                 <input type="text" name="price" id="priceVal" class="form-control @error('price') is-invalid @enderror" placeholder="Price">
                             </div>
@@ -125,11 +125,11 @@ Add Product
                                 <input type="text" name="discount_rate" class="form-control discount-price" id="discountPrice" placeholder="Discount Rate (1-100%)">
                                 <span id="disCountPriceError" class="pl-2" style="color: red;"></span>
                             </div>
-                        
+
                         </div>
                         <hr>
-                        
-                        <div class="form-row">
+
+                        <!-- <div class="form-row">
                             <div class="col-12">
                                 <select class="form-control " id="discount" name="discount_type">
                                     <option selected>Select Discount Type</option>
@@ -137,9 +137,9 @@ Add Product
                                 </select>
                                 <span id="discountError" class="pl-2" style="color: red;"></span>
                             </div>
-                            
+
                         </div>
-                        <hr>
+                        <hr> -->
                         <div class="form-row">
                             <div class="col-12" id="disCount">
                                 <input  type="number" name="discount_price" id="disResult"  class="form-control @error('price') is-invalid @enderror" placeholder="Total">
@@ -157,7 +157,7 @@ Add Product
                                 <span id="QuantityErrr" class="pl-2" style="color: red;"></span>
                             </div>
                         </div>
-                      
+
                         <div class="form-row variant">
                             <div class="col-4">
                                 <select  id="sizeId" class="select-size form-control mb-1" >
@@ -176,20 +176,22 @@ Add Product
                                     @endforeach
                                 </select>
                                 <span id="colorError" class="pl-2" style="color: red;"></span>
-                                
+
                             </div>
                             <div class="col-2">
                                 <input type="number" id="sizeColorQty" class="form-control"  placeholder="Quantity">
                             </div>
                             <div class="col-2 text-center">
-                                <button id="addRow" class="ml-2 btn btn-primary w-100">Add</button>
+                                <button type="button" id="addRow" class="ml-2 btn btn-primary w-100">Add</button>
                             </div>
                         </div>
-                        
-                     
+
+
                         <div id="myTable">
-                            
+
                         </div>
+
+
 
                         <hr>
                         <div class="form-row">
@@ -198,7 +200,7 @@ Add Product
                             </div>
                             <span id="discriptionError" class="pl-2" style="color: red;"></span>
                         </div>
-                        
+
                         <hr>
                         <div class="form-row">
                             <div class="col-3">
@@ -214,7 +216,7 @@ Add Product
                                 <div class="text-center prev">
                                     <img src="{{ asset('assets/images/noimage.jpeg') }}" id="option1Preview"/ width="100px" height="100px">
                                 </div>
-                                
+
                             </div>
                             <div class="col-3">
                                 <input type="file" id="optionImg2" class="@error('image') is-invalid @enderror" name="image2" onchange="checkImage();" />
@@ -232,7 +234,7 @@ Add Product
                             </div>
                             <span id="imgError" class="pl-2" style="color: red;"></span>
                         </div>
-                        
+
                         <hr>
                         <div class="form-row">
                             <select id="status" class="form-control @error('status') is-invalid @enderror" id="" name="status">
@@ -254,7 +256,7 @@ Add Product
     </div>
     @endsection
     @section('js')
-    
+
     <script type="text/javascript">
 
         $(document).ready(function(){
@@ -273,8 +275,8 @@ Add Product
             data   : {cat_id:catId},
             success: function(data){
                     $('#subCatId').html(data);
-                   
-                } 
+
+                }
             })
         });
 
@@ -304,12 +306,13 @@ Add Product
                     color_text:colorText,
                     size_color_qty:sizeColorQty,
                 },
-                success: function(data){ 
-                         $('#myTable').html(data);
-                          updateQunatity();
+                success: function(data){
+                         // $('#myTable').html(data);
+                          // updateQunatity();
+                          alert(data);
                 }
             });
-        
+
         });
 
         $("#check").click(function(){
@@ -322,7 +325,7 @@ Add Product
             }
         });
 
-        
+
 
         function updateQunatity(){
              $.ajaxSetup({
@@ -334,10 +337,8 @@ Add Product
 
                 type   : 'GET',
                 url: "{{ route('update.quantity') }}",
-                success: function(data){ 
+                success: function(data){
                         $("#updateQuantity").val(data);
-
-                        // console.log(data);
                 }
             });
         }
@@ -345,19 +346,19 @@ Add Product
 
 
 
-        $('#discount').change(function(){
+        $('.discount-price').keyup(function(){
             var discountType = $(this).val();
             var priceVal = $('#priceVal').val();
             var discountPrice = $('#discountPrice').val();
-        
-            if(discountType == "%"){
-                var result = ((priceVal * (100 - discountPrice)) / 100);
-                $('#disResult').val(result);
-                
-            }
+
+            // if(discountType == "%"){
+              var result = ((priceVal * (100 - discountPrice)) / 100);
+              $('#disResult').val(result);
+
+            // }
         });
 
-    
+
 
 
 
@@ -385,41 +386,41 @@ Add Product
                 return true;
             }
         };
-  
-
-
-        function checkDiscontType() {
-            var discountPrice = $('#discountPrice').val();
-            if (discountPrice == ' ') {
-                $('#discountError').text('Please select your Discount');
-                return false;
-            } else {
-                $('#discountError').text(' ');
-                return true;
-            }
-        };
 
 
 
-        function checkStatus() {
-            var status = $('#status').val();
-            if (status == '0') {
-                $('#statusError').text('Please select status');
-                return false;
-            } else {
-                $('#statusError').text(' ');
-                return true;
-            }
-        };
-      
+        // function checkDiscontType() {
+        //     var discountPrice = $('#discountPrice').val();
+        //     if (discountPrice == ' ') {
+        //         $('#discountError').text('Please select your Discount');
+        //         return false;
+        //     } else {
+        //         $('#discountError').text(' ');
+        //         return true;
+        //     }
+        // };
+
+
+
+        // function checkStatus() {
+        //     var status = $('#status').val();
+        //     if (status == '0') {
+        //         $('#statusError').text('Please select status');
+        //         return false;
+        //     } else {
+        //         $('#statusError').text(' ');
+        //         return true;
+        //     }
+        // };
+
 
        // form validation
-    
+
         $('#productForm').submit(function() {
-            if (checkCategory() == true && checkSubCatId() == true &&  checkStatus() == true) {
-            return true;
+            if (checkCategory() == true && checkSubCatId() == true) {
+              return true;
             } else {
-            return false;
+              return false;
             }
         });
     });
@@ -480,7 +481,7 @@ Add Product
             }
         }
 
-    
+
     </script>
-    
+
     @endsection

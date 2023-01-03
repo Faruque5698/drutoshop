@@ -45,11 +45,13 @@ class Product extends Model
         return $this->hasOne(StockProduct::class);
     }
 
-
+    public function colorPerSize()
+    {
+        
+        return $this->hasMany(ColorPerSize::class);
+    }
 
     protected $casts = [
-        'size' => 'array',
-        'color' => 'array',
         'images' => 'array'
     ];
 }
