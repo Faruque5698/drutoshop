@@ -12,6 +12,7 @@ use App\Models\Category;
 use App\Models\TempData;
 use App\Models\Subcategory;
 use Illuminate\Support\Str;
+use App\Models\ColorPerSize;
 use App\Models\ColorSizeQty;
 use App\Models\StockProduct;
 use Illuminate\Http\Request;
@@ -66,18 +67,32 @@ class ProductController extends Controller
     {
 
 
-        $temp_data = new TempData();
-        $temp_data->size_id = $request->size_id;
-        $temp_data->size_name = $request->size_text;
-        $temp_data->color_code = $request->color_code;
-        $temp_data->color_name = $request->color_text;
-        $temp_data->quantity = $request->size_color_qty;
-        $temp_data->save();
+        $validatedData = $request->validate([
+            'size_id' => 'required',
+            'size_name' => 'required',
+            'color_code' => 'required',
+            'size_name' => 'required',
+            'color_name' => 'required',
+            'quantity' => 'required',
+        ]);
+
+        $size_product = new SizeProduct();
+
+        $exsits = SizeProduct::where('size_name',$request->size_text)->where('color_code',$request->color_code)->first();
+
+        $exsits = TempData::where('size_name',$request->size_text)->where('color_code',$request->color_code)->first();
+
+        if(!$exsits){
+            $temp_data = new TempData();
+            $temp_data->size_id = $request->size_id;
+            $temp_data->size_name = $request->size_text;
+            $temp_data->color_code = $request->color_code;
+            $temp_data->color_name = $request->color_text;
+            $temp_data->quantity = $request->size_color_qty;
+            $temp_data->save();
+        }
 
         $datas = TempData::get();
-
-
-
 
         $row = "<div class='form-row mb-1 mt-1'><div class='col-4'><input type='text' value='' class='form-control' disabled></div><div class='col-4'><input type='text' value='' class='form-control' disabled></div><div class='col-2'><input type='number' value='' class='form-control' disabled></div><div class='col-2 text-center'><button id='remove' class='ml-2 btn btn-danger w-100'>remove</button></div></div>";
 
@@ -98,12 +113,6 @@ class ProductController extends Controller
         return $total;
     }
 
-
-
-
-
-
-
     public function store(Request $request)
     {
 
@@ -123,30 +132,6 @@ class ProductController extends Controller
 
 
 
-        $temp_datas = TempData::all();
-
-
-        // return $temp_datas;
-
-
-
-        $total = TempData::sum('quantity');
-        $colors = [];
-        foreach($temp_datas as $color){
-             $colors[] =  $color->color_code;
-        };
-
-
-
-
-        $sizes = [];
-        foreach($temp_datas as $size){
-          $sizes[] = $size->size_name;
-        };
-
-
-
-        return $sizes;
 
 
         $slug_name =  Str::slug(Str::lower($request->product_name));
@@ -174,10 +159,6 @@ class ProductController extends Controller
                 $product_image ->move($directory,$imageName1);
 
 
-            //    GalleryProduct::where('id', $gallery)->update([
-            //         'image1' => $imageUrl1,
-            //     ]);
-
             $galleryImages[]  = $imageUrl1;
             }
             if ($request->hasFile('image2')) {
@@ -188,9 +169,6 @@ class ProductController extends Controller
                 $imageUrl2 = $directory.$imageName2;
                 $product_image ->move($directory,$imageName2);
 
-                // GalleryProduct::where('id', $gallery)->update([
-                //     'image2' => $imageUrl2,
-                // ]);
 
                 $galleryImages[]  = $imageUrl2;
 
@@ -203,15 +181,12 @@ class ProductController extends Controller
                 $imageUrl3 = $directory.$imageName3;
                 $product_image ->move($directory,$imageName3);
 
-                //  GalleryProduct::where('id', $gallery)->update([
-                //     'image3' => $imageUrl3,
-                // ]
 
                 $galleryImages[]  = $imageUrl3;
 
             }
 
-            // return $galleryImages;
+
 
 
             if ($product_image) {
@@ -221,8 +196,7 @@ class ProductController extends Controller
                     'brand_id' => $request->brand_id,
                     'category_id' => $request->category_id,
                     'subcategory_id' => $request->subcategory_id,
-                    'size' => json_encode($sizes),
-                    'color' => json_encode($colors),
+
                     'discount_rate' => $request->discount_rate,
                     'price' => $request->price,
                     'quantity' => $request->quantity,
@@ -282,9 +256,70 @@ class ProductController extends Controller
 
         }
 
+
+        $temp_datas = TempData::all();
+
+
+
+
+        $s = [];
+        $m = [];
+        $l = [];
+        $xxl = [];
+
+        foreach($temp_datas as $color){
+            if($color->size_name == "S"){
+                $s[] = $color->color_code;
+            }
+
+            if($color->size_name == "M"){
+               $m[] = $color->color_code;
+            }
+
+            if($color->size_name == "L"){
+                $l[] = $color->color_code;
+            }
+
+            if($color->size_name == "XXl"){
+               $xxl[] = $color->color_code;
+            }
+
+        }
+
+        if(!empty($s)){
+            $colorspersize = new ColorPerSize();
+            $colorspersize->product_id = $product_id;
+            $colorspersize->size = "S";
+            $colorspersize->color_code = json_encode($s);
+            $colorspersize->save();
+        }
+
+        if(!empty($m)){
+            $colorspersize = new ColorPerSize();
+            $colorspersize->product_id = $product_id;
+            $colorspersize->size = "M";
+            $colorspersize->color_code = json_encode($m);
+            $colorspersize->save();
+        }
+
+        if(!empty($l)){
+            $colorspersize = new ColorPerSize();
+            $colorspersize->product_id = $product_id;
+            $colorspersize->size = "L";
+            $colorspersize->color_code = json_encode($l);
+            $colorspersize->save();
+        }
+
+        if(!empty($xxl)){
+            $colorspersize = new ColorPerSize();
+            $colorspersize->product_id = $product_id;
+            $colorspersize->size = "XXL";
+            $colorspersize->color_code = json_encode($xxl);
+            $colorspersize->save();
+        }
+
+
         TempData::truncate();
-
-
         return redirect()->route('admin.product')->with('message', 'Product Uplopad Successfully');
     }
 
@@ -452,20 +487,6 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product_id = Product::find($id);
-
-
-        if ($product_id) {
-            $Gallery_photo = GalleryProduct::where('product_id', $product_id)->get();
-
-            foreach($Gallery_photo as $gall){
-
-                 unlink(public_path('/assets/images/gallery/'.$gall->gallery));
-                 $gall->delete();
-            }
-
-
-        }
-
         $product_id->delete();
 
         return response()->json(['success'=>'Deleted Successfully!!']);

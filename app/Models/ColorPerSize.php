@@ -4,15 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Color;
-use App\Models\Size;
 
-class ColorSizeQty extends Model
+class ColorPerSize extends Model
 {
     use HasFactory;
- 
 
-    
-
-   
+    protected $casts = [
+        'color_code' => 'array',
+    ];
 }

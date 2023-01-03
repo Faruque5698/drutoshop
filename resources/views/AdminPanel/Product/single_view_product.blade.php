@@ -114,7 +114,6 @@
 
                                             @endforelse
 
-
                                        </td>
                                    </tr>
                                    <tr>
