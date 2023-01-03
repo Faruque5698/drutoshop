@@ -10,7 +10,12 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function product(){
+
         $product = Product::with('productToCategory','productToSubcategory','productToBrand','color_per_size','rating')->where('status','=','active')->get();
+
+
+
+
         return ApiResponse::success($product);
     }
 

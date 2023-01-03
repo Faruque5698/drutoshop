@@ -12,5 +12,7 @@ class ColorSizeQty extends Model
     use HasFactory;
  
 
+    
+
    
 }

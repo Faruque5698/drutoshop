@@ -49,6 +49,7 @@ class Product extends Model
         return $this->hasOne(StockProduct::class);
     }
 
+
     public function rating()
     {
         return $this->hasOne(Rating::class,'product_id','id');
@@ -59,5 +60,13 @@ class Product extends Model
     protected $casts = [
         'images' => 'array',
         'color_code' => 'array',
+
+    public function colorPerSize()
+    {
+        
+        return $this->hasMany(ColorPerSize::class);
+    }
+
+
     ];
 }

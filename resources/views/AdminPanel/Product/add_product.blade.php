@@ -129,7 +129,9 @@ Add Product
                         </div>
                         <hr>
 
+
                         <div class="form-row">
+
                             <div class="col-12">
                                 <select class="form-control " id="discount" name="discount_type">
                                     <option selected>Select Discount Type</option>
@@ -139,7 +141,7 @@ Add Product
                             </div>
 
                         </div>
-                        <hr>
+                        <hr> -->
                         <div class="form-row">
                             <div class="col-12" id="disCount">
                                 <input  type="number" name="discount_price" id="disResult"  class="form-control @error('price') is-invalid @enderror" placeholder="Total">
@@ -182,7 +184,7 @@ Add Product
                                 <input type="number" id="sizeColorQty" class="form-control"  placeholder="Quantity">
                             </div>
                             <div class="col-2 text-center">
-                                <button id="addRow" class="ml-2 btn btn-primary w-100">Add</button>
+                                <button type="button" id="addRow" class="ml-2 btn btn-primary w-100">Add</button>
                             </div>
                         </div>
 
@@ -190,6 +192,8 @@ Add Product
                         <div id="myTable">
 
                         </div>
+
+
 
                         <hr>
                         <div class="form-row">
@@ -351,12 +355,14 @@ Add Product
                     size_color_qty:sizeColorQty,
                 },
                 success: function(data){
+
                          $('#myTable').html(data);
                          updateQunatity();
 
                          $('#sizeId option:first').prop('selected',true);
                          $('#colorId option:first').prop('selected',true);
                          $('#sizeColorQty').val(' ');
+
 
                 }
             });
@@ -388,8 +394,6 @@ Add Product
                 url: "{{ route('update.quantity') }}",
                 success: function(data){
                         $("#updateQuantity").val(data);
-
-                        // console.log(data);
                 }
             });
         }
@@ -397,16 +401,11 @@ Add Product
 
 
 
-        $('#discount').change(function(){
+        $('.discount-price').keyup(function(){
             var discountType = $(this).val();
             var priceVal = $('#priceVal').val();
             var discountPrice = $('#discountPrice').val();
 
-            if(discountType == "%"){
-                var result = ((priceVal * (100 - discountPrice)) / 100);
-                $('#disResult').val(result);
-
-            }
         });
 
 
@@ -440,38 +439,29 @@ Add Product
 
 
 
-        function checkDiscontType() {
-            var discountPrice = $('#discountPrice').val();
-            if (discountPrice == ' ') {
-                $('#discountError').text('Please select your Discount');
-                return false;
-            } else {
-                $('#discountError').text(' ');
-                return true;
-            }
-        };
+        // function checkDiscontType() {
+        //     var discountPrice = $('#discountPrice').val();
+        //     if (discountPrice == ' ') {
+        //         $('#discountError').text('Please select your Discount');
+        //         return false;
+        //     } else {
+        //         $('#discountError').text(' ');
+        //         return true;
+        //     }
+        // };
 
 
 
-        function checkStatus() {
-            var status = $('#status').val();
-            if (status == '0') {
-                $('#statusError').text('Please select status');
-                return false;
-            } else {
-                $('#statusError').text(' ');
-                return true;
-            }
-        };
+   
 
 
        // form validation
 
         $('#productForm').submit(function() {
-            if (checkCategory() == true && checkSubCatId() == true &&  checkStatus() == true) {
-            return true;
+            if (checkCategory() == true && checkSubCatId() == true) {
+              return true;
             } else {
-            return false;
+              return false;
             }
         });
     });
