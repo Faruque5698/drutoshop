@@ -63,25 +63,17 @@
                                     </thead>
                                     <tbody>
 
-                                      @foreach($orders as $product => $order_items)
-
-                                        @foreach($order_items as $order)
-
-                                            @if ($order->order_id == $product)
-
-
-
+                                      @foreach($orders as $order)
                                                     <tr>
                                                         <td>{{ $loop->index +1 }}</td>
-                                                        <td>{{ $product }}</td>
+                                                        <td>{{ $order->order_id }}</td>
                                                         <td>
-                                                            @foreach ($order_items as $product_name)
-                                                                {{ $product_name->order_to_product->product_name }}
+                                                            @foreach ($order->order_to_product as $product_name)
+                                                                {{ $product_name->product->product_name }}
                                                             @endforeach
                                                         </td>
-                                                        {{-- <td>{{ $order->order_to_product->product_name }}</td> --}}
                                                         <td>
-                                                            {{ $order_items->count() }}
+                                                            {{ $order->order_to_product->count() }}
                                                         </td>
                                                         <td>
                                                             @php
@@ -89,7 +81,7 @@
 
                                                             @endphp
 
-                                                                @foreach($order_items as $product_price)
+                                                                @foreach($order->order_to_product as $product_price)
                                                                    <?php $total_price = $total_price + $product_price->total_price ?>
                                                                 @endforeach
                                                                 {{ $total_price }}
@@ -111,18 +103,18 @@
                                                             @endif
                                                         </td>
                                                         <td>
-                                                            <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#orderInfo-{{ $product }}"><i class="fa fa-info"></i></button>
+                                                            <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#orderInfo-{{ $order->id }}"><i class="fa fa-info"></i></button>
                                                         </td>
                                                         <td>
                                                             @if($order->status == 0)
-                                                            <a href="{{ route('order.cancel', ['order_id'=>$product]) }}" class="btn btn-danger mb-2">Order Cancel</a>
-                                                            <a href="{{ route('order.approve', ['order_id'=>$product]) }}" class="btn btn-warning mb-2">Confiram</a>
+                                                            <a href="{{ route('order.cancel', ['order_id'=>$order->id]) }}" class="btn btn-danger mb-2">Order Cancel</a>
+                                                            <a href="{{ route('order.approve', ['order_id'=>$order->id]) }}" class="btn btn-warning mb-2">Confiram</a>
                                                             @endif
                                                         <!--  order.success -->
                                                             @if($order->status == 1)
                                                             <!--  <button type="button" class="btn btn-success">Success</button> -->
                                                         {{-- <!-- <a href="{{ route('order.cancel', ['order_id'=>$product]) }}" class="btn btn-danger">Order Cancel</a> --> --}}
-                                                            <a href="{{ route('order.success', ['order_id'=>$product]) }}" class="btn btn-success">Success</a>
+                                                            <a href="{{ route('order.success', ['order_id'=>$order->id]) }}" class="btn btn-success">Success</a>
                                                             @endif
                                                             <!--  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
                                                             {{-- @if($order->status == 2)
@@ -133,7 +125,7 @@
 
 
                                                     <!-- Modal Start -->
-                                                    <div class="modal fade" id="orderInfo-{{ $product }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                     <div class="modal fade" id="orderInfo-{{ $order->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="modal-content">
                                                         <div class="modal-header bg-warning">
@@ -156,16 +148,16 @@
                                                                 </div>
 
                                                                 <div class="row">
-                                                                    @foreach ($order_items as $product_list)
+                                                                    @foreach ($order->order_to_product as $product_list)
                                                                     <div class="col-4">
 
 
                                                                         <div class="card shadow">
-                                                                            <img src="{{ asset($product_list->order_to_product->image) }}" width="100%" height="200px">
+                                                                            <img src="{{ asset($product_list->product->image) }}" width="100%" height="200px">
                                                                         </div>
                                                                         <div class="customer-info">
                                                                             {{-- <p><strong style="width:300px">Order ID</strong>: {{ $product_list->order_id }}</p> --}}
-                                                                            <p><strong style="width:300px">Product Name</strong>: {{ $product_list->order_to_product->product_name }}</p>
+                                                                            <p><strong style="width:300px">Product Name</strong>: {{ $product_list->product->product_name }}</p>
                                                                             {{-- <p><strong style="width:300px">Order Status</strong>:
                                                                                     @if($product_list->status == 0)
                                                                                         <span>Pending</span>
@@ -179,13 +171,13 @@
                                                                                     @endif
                                                                             </p> --}}
                                                                             {{-- <p><strong style="width:300px">Payment Type</strong>: {{ $product_list->payment_type == null ? "COD" : " "}}</p> --}}
-                                                                            <p><strong style="width:300px">Payment Status</strong>: {{ $product_list->isPaid == 0? "Pending" : "Success"}}</p>
+                                                                            <p><strong style="width:300px">Payment Status</strong>: {{ $order->isPaid == 0? "Pending" : "Success"}}</p>
                                                                             <!-- //customer info -->
 
                                                                         </div>
 
                                                                         <div class="product-info">
-                                                                            <p><strong style="width:300px">SKU</strong>: {{ $product_list->order_to_product->sku }}</p>
+                                                                            <p><strong style="width:300px">SKU</strong>: {{ $product_list->product->sku }}</p>
                                                                             <p><strong style="width:300px">Size</strong>: {{ $product_list->size }}</p>
                                                                             <p><strong style="width:300px">Color</strong>: <span class="pills bg-{{ $product_list->color_code }}">{{ $product_list->color_code }}</span></p>
                                                                             <p><strong style="width:300px">Quantity</strong>:  {{ $product_list->quantity }}</p>
@@ -204,29 +196,24 @@
                                                         <div class="modal-footer">
 
                                                             @if($order->status == 0)
-                                                            <a href="{{ route('order.cancel', ['order_id'=>$product]) }}" class="btn btn-danger">Order Cancel</a>
-                                                            <a href="{{ route('order.approve', ['order_id'=>$product]) }}" class="btn btn-warning">Confiram</a>
+                                                            <a href="{{ route('order.cancel', ['order_id'=>$order->id]) }}" class="btn btn-danger">Order Cancel</a>
+                                                            <a href="{{ route('order.approve', ['order_id'=>$order->id]) }}" class="btn btn-warning">Confiram</a>
                                                             @endif
                                                         <!--  order.success -->
                                                             @if($order->status == 1)
                                                             <!--  <button type="button" class="btn btn-success">Success</button> -->
                                                         {{-- <!-- <a href="{{ route('order.cancel', ['order_id'=>$product]) }}" class="btn btn-danger">Order Cancel</a> --> --}}
-                                                            <a href="{{ route('order.success', ['order_id'=>$product]) }}" class="btn btn-success">Success</a>
+                                                            <a href="{{ route('order.success', ['order_id'=>$order->id]) }}" class="btn btn-success">Success</a>
                                                             @endif
                                                             <!--  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
                                                             @if($order->status == 2)
-                                                            <a href="" class="btn btn-info">View Details</a>
+                                                            {{-- <a href="" class="btn btn-info">View Details</a> --}}
                                                             @endif
                                                         </div>
                                                         </div>
                                                     </div>
                                                     </div>
 
-                                                    @break
-                                                @endif
-
-										    <!-- Modal End -->
-                                            @endforeach
 
 										@endforeach
 

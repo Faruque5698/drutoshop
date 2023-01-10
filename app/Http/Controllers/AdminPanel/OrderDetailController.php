@@ -21,10 +21,10 @@ class OrderDetailController extends Controller
         //         ->select('order_id', DB::raw('max(value)'))
         //         ->groupBy('attr_group_id')
         //         ->get();
-    	$orders = Order::with('order_to_product')->orderBy('id','DESC')->get()->groupBy('order_id');
+    	$orders = Order::with('order_to_product','order_to_product.product')->orderBy('id','DESC')->get();
 
     	// return $orders;
-    	// // return view 
+    	// // return view
     	return view('AdminPanel.Order.order-list', [
     		"orders" => $orders
     	]);
@@ -35,10 +35,10 @@ class OrderDetailController extends Controller
 
 
         // fetch data order model
-        $orders = Order::with('order_to_product')->where('status', 0)->get();
+        $orders = Order::where('status', 0)->with('order_to_product','order_to_product.product')->orderBy('id','DESC')->get();
 
         //return $orders;
-        // return view 
+        // return view
         return view('AdminPanel.Order.pending-order', [
             "orders" => $orders
         ]);
@@ -49,10 +49,10 @@ class OrderDetailController extends Controller
 
 
         // fetch data order model
-        $orders = Order::with('order_to_product')->where('status', 3)->get();
+        $orders = Order::where('status', 3)->with('order_to_product','order_to_product.product')->orderBy('id','DESC')->get();
 
         //return $orders;
-        // return view 
+        // return view
         return view('AdminPanel.Order.cancel-order', [
             "orders" => $orders
         ]);
@@ -63,10 +63,10 @@ class OrderDetailController extends Controller
 
 
         // fetch data order model
-        $orders = Order::with('order_to_product')->where('status', 1)->get();
+        $orders = Order::where('status', 1)->with('order_to_product','order_to_product.product')->orderBy('id','DESC')->get();
 
         //return $orders;
-        // return view 
+        // return view
         return view('AdminPanel.Order.confirma-order', [
             "orders" => $orders
         ]);
@@ -77,10 +77,10 @@ class OrderDetailController extends Controller
 
 
         // fetch data order model
-        $orders = Order::with('order_to_product')->where('status', 2)->get();
+        $orders = Order::where('status', 2)->with('order_to_product','order_to_product.product')->orderBy('id','DESC')->get();
 
         //return $orders;
-        // return view 
+        // return view
         return view('AdminPanel.Order.success-order', [
             "orders" => $orders
         ]);
@@ -92,17 +92,17 @@ class OrderDetailController extends Controller
     //order status  confirm = 1
 
     public function approve($order_id){
-    	$orders = Order::where("order_id",$order_id)->get();
+    	$order = Order::find($order_id);
 
         // return $orders;
-        foreach($orders as $order){
-            if ($order->status == 0) {
-            
-                    Order::where('id',$order->id)->update([
-                        'status' => 1
-                    ]);
-            }
+
+        if ($order->status == 0) {
+
+                Order::where('id',$order->id)->update([
+                    'status' => 1
+                ]);
         }
+
 
         return back()->with('message', 'Order Approve Successfully!');
 
@@ -113,17 +113,13 @@ class OrderDetailController extends Controller
       //order status success = 2
 
     public function success($order_id){
-    	$orders = Order::where("order_id",$order_id)->get();
-
-
-        foreach($orders as $order){
+    	$order = Order::find($order_id);
             if ($order->status == 1) {
-            
-                    Order::where('id',$order->id)->update([
-                        'status' => 2
-                    ]);
+                Order::where('id',$order->id)->update([
+                    'status' => 2
+                ]);
             }
-        }
+
 
         return back()->with('message', 'Order Delivery Successfully!');
 
@@ -133,16 +129,15 @@ class OrderDetailController extends Controller
      //order status  cancel = 3
 
     public function cancel($order_id){
-    	$orders = Order::where("order_id",$order_id)->get();
+    	$order = Order::find($order_id);
 
-		foreach($orders as $order){
-            if ($order->status == 0) {
-            
-                    Order::where('id',$order->id)->update([
-                        'status' => 3
-                    ]);
-            }
+
+        if ($order->status == 0) {
+            Order::where('id',$order->id)->update([
+                'status' => 3
+            ]);
         }
+
    		return back()->with('message', 'This Order cancle Successfully!');
 
     }

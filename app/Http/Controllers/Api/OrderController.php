@@ -70,15 +70,17 @@ class OrderController extends Controller
 
         }
 
-        $orders = Order::where('user_id','=',auth()->user()->id)->get();
+        $orders = Order::where('user_id','=',auth()->user()->id)->with('order_to_product', 'order_to_product.product')->get();
         return ApiResponse::success($orders);
     }
 
 
     public function order_all(Request $request){
-        $orders = Order::with('product')->where('user_id','=',auth()->user()->id)->get()->groupBy('order_id');
+       $orders = Order::where('user_id','=',auth()->user()->id)->with('order_to_product','order_to_product.product')->get();
+
         if ($orders->isEmpty()){
-            return ApiResponse::not_found();
+            $data = [];
+            return ApiResponse::success($data);
         }else{
             return ApiResponse::success($orders);
 
@@ -87,7 +89,7 @@ class OrderController extends Controller
 
     public function history(){
         $user_id = auth()->user()->id;
-        $history = Order::with('order_to_product')->where('user_id','=',$user_id)->get()->groupBy('order_id');
+        $history = Order::where('user_id','=',$user_id)->get()->with('order_to_product','order_to_product.product')->get();
 //        if ($history -> isEmpty()){
 //            return ApiResponse::not_found();
 //        }
@@ -96,7 +98,7 @@ class OrderController extends Controller
 
     public function pending(){
         $user_id = auth()->user()->id;
-        $history = Order::with('order_to_product')->where('user_id','=',$user_id)->where('status','=',0)->get()->groupBy('order_id');
+        $history = Order::where('user_id','=',$user_id)->where('status','=',0)->with('order_to_product','order_to_product.product')->get();
 //        if ($history -> isEmpty()){
 //            return ApiResponse::not_found();
 //        }
@@ -105,7 +107,7 @@ class OrderController extends Controller
 
     public function confirm(){
         $user_id = auth()->user()->id;
-        $history = Order::with('order_to_product')->where('user_id','=',$user_id)->where('status','=',1)->get()->groupBy('order_id');
+        $history = Order::where('user_id','=',$user_id)->where('status','=',1)->with('order_to_product','order_to_product.product')->get();
 //        if ($history -> isEmpty()){
 //            return ApiResponse::not_found();
 //        }
@@ -113,7 +115,7 @@ class OrderController extends Controller
     }
     public function cancel(){
         $user_id = auth()->user()->id;
-        $history = Order::with('order_to_product')->where('user_id','=',$user_id)->where('status','=',3)->get()->groupBy('order_id');
+        $history = Order::where('user_id','=',$user_id)->where('status','=',3)->with('order_to_product','order_to_product.product')->get();
 //        if ($history -> isEmpty()){
 //            return ApiResponse::not_found();
 //        }
@@ -121,7 +123,7 @@ class OrderController extends Controller
     }
     public function success(){
         $user_id = auth()->user()->id;
-        $history = Order::with('order_to_product')->where('user_id','=',$user_id)->where('status','=',2)->get()->groupBy('order_id');
+        $history = Order::where('user_id','=',$user_id)->where('status','=',2)->with('order_to_product','order_to_product.product')->get();
 //        if ($history -> isEmpty()){
 //            return ApiResponse::not_found();
 //        }
