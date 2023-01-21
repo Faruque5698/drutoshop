@@ -73,6 +73,15 @@
 
 
 
+
+                <li class="nav-item">
+                    <a href="{{route('admin.adsBanner.index')}}" class="nav-link">
+                        <i class="nav-icon fa fa-list-alt text-primary"></i>
+                        <p class="text-{{ (request()->is('admin/ads-banner/index*')) ? 'warning' : '' }}"> Ads Banner</p>
+                    </a>
+                </li>
+
+
                 <li class="nav-item">
                     <a href="{{route('banner.index')}}" class="nav-link">
                         <i class="nav-icon fa fa-list-alt text-primary"></i>

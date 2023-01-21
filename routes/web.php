@@ -13,6 +13,7 @@ use \App\Http\Controllers\AdminPanel\ProductController;
 use \App\Http\Controllers\AdminPanel\ProfileController;
 use \App\Http\Controllers\AdminPanel\SettingController;
 use App\Http\Controllers\AdminPanel\CategoryController;
+use App\Http\Controllers\AdminPanel\AdsBannerController;
 use App\Http\Controllers\AdminPanel\FlashDealController;
 use App\Http\Controllers\AdminPanel\HomeSectionController;
 use \App\Http\Controllers\AdminPanel\MailSettingController;
@@ -73,6 +74,11 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','middleware'=>'checkRole'],
 
     Route::resource('banner', BannerController::class);
     Route::get('banner/status/{id}', [BannerController::class, 'status'])->name('banner.status');
+
+    Route::prefix('ads-banner')->group(function(){
+        Route::get('/index', [AdsBannerController::class, 'index'])->name('admin.adsBanner.index');
+        Route::post('/store', [AdsBannerController::class, 'store'])->name('admin.adsBanner.store');
+    });
 
     Route::get('category',[CategoryController::class,'index'])->name('admin.category');
     Route::get('category/add',[CategoryController::class,'add'])->name('add_category');
